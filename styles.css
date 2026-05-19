@@ -18,12 +18,17 @@ body { margin:0; font-family:"Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif;
 input{width:100%;border:2px solid #3f4f6f;background:#0c1322;color:#fff;border-radius:14px;padding:14px;font-size:30px;text-transform:uppercase;}
 .status{min-height:44px;font-weight:700;font-size:30px;}.status.ok{color:var(--ok);animation:pop .4s ease;}.status.miss{color:var(--miss);} 
 .car-track{height:90px;background:repeating-linear-gradient(90deg,#2f3d5f 0 42px,#1f2c49 42px 84px);border-radius:12px;margin:16px 0;overflow:hidden;position:relative;}
-.car{position:absolute;left:10px;top:18px;font-size:50px;transition:transform .6s ease;}.car.go{transform:translateX(520px);} 
+.car{position:absolute;right:10px;top:18px;font-size:50px;transition:transform .6s ease;}.car.go{transform:translateX(-520px);} 
 .emoji-lane{height:60px;overflow:hidden;position:relative;}.race-car{position:absolute;left:-40px;top:8px;font-size:40px;filter:drop-shadow(0 0 8px currentColor);}.race-car.go{animation:dash .9s ease forwards;}
-.tap-pad,.alpha-pad{display:grid;gap:8px;margin:12px 0 16px;}.tap-pad{grid-template-columns:repeat(3,1fr);} .alpha-pad{grid-template-columns:repeat(6,1fr);max-height:230px;overflow:auto;padding-right:4px;}
+.tap-pad,.alpha-pad{display:grid;gap:8px;margin:12px 0 16px;}.tap-pad{grid-template-columns:repeat(3,1fr);} .alpha-pad{display:flex;flex-direction:column;gap:8px;max-height:280px;overflow:auto;padding-right:4px;}
+.key-row{display:grid;gap:8px;}
+.row-0,.row-1{grid-template-columns:repeat(10,1fr);}
+.row-2{grid-template-columns:repeat(9,1fr);padding:0 20px;}
+.row-3{grid-template-columns:repeat(7,1fr);padding:0 56px;}
 .pad-btn{padding:10px;font-size:20px;border-radius:10px;}
-@keyframes dash{from{transform:translateX(0);}to{transform:translateX(780px);}} @keyframes pop{0%{transform:scale(.9);}70%{transform:scale(1.08);}100%{transform:scale(1);}}
+@keyframes dash{from{transform:translateX(780px);}to{transform:translateX(-80px);}} @keyframes pop{0%{transform:scale(.9);}70%{transform:scale(1.08);}100%{transform:scale(1);}}
 .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px;}
 .collection-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px;}
 .car-tile{border-radius:12px;padding:12px;text-align:center;font-weight:700;min-height:90px;}
 .locked{background:#49546c;color:#c0c7d7;} .unlocked{background:#1c5f46;color:#d4ffe6;cursor:pointer;} .hint{font-size:20px;color:#c7d8ff;}
+.name-top{font-size:34px;min-height:52px;margin-bottom:8px;color:#ffd740;}
