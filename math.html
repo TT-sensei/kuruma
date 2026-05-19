@@ -1,0 +1,21 @@
+<!doctype html><html lang="ja"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>けいさん</title><link rel="stylesheet" href="styles.css"></head>
+<body><main class="container"><section class="card">
+<h1>けいさんミッション</h1>
+<p class="level" id="modeLabel">モード：カーショップ</p>
+<p id="q" class="big" style="font-size:40px"></p>
+<input id="ans" inputmode="numeric" placeholder="数字を入力">
+<p id="status" class="status"></p>
+<div class="buttons">
+<button id="switch" class="orange">モードきりかえ</button>
+<a class="button-link blue small" href="index.html">ガレージへ</a>
+</div>
+</section></main>
+<script src="app.js"></script><script>
+let mode='shop', answer=0;
+function rand(a,b){return Math.floor(Math.random()*(b-a+1))+a;}
+function makeShop(){const money=rand(700,2000);const a=rand(120,650),b=rand(120,650);const total=a+b;const remain=money-total;const askRemain=Math.random()<0.5;document.getElementById('q').textContent=askRemain?`しょじきん${money}円。タイヤ${a}円とライト${b}円。あといくら？`:`タイヤ${a}円 + ライト${b}円 = ぜんぶでいくら？`;answer=askRemain?remain:total;}
+function makeFast(){const ops=['+','-','×','÷'];const op=ops[rand(0,3)];let x,y;if(op==='÷'){y=rand(2,9);answer=rand(2,12);x=y*answer;}else if(op==='×'){x=rand(3,20);y=rand(2,12);answer=x*y;}else if(op==='+'){x=rand(80,500);y=rand(20,400);answer=x+y;}else{x=rand(100,500);y=rand(10,99);if(y>x)[x,y]=[y,x];answer=x-y;}document.getElementById('q').textContent=`${x} ${op} ${y} = ?`;}
+function newQ(){document.getElementById('modeLabel').textContent=`モード：${mode==='shop'?'カーショップ':'こうそく計算'}`;document.getElementById('ans').value='';mode==='shop'?makeShop():makeFast();}
+function judge(){const v=Number(document.getElementById('ans').value);if(!Number.isFinite(v))return;const st=document.getElementById('status');if(v===answer){KurumaApp.horn();const s=KurumaApp.addPoint();st.textContent=`せいかい！ +1ポイント（Lv.${s.level}）`;st.className='status ok';setTimeout(newQ,700);}else{KurumaApp.miss();st.textContent='おしい！ すうじをみなおそう';st.className='status miss';}}
+document.getElementById('ans').addEventListener('change',judge);document.getElementById('switch').addEventListener('click',()=>{mode=mode==='shop'?'fast':'shop';newQ();});newQ();
+</script></body></html>

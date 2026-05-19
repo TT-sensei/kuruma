@@ -1,0 +1,13 @@
+<!doctype html><html lang="ja"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>くるまスタディ</title><link rel="stylesheet" href="styles.css"></head>
+<body><main class="container"><section class="card">
+<h1 class="big">くるまスタディ</h1>
+<p class="level" id="levelLabel">レベル 1 / ポイント 0</p>
+<div class="buttons">
+<a class="button-link orange" href="typing.html">タイピング</a>
+<a class="button-link blue" href="math.html">けいさん</a>
+<a class="button-link orange" href="words.html">ことば</a>
+</div>
+<p class="hint">ずかんは <a href="collection.html">こちら</a></p>
+</section></main>
+<script src="app.js"></script><script>const s=KurumaApp.loadState();document.getElementById('levelLabel').textContent=`レベル ${s.level} / ポイント ${s.points}`;</script>
+</body></html>

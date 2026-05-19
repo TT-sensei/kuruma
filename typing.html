@@ -1,0 +1,15 @@
+<!doctype html><html lang="ja"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>タイピング</title><link rel="stylesheet" href="styles.css"></head>
+<body><main class="container"><section class="card">
+<h1>タイピングミッション</h1>
+<p class="level" id="target"></p>
+<div class="car-track"><div id="car" class="car">🚗</div></div>
+<input id="answer" autocomplete="off" aria-label="こたえ" placeholder="ここに入力">
+<p id="status" class="status"></p>
+<div class="buttons"><a class="button-link blue small" href="index.html">ガレージへ</a></div>
+</section></main>
+<script src="app.js"></script><script>
+let word='';
+function loadWord(){word=KurumaApp.nextTypingWord();document.getElementById('target').textContent=`この車名を入力： ${word}`;document.getElementById('answer').value='';}
+function judge(){const v=document.getElementById('answer').value.trim().toUpperCase();const st=document.getElementById('status');if(v===word){const s=KurumaApp.addPoint();KurumaApp.horn();st.textContent=`せいかい！ レベル ${s.level}`;st.className='status ok';const c=document.getElementById('car');c.classList.remove('go');void c.offsetWidth;c.classList.add('go');setTimeout(loadWord,900);} else {KurumaApp.miss();st.textContent='おしい！ もういちど';st.className='status miss';}}
+document.getElementById('answer').addEventListener('input',judge);loadWord();
+</script></body></html>
