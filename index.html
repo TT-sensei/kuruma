@@ -1,13 +1,296 @@
-<!doctype html><html lang="ja"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>くるまスタディ</title><link rel="stylesheet" href="styles.css"></head>
-<body><main class="container"><section class="card">
-<h1 class="big">くるまスタディ</h1>
-<p class="level" id="levelLabel">レベル 1 / ポイント 0</p>
-<div class="buttons">
-<a class="button-link orange" href="typing.html">タイピング</a>
-<a class="button-link blue" href="math.html">けいさん</a>
-<a class="button-link orange" href="words.html">ことば</a>
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>くるまスタディ</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic:wght@400;700;900&display=swap');
+
+  :root {
+    --sky:    #e8f4fd;
+    --cream:  #fffbf0;
+    --orange: #ff8c42;
+    --blue:   #4a90d9;
+    --green:  #5db87a;
+    --card:   #ffffff;
+    --text:   #3a3a3a;
+    --shadow: 0 6px 20px rgba(0,0,0,.10);
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Zen Maru Gothic', 'Hiragino Maru Gothic Pro', sans-serif;
+    background: var(--sky);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    /* 道路ストライプ背景 */
+    background-image:
+      repeating-linear-gradient(
+        180deg,
+        transparent 0px, transparent 60px,
+        rgba(255,255,255,.35) 60px, rgba(255,255,255,.35) 80px
+      ),
+      linear-gradient(160deg, #dceefb 0%, #e8f4fd 50%, #fef9ec 100%);
+  }
+
+  .container {
+    width: 100%;
+    max-width: 420px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    animation: fadeUp .6s ease both;
+  }
+
+  @keyframes fadeUp {
+    from { opacity:0; transform:translateY(30px); }
+    to   { opacity:1; transform:translateY(0); }
+  }
+
+  /* ===== キャラカード ===== */
+  .mascot-card {
+    background: var(--card);
+    border-radius: 24px;
+    box-shadow: var(--shadow);
+    padding: 20px 24px 18px;
+    display: flex;
+    align-items: flex-end;
+    gap: 14px;
+  }
+
+  .car-wrap {
+    flex-shrink: 0;
+    animation: bounce 2.4s ease-in-out infinite;
+  }
+  @keyframes bounce {
+    0%,100% { transform: translateY(0); }
+    50%      { transform: translateY(-6px); }
+  }
+
+  .car-svg { width: 80px; height: auto; }
+
+  .speech-bubble {
+    background: #fffbe6;
+    border: 2.5px solid #ffd166;
+    border-radius: 16px 16px 16px 4px;
+    padding: 10px 14px;
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: var(--text);
+    position: relative;
+  }
+  .speech-bubble::before {
+    content: '';
+    position: absolute;
+    left: -12px; bottom: 10px;
+    border: 6px solid transparent;
+    border-right-color: #ffd166;
+  }
+  .speech-bubble::after {
+    content: '';
+    position: absolute;
+    left: -8px; bottom: 11px;
+    border: 5px solid transparent;
+    border-right-color: #fffbe6;
+  }
+
+  /* ===== メインカード ===== */
+  .main-card {
+    background: var(--card);
+    border-radius: 24px;
+    box-shadow: var(--shadow);
+    padding: 28px 24px 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .title-area { text-align: center; }
+
+  .title-area h1 {
+    font-size: 2rem;
+    font-weight: 900;
+    color: #2b6cb0;
+    letter-spacing: .06em;
+    line-height: 1.2;
+  }
+
+  .level-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 8px;
+    background: linear-gradient(135deg, #fff3cd, #ffe08a);
+    border-radius: 999px;
+    padding: 6px 18px;
+    font-size: .95rem;
+    font-weight: 700;
+    color: #7b5e00;
+    box-shadow: 0 2px 6px rgba(255,180,0,.25);
+  }
+
+  /* ===== ナビボタン ===== */
+  .nav-buttons {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .nav-btn {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 18px 22px;
+    border-radius: 18px;
+    text-decoration: none;
+    font-family: inherit;
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(0,0,0,.12);
+    transition: transform .15s, box-shadow .15s;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .nav-btn:active {
+    transform: scale(.97);
+    box-shadow: 0 2px 6px rgba(0,0,0,.10);
+  }
+
+  .nav-btn.orange { background: linear-gradient(135deg, #ff9f5a, #ff6b1a); }
+  .nav-btn.blue   { background: linear-gradient(135deg, #5ba8f5, #1c7ed6); }
+  .nav-btn.green  { background: linear-gradient(135deg, #6dd07e, #2fa84f); }
+
+  .btn-icon {
+    width: 44px; height: 44px;
+    background: rgba(255,255,255,.28);
+    border-radius: 12px;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.6rem;
+    flex-shrink: 0;
+  }
+
+  .btn-text { display: flex; flex-direction: column; }
+  .btn-label { font-size: 1.2rem; line-height: 1.2; }
+  .btn-sub   { font-size: .78rem; font-weight: 400; opacity: .88; margin-top: 2px; }
+
+  /* ===== ずかんリンク ===== */
+  .zukan-link {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    background: #f0f9ff;
+    border: 2px solid #bee3f8;
+    border-radius: 14px;
+    padding: 12px 20px;
+    width: 100%;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #2b6cb0;
+    transition: background .2s;
+  }
+  .zukan-link:hover { background: #e0f2fe; }
+
+  ruby rt { font-size: .55em; }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <!-- キャラクター吹き出し -->
+  <div class="mascot-card">
+    <div class="car-wrap">
+      <!-- シンプルな車SVG -->
+      <svg class="car-svg" viewBox="0 0 100 60" xmlns="http://www.w3.org/2000/svg">
+        <!-- ボディ -->
+        <rect x="5" y="28" width="90" height="22" rx="6" fill="#4a90d9"/>
+        <!-- ルーフ -->
+        <rect x="22" y="14" width="52" height="18" rx="8" fill="#5ba8f5"/>
+        <!-- 窓左 -->
+        <rect x="26" y="17" width="20" height="12" rx="4" fill="#d0ecff" opacity=".9"/>
+        <!-- 窓右 -->
+        <rect x="50" y="17" width="20" height="12" rx="4" fill="#d0ecff" opacity=".9"/>
+        <!-- タイヤ左 -->
+        <circle cx="24" cy="50" r="10" fill="#333"/>
+        <circle cx="24" cy="50" r="5"  fill="#888"/>
+        <!-- タイヤ右 -->
+        <circle cx="76" cy="50" r="10" fill="#333"/>
+        <circle cx="76" cy="50" r="5"  fill="#888"/>
+        <!-- ライト -->
+        <ellipse cx="93" cy="36" rx="5" ry="4" fill="#ffe066"/>
+        <!-- にこにこ -->
+        <circle cx="88" cy="33" r="2" fill="#fff" opacity=".7"/>
+        <!-- ナンバー -->
+        <rect x="38" y="38" width="24" height="9" rx="3" fill="#fff" opacity=".7"/>
+        <text x="50" y="45.5" text-anchor="middle" font-size="6" fill="#2b6cb0" font-weight="bold">くるスタ</text>
+      </svg>
+    </div>
+    <div class="speech-bubble">
+      <ruby>今日<rt>きょう</rt></ruby>も<ruby>一緒<rt>いっしょ</rt></ruby>に<br>
+      がんばろう！🎉<br>
+      <span style="font-size:.88em;color:#888;"><ruby>好<rt>す</rt></ruby>きなところから<ruby>始<rt>はじ</rt></ruby>めてね</span>
+    </div>
+  </div>
+
+  <!-- メインカード -->
+  <div class="main-card">
+    <div class="title-area">
+      <h1><ruby>くるまスタディ<rt>　　　　　　</rt></ruby></h1>
+      <div class="level-badge">
+        ⭐ <span id="levelLabel"><ruby>レベル<rt></rt></ruby> 1 ／ <ruby>ポイント<rt></rt></ruby> 0</span>
+      </div>
+    </div>
+
+    <nav class="nav-buttons" aria-label="べんきょうメニュー">
+      <a class="nav-btn orange" href="typing.html">
+        <span class="btn-icon">⌨️</span>
+        <span class="btn-text">
+          <span class="btn-label"><ruby>タイピング<rt></rt></ruby></span>
+          <span class="btn-sub"><ruby>文字<rt>もじ</rt></ruby>を<ruby>打<rt>う</rt></ruby>ってみよう</span>
+        </span>
+      </a>
+
+      <a class="nav-btn blue" href="math.html">
+        <span class="btn-icon">🔢</span>
+        <span class="btn-text">
+          <span class="btn-label"><ruby>けいさん<rt></rt></ruby></span>
+          <span class="btn-sub"><ruby>算数<rt>さんすう</rt></ruby>に<ruby>チャレンジ<rt></rt></ruby>！</span>
+        </span>
+      </a>
+
+      <a class="nav-btn green" href="words.html">
+        <span class="btn-icon">📖</span>
+        <span class="btn-text">
+          <span class="btn-label"><ruby>ことば<rt></rt></ruby></span>
+          <span class="btn-sub"><ruby>言葉<rt>ことば</rt></ruby>の<ruby>力<rt>ちから</rt></ruby>をつけよう</span>
+        </span>
+      </a>
+    </nav>
+
+    <a class="zukan-link" href="collection.html">
+      🚗 <ruby>車<rt>くるま</rt></ruby>の<ruby>図鑑<rt>ずかん</rt></ruby>を<ruby>見<rt>み</rt></ruby>る
+    </a>
+  </div>
+
 </div>
-<p class="hint">ずかんは <a href="collection.html">こちら</a></p>
-</section></main>
-<script src="app.js"></script><script>const s=KurumaApp.loadState();document.getElementById('levelLabel').textContent=`レベル ${s.level} / ポイント ${s.points}`;</script>
-</body></html>
+
+<script src="app.js"></script>
+<script>
+  // app.jsがある場合は使い、なければダミー
+  try {
+    const s = KurumaApp.loadState();
+    document.getElementById('levelLabel').textContent =
+      `レベル ${s.level} ／ ポイント ${s.points}`;
+  } catch(e) {
+    // app.js未読み込み時はデフォルト表示のまま
+  }
+</script>
+</body>
+</html>
