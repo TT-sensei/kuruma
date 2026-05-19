@@ -1,21 +1,31 @@
 <!doctype html><html lang="ja"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>けいさん</title><link rel="stylesheet" href="styles.css"></head>
-<body><main class="container"><section class="card">
+<body><main class="container"><section class="card cool">
 <h1>けいさんミッション</h1>
-<p class="level" id="modeLabel">モード：カーショップ</p>
-<p id="q" class="big" style="font-size:40px"></p>
+<p class="level" id="modeLabel">モード：ランダム100問</p>
+<p id="q" class="big question"></p>
 <input id="ans" inputmode="numeric" placeholder="数字を入力">
+<div class="tap-pad" id="numPad"></div>
 <p id="status" class="status"></p>
 <div class="buttons">
-<button id="switch" class="orange">モードきりかえ</button>
+<button id="clear" class="orange small">クリア</button>
 <a class="button-link blue small" href="index.html">ガレージへ</a>
 </div>
+<div class="emoji-lane" id="emojiLane"></div>
 </section></main>
 <script src="app.js"></script><script>
-let mode='shop', answer=0;
-function rand(a,b){return Math.floor(Math.random()*(b-a+1))+a;}
-function makeShop(){const money=rand(700,2000);const a=rand(120,650),b=rand(120,650);const total=a+b;const remain=money-total;const askRemain=Math.random()<0.5;document.getElementById('q').textContent=askRemain?`しょじきん${money}円。タイヤ${a}円とライト${b}円。あといくら？`:`タイヤ${a}円 + ライト${b}円 = ぜんぶでいくら？`;answer=askRemain?remain:total;}
-function makeFast(){const ops=['+','-','×','÷'];const op=ops[rand(0,3)];let x,y;if(op==='÷'){y=rand(2,9);answer=rand(2,12);x=y*answer;}else if(op==='×'){x=rand(3,20);y=rand(2,12);answer=x*y;}else if(op==='+'){x=rand(80,500);y=rand(20,400);answer=x+y;}else{x=rand(100,500);y=rand(10,99);if(y>x)[x,y]=[y,x];answer=x-y;}document.getElementById('q').textContent=`${x} ${op} ${y} = ?`;}
-function newQ(){document.getElementById('modeLabel').textContent=`モード：${mode==='shop'?'カーショップ':'こうそく計算'}`;document.getElementById('ans').value='';mode==='shop'?makeShop():makeFast();}
-function judge(){const v=Number(document.getElementById('ans').value);if(!Number.isFinite(v))return;const st=document.getElementById('status');if(v===answer){KurumaApp.horn();const s=KurumaApp.addPoint();st.textContent=`せいかい！ +1ポイント（Lv.${s.level}）`;st.className='status ok';setTimeout(newQ,700);}else{KurumaApp.miss();st.textContent='おしい！ すうじをみなおそう';st.className='status miss';}}
-document.getElementById('ans').addEventListener('change',judge);document.getElementById('switch').addEventListener('click',()=>{mode=mode==='shop'?'fast':'shop';newQ();});newQ();
+const addQuestions=[{q:"300 + 200",a:500},{q:"450 + 150",a:600},{q:"120 + 80",a:200},{q:"600 + 300",a:900},{q:"250 + 250",a:500},{q:"700 + 200",a:900},{q:"90 + 60",a:150},{q:"800 + 100",a:900},{q:"130 + 170",a:300},{q:"400 + 400",a:800}];
+const subQuestions=[{q:"500 - 200",a:300},{q:"600 - 150",a:450},{q:"900 - 300",a:600},{q:"800 - 400",a:400},{q:"700 - 100",a:600},{q:"650 - 250",a:400},{q:"1000 - 500",a:500},{q:"750 - 250",a:500},{q:"900 - 100",a:800},{q:"400 - 150",a:250}];
+const mulQuestions=[{q:"12 × 3",a:36},{q:"15 × 2",a:30},{q:"8 × 7",a:56},{q:"9 × 6",a:54},{q:"11 × 4",a:44},{q:"6 × 6",a:36},{q:"7 × 8",a:56},{q:"10 × 5",a:50},{q:"4 × 9",a:36},{q:"3 × 12",a:36}];
+const divQuestions=[{q:"36 ÷ 3",a:12},{q:"40 ÷ 5",a:8},{q:"56 ÷ 7",a:8},{q:"54 ÷ 6",a:9},{q:"44 ÷ 4",a:11},{q:"48 ÷ 6",a:8},{q:"63 ÷ 9",a:7},{q:"30 ÷ 5",a:6},{q:"72 ÷ 8",a:9},{q:"81 ÷ 9",a:9}];
+const shopQuestions=[{q:"タイヤ300円 + ライト200円",a:500},{q:"エンジン500円 + バッテリー300円",a:800},{q:"ホイール400円 + シート200円",a:600},{q:"ライト200円 + ミラー100円",a:300},{q:"タイヤ300円 × 2",a:600},{q:"1000円 - 300円",a:700},{q:"1000円 - 450円",a:550},{q:"500円 + 250円",a:750},{q:"800円 - 200円",a:600},{q:"600円 + 300円",a:900},{q:"700円 - 400円",a:300},{q:"900円 - 600円",a:300},{q:"200円 × 3",a:600},{q:"100円 × 5",a:500},{q:"120円 + 80円",a:200}];
+const missionQuestions=[{q:"300円のタイヤを2つ買うと？",a:600},{q:"500円持っていて200円使ったら？",a:300},{q:"100円のライトを5こ買うと？",a:500},{q:"800円から300円引くと？",a:500},{q:"200円を3回足すと？",a:600},{q:"900円から600円引くと？",a:300},{q:"50円を4回足すと？",a:200},{q:"600円を2で割ると？",a:300},{q:"400円に200円足すと？",a:600},{q:"700円から100円引くと？",a:600}];
+const allMath=[...addQuestions,...subQuestions,...mulQuestions,...divQuestions,...shopQuestions,...missionQuestions];
+let current;
+function newQ(){current=allMath[Math.floor(Math.random()*allMath.length)];document.getElementById('q').textContent=current.q;document.getElementById('ans').value='';}
+function runEmoji(){const lane=document.getElementById('emojiLane');lane.innerHTML='';const e=document.createElement('div');e.className='race-car';e.textContent='🚗';e.style.color=['#00e5ff','#ff3d81','#9cff57','#ffd740','#9b7bff'][Math.floor(Math.random()*5)];lane.appendChild(e);requestAnimationFrame(()=>e.classList.add('go'))}
+function judge(){const v=Number(document.getElementById('ans').value);if(!Number.isFinite(v))return;const st=document.getElementById('status');if(v===current.a){KurumaApp.horn();const s=KurumaApp.addPoint();st.textContent=`せいかい！ +1ポイント（Lv.${s.level}）`;st.className='status ok';runEmoji();setTimeout(newQ,700);}else{KurumaApp.miss();st.textContent='おしい！ すうじをみなおそう';st.className='status miss';}}
+function addDigit(d){const i=document.getElementById('ans');i.value+=d;judge();}
+['7','8','9','4','5','6','1','2','3','0','00'].forEach(n=>{const b=document.createElement('button');b.className='pad-btn blue';b.textContent=n;b.onclick=()=>addDigit(n);document.getElementById('numPad').appendChild(b);});
+document.getElementById('clear').addEventListener('click',()=>document.getElementById('ans').value='');
+document.getElementById('ans').addEventListener('input',judge);newQ();
 </script></body></html>
