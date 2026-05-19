@@ -1,19 +1,20 @@
 <!doctype html><html lang="ja"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ことば</title><link rel="stylesheet" href="styles.css"></head>
-<body><main class="container"><section class="card">
+<body><main class="container"><section class="card cool">
 <h1>ことばミッション</h1>
-<p id="q" class="big" style="font-size:38px"></p>
+<p id="q" class="big question"></p>
 <div class="grid2" id="choices"></div>
 <p id="status" class="status"></p>
 <div class="buttons">
 <button id="next" class="orange">つぎのもんだい</button>
 <a class="button-link blue small" href="index.html">ガレージへ</a>
 </div>
+<div class="emoji-lane" id="emojiLane"></div>
 </section></main>
 <script src="app.js"></script><script>
-const english=[{q:'CAR のいみは？',a:'くるま',w:['はやい','くるま']},{q:'SPEED のいみは？',a:'スピード',w:['みち','スピード']},{q:'ENGINE のいみは？',a:'エンジン',w:['エンジン','タイヤ']}];
-const kanji=[{q:'「速」のよみは？',a:'はやい',w:['みぎ','はやい']},{q:'「左」のよみは？',a:'ひだり',w:['ひだり','みぎ']},{q:'「道」のいみは？',a:'みち',w:['みち','くるま']}];
-function shuffle(a){return a.sort(()=>Math.random()-0.5);} let current;
-function newQ(){const list=Math.random()<0.5?english:kanji;current=list[Math.floor(Math.random()*list.length)];document.getElementById('q').textContent=current.q;const box=document.getElementById('choices');box.innerHTML='';shuffle([...current.w]).forEach(c=>{const b=document.createElement('button');b.className='blue';b.textContent=c;b.onclick=()=>judge(c);box.appendChild(b);});document.getElementById('status').textContent='';}
-function judge(v){const st=document.getElementById('status');if(v===current.a){const s=KurumaApp.addPoint();KurumaApp.horn();st.textContent=`せいかい！ Lv.${s.level}`;st.className='status ok';}else{KurumaApp.miss();st.textContent='おしい！ もういちど';st.className='status miss';}}
+const wordQuestions=[{q:"CAR の意味は？",choices:["くるま","いえ","みち"],a:"くるま"},{q:"FAST の意味は？",choices:["はやい","おそい","たかい"],a:"はやい"},{q:"ROAD の意味は？",choices:["みち","うみ","やま"],a:"みち"},{q:"SPEED の意味は？",choices:["はやさ","いろ","おと"],a:"はやさ"},{q:"LEFT の意味は？",choices:["ひだり","みぎ","まえ"],a:"ひだり"},{q:"RIGHT の意味は？",choices:["みぎ","ひだり","うしろ"],a:"みぎ"},{q:"車 の読みは？",choices:["くるま","みち","はしる"],a:"くるま"},{q:"速い の意味は？",choices:["はやい","おそい","たかい"],a:"はやい"},{q:"道 の意味は？",choices:["みち","いえ","くるま"],a:"みち"},{q:"右 の意味は？",choices:["みぎ","ひだり","まえ"],a:"みぎ"}];
+function runEmoji(){const lane=document.getElementById('emojiLane');lane.innerHTML='';const e=document.createElement('div');e.className='race-car';e.textContent='🚙';e.style.color=['#00e5ff','#ff3d81','#9cff57','#ffd740','#9b7bff'][Math.floor(Math.random()*5)];lane.appendChild(e);requestAnimationFrame(()=>e.classList.add('go'))}
+let current; function shuffle(a){return a.sort(()=>Math.random()-0.5);} 
+function newQ(){current=wordQuestions[Math.floor(Math.random()*wordQuestions.length)];document.getElementById('q').textContent=current.q;const box=document.getElementById('choices');box.innerHTML='';shuffle([...current.choices]).forEach(c=>{const b=document.createElement('button');b.className='blue';b.textContent=c;b.onclick=()=>judge(c);box.appendChild(b);});document.getElementById('status').textContent='';}
+function judge(v){const st=document.getElementById('status');if(v===current.a){const s=KurumaApp.addPoint();KurumaApp.horn();st.textContent=`せいかい！ Lv.${s.level}`;st.className='status ok';runEmoji();}else{KurumaApp.miss();st.textContent='おしい！ もういちど';st.className='status miss';}}
 document.getElementById('next').addEventListener('click',newQ);newQ();
 </script></body></html>
