@@ -1,0 +1,19 @@
+<!doctype html><html lang="ja"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ことば</title><link rel="stylesheet" href="styles.css"></head>
+<body><main class="container"><section class="card">
+<h1>ことばミッション</h1>
+<p id="q" class="big" style="font-size:38px"></p>
+<div class="grid2" id="choices"></div>
+<p id="status" class="status"></p>
+<div class="buttons">
+<button id="next" class="orange">つぎのもんだい</button>
+<a class="button-link blue small" href="index.html">ガレージへ</a>
+</div>
+</section></main>
+<script src="app.js"></script><script>
+const english=[{q:'CAR のいみは？',a:'くるま',w:['はやい','くるま']},{q:'SPEED のいみは？',a:'スピード',w:['みち','スピード']},{q:'ENGINE のいみは？',a:'エンジン',w:['エンジン','タイヤ']}];
+const kanji=[{q:'「速」のよみは？',a:'はやい',w:['みぎ','はやい']},{q:'「左」のよみは？',a:'ひだり',w:['ひだり','みぎ']},{q:'「道」のいみは？',a:'みち',w:['みち','くるま']}];
+function shuffle(a){return a.sort(()=>Math.random()-0.5);} let current;
+function newQ(){const list=Math.random()<0.5?english:kanji;current=list[Math.floor(Math.random()*list.length)];document.getElementById('q').textContent=current.q;const box=document.getElementById('choices');box.innerHTML='';shuffle([...current.w]).forEach(c=>{const b=document.createElement('button');b.className='blue';b.textContent=c;b.onclick=()=>judge(c);box.appendChild(b);});document.getElementById('status').textContent='';}
+function judge(v){const st=document.getElementById('status');if(v===current.a){const s=KurumaApp.addPoint();KurumaApp.horn();st.textContent=`せいかい！ Lv.${s.level}`;st.className='status ok';}else{KurumaApp.miss();st.textContent='おしい！ もういちど';st.className='status miss';}}
+document.getElementById('next').addEventListener('click',newQ);newQ();
+</script></body></html>

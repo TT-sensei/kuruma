@@ -1,0 +1,10 @@
+<!doctype html><html lang="ja"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>ずかん</title><link rel="stylesheet" href="styles.css"></head>
+<body><main class="container"><section class="card">
+<h1>くるまずかん</h1><p class="hint">タップすると名前をよめるよ</p>
+<div id="grid" class="collection-grid"></div>
+<p id="name" class="status"></p>
+<div class="buttons"><a class="button-link blue small" href="index.html">ガレージへ</a></div>
+</section></main>
+<script src="app.js"></script><script>
+const s=KurumaApp.loadState();const g=document.getElementById('grid');KurumaApp.ALL_CARS.forEach(n=>{const d=document.createElement('div');const ok=s.unlockedCars.includes(n);d.className='car-tile '+(ok?'unlocked':'locked');d.textContent=ok?'🚘':'🔒';d.onclick=()=>{if(!ok)return;document.getElementById('name').textContent=n;KurumaApp.horn();};g.appendChild(d);});
+</script></body></html>
