@@ -1,24 +1,37 @@
 <!doctype html><html lang="ja"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>タイピング</title><link rel="stylesheet" href="styles.css"></head>
-<body><main class="container"><section class="card cool">
+<body><main class="container"><section class="card cool mission-card">
 <h1>タイピングミッション</h1>
 <p class="level" id="target"></p>
-<p class="hint">キーボードみたいにタップして入力しよう！</p>
+<p class="kana-label" id="kana"></p>
+<p class="hint">画面のキーをタップしても、ほんもののキーボードで入力してもOK！スペース・ハイフンは入れなくてもせいかいになるよ。</p>
 <div class="car-track"><div id="car" class="car">🚗</div></div>
-<input id="answer" autocomplete="off" aria-label="こたえ" placeholder="ここに入力">
-<div class="alpha-pad" id="alphaPad"></div>
+<div class="progress-wrap" aria-hidden="true"><div id="progressBar" class="progress-bar"></div></div>
+<input id="answer" autocomplete="off" autocapitalize="characters" spellcheck="false" aria-label="こたえ" placeholder="ここに入力 / キーボードでもOK">
+<div class="typing-toolbar">
+  <button id="focusInput" class="green small" type="button">キーボード入力をはじめる</button>
+  <button id="nextWord" class="blue small" type="button">ちがう車名</button>
+</div>
+<div class="alpha-pad" id="alphaPad" aria-label="がめんキーボード"></div>
 <p id="status" class="status"></p>
 <div class="buttons"><button id="bksp" class="orange small">1文字けす</button><a class="button-link blue small" href="index.html">ガレージへ</a></div>
 <div class="emoji-lane" id="emojiLane"></div>
 </section></main>
 <script src="app.js"></script><script>
-const typingQuestions=["PRIUS","AQUA","YARIS","COROLLA","CROWN","ALPHARD","VELLFIRE","HARRIER","RAV4","LANDCRUISER","SUPRA","SKYLINE","GTR","FAIRLADYZ","NOTE","SERENA","CIVIC","FIT","FREED","VEZEL","ODYSSEY","ROADSTER","CX5","IMPREZA","FORESTER","SWIFT","JIMNY","BRZ","LEAF","A3","GOLF","POLO","NBOX","VOXY","NOAH","RX7"];
-let word='';
+const typingQuestions = KurumaApp.CAR_LIBRARY.map((car) => car.name);
+let word = '';
+let answered = false;
+function normalizedAnswer() { return KurumaApp.normalizeCarName(document.getElementById('answer').value.trim()); }
 function runEmoji(){const lane=document.getElementById('emojiLane');lane.innerHTML='';const e=document.createElement('div');e.className='race-car';e.textContent='🏎️';e.style.color=['#00e5ff','#ff3d81','#9cff57','#ffd740','#9b7bff'][Math.floor(Math.random()*5)];lane.appendChild(e);requestAnimationFrame(()=>e.classList.add('go'))}
-function loadWord(){word=typingQuestions[Math.floor(Math.random()*typingQuestions.length)];document.getElementById('target').textContent=`この車名を入力： ${word}`;document.getElementById('answer').value='';}
-function judge(){const v=document.getElementById('answer').value.trim().toUpperCase();const st=document.getElementById('status');if(v===word){const s=KurumaApp.addPoint();KurumaApp.horn();st.textContent=`せいかい！ レベル ${s.level}`;st.className='status ok';const c=document.getElementById('car');c.classList.remove('go');void c.offsetWidth;c.classList.add('go');runEmoji();setTimeout(loadWord,900);} else if(word.startsWith(v)){st.textContent='';}else{KurumaApp.miss();st.textContent='おしい！ もういちど';st.className='status miss';}}
-function addChar(ch){const i=document.getElementById('answer');i.value+=ch;judge();}
-const keyRows=[['1','2','3','4','5','6','7','8','9','0'],['Q','W','E','R','T','Y','U','I','O','P'],['A','S','D','F','G','H','J','K','L'],['Z','X','C','V','B','N','M']];
-keyRows.forEach((row,rowIdx)=>{const r=document.createElement('div');r.className='key-row row-'+rowIdx;row.forEach(ch=>{const b=document.createElement('button');b.className='pad-btn blue';b.textContent=ch;b.onclick=()=>addChar(ch);r.appendChild(b);});document.getElementById('alphaPad').appendChild(r);});
-document.getElementById('bksp').addEventListener('click',()=>{const i=document.getElementById('answer');i.value=i.value.slice(0,-1);judge();});
-document.getElementById('answer').addEventListener('input',judge);loadWord();
+function loadWord(){word=typingQuestions[Math.floor(Math.random()*typingQuestions.length)];answered=false;const car=KurumaApp.getCarData(word);document.getElementById('target').textContent=`この車名を入力： ${car.name}`;document.getElementById('kana').textContent=car.kana;document.getElementById('answer').value='';document.getElementById('status').textContent='';updateProgress();document.getElementById('answer').focus();}
+function updateProgress(){const goal=KurumaApp.normalizeCarName(word).length;const typed=normalizedAnswer().length;document.getElementById('progressBar').style.width=`${Math.min(100, (typed / goal) * 100)}%`;}
+function judge(){if(answered)return;const v=normalizedAnswer();const goal=KurumaApp.normalizeCarName(word);const st=document.getElementById('status');updateProgress();if(v===goal){answered=true;const s=KurumaApp.addPoint();KurumaApp.horn();st.textContent=`せいかい！ レベル ${s.level}。${KurumaApp.getCarLabel(word)}をクリア！`;st.className='status ok';const c=document.getElementById('car');c.classList.remove('go');void c.offsetWidth;c.classList.add('go');runEmoji();setTimeout(loadWord,1000);} else if(goal.startsWith(v)){st.textContent=v ? 'いいね！そのまま入力しよう' : '';st.className='status';}else{KurumaApp.miss();st.textContent='おしい！ 赤いところから見なおそう';st.className='status miss';}}
+function addChar(ch){const i=document.getElementById('answer');i.value+=ch;i.focus();judge();}
+const keyRows=[['1','2','3','4','5','6','7','8','9','0'],['Q','W','E','R','T','Y','U','I','O','P'],['A','S','D','F','G','H','J','K','L'],['Z','X','C','V','B','N','M'],['-','SPACE']];
+keyRows.forEach((row,rowIdx)=>{const r=document.createElement('div');r.className='key-row row-'+rowIdx;row.forEach(ch=>{const b=document.createElement('button');b.className='pad-btn blue';b.textContent=ch==='SPACE'?'スペース':ch;b.type='button';b.onclick=()=>addChar(ch==='SPACE'?' ':ch);r.appendChild(b);});document.getElementById('alphaPad').appendChild(r);});
+document.getElementById('bksp').addEventListener('click',()=>{const i=document.getElementById('answer');i.value=i.value.slice(0,-1);i.focus();judge();});
+document.getElementById('focusInput').addEventListener('click',()=>document.getElementById('answer').focus());
+document.getElementById('nextWord').addEventListener('click',loadWord);
+document.getElementById('answer').addEventListener('input',judge);
+document.addEventListener('keydown',(event)=>{if(event.key==='Enter'){judge();} if(event.key==='Backspace' || event.key.length===1){document.getElementById('answer').focus();}});
+loadWord();
 </script></body></html>

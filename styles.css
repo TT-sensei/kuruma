@@ -352,3 +352,100 @@ input:focus {
 ::-webkit-scrollbar { width: 6px; height: 6px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: #3f4f6f; border-radius: 999px; }
+
+/* ===== 学習アップデート用パーツ ===== */
+.mission-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.mission-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 85% 8%, rgba(255, 215, 64, .16), transparent 26%);
+  pointer-events: none;
+}
+
+.kana-label {
+  display: inline-block;
+  margin: -8px 0 12px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: rgba(255, 215, 64, .16);
+  color: #ffe27a;
+  font-size: clamp(24px, 4vw, 36px);
+  font-weight: 900;
+  letter-spacing: .06em;
+}
+
+.progress-wrap {
+  height: 16px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: #0b1220;
+  border: 1px solid rgba(255,255,255,.16);
+  margin: 8px 0 12px;
+}
+
+.progress-bar {
+  width: 0;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #3de2a0, #ffd740, #ff8a00);
+  transition: width .18s ease;
+}
+
+.typing-toolbar {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin: 12px 0;
+}
+
+.row-4 {
+  grid-template-columns: 1fr 2fr;
+  padding: 0 80px;
+}
+
+.math-dashboard {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.mission-badge,
+.formula-hint {
+  display: inline-flex;
+  align-items: center;
+  min-height: 42px;
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-size: 18px;
+  font-weight: 900;
+}
+
+.mission-badge {
+  background: linear-gradient(135deg, rgba(255,138,0,.24), rgba(61,158,255,.18));
+  color: #ffd740;
+  border: 1px solid rgba(255,215,64,.28);
+}
+
+.formula-hint {
+  background: rgba(61,158,255,.14);
+  color: #b9dcff;
+  border: 1px solid rgba(61,158,255,.28);
+}
+
+.math-pad {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+@media (max-width: 680px) {
+  .typing-toolbar { grid-template-columns: 1fr; }
+  .row-0, .row-1 { grid-template-columns: repeat(5, 1fr); }
+  .row-2, .row-3, .row-4 { padding: 0; }
+  .math-pad { grid-template-columns: repeat(4, 1fr); }
+}
