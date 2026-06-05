@@ -5,5 +5,5 @@
 <div class="buttons"><a class="button-link blue small" href="index.html">ガレージへ</a></div>
 </section></main>
 <script src="app.js"></script><script>
-const s=KurumaApp.loadState();const g=document.getElementById('grid');KurumaApp.ALL_CARS.forEach(n=>{const d=document.createElement('div');const ok=s.unlockedCars.includes(n);d.className='car-tile '+(ok?'unlocked':'locked');d.textContent=ok?'🚘':'🔒';d.onclick=()=>{if(!ok)return;document.getElementById('name').textContent=n;KurumaApp.horn();};g.appendChild(d);});
+const s=KurumaApp.loadState();const g=document.getElementById('grid');KurumaApp.ALL_CARS.forEach(n=>{const d=document.createElement('div');const ok=s.unlockedCars.includes(n);d.className='car-tile '+(ok?'unlocked':'locked');d.textContent=ok?'🚘':'🔒';d.onclick=()=>{if(!ok)return;document.getElementById('name').textContent=KurumaApp.getCarLabel(n);KurumaApp.horn();};g.appendChild(d);});
 </script></body></html>

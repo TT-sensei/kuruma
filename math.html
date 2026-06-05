@@ -1,31 +1,56 @@
 <!doctype html><html lang="ja"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>けいさん</title><link rel="stylesheet" href="styles.css"></head>
-<body><main class="container"><section class="card cool">
+<body><main class="container"><section class="card cool mission-card">
 <h1>けいさんミッション</h1>
-<p class="level" id="modeLabel">モード：ランダム100問</p>
+<p class="level" id="modeLabel">モード：くるま算数ドライブ</p>
+<div class="math-dashboard"><span id="badge" class="mission-badge">🚗 ピット問題</span><span id="formulaHint" class="formula-hint"></span></div>
 <p id="q" class="big question"></p>
-<input id="ans" inputmode="numeric" placeholder="数字を入力">
-<div class="tap-pad" id="numPad"></div>
+<p id="story" class="hint"></p>
+<input id="ans" inputmode="text" autocomplete="off" aria-label="こたえまたはしき" placeholder="答え または しき（例: 3+2）">
+<div class="tap-pad math-pad" id="numPad"></div>
 <p id="status" class="status"></p>
 <div class="buttons">
 <button id="clear" class="orange small">クリア</button>
+<button id="skip" class="green small">つぎのもんだい</button>
 <a class="button-link blue small" href="index.html">ガレージへ</a>
 </div>
 <div class="emoji-lane" id="emojiLane"></div>
 </section></main>
 <script src="app.js"></script><script>
-const addQuestions=[{q:"300 + 200",a:500},{q:"450 + 150",a:600},{q:"120 + 80",a:200},{q:"600 + 300",a:900},{q:"250 + 250",a:500},{q:"700 + 200",a:900},{q:"90 + 60",a:150},{q:"800 + 100",a:900},{q:"130 + 170",a:300},{q:"400 + 400",a:800}];
-const subQuestions=[{q:"500 - 200",a:300},{q:"600 - 150",a:450},{q:"900 - 300",a:600},{q:"800 - 400",a:400},{q:"700 - 100",a:600},{q:"650 - 250",a:400},{q:"1000 - 500",a:500},{q:"750 - 250",a:500},{q:"900 - 100",a:800},{q:"400 - 150",a:250}];
-const mulQuestions=[{q:"12 × 3",a:36},{q:"15 × 2",a:30},{q:"8 × 7",a:56},{q:"9 × 6",a:54},{q:"11 × 4",a:44},{q:"6 × 6",a:36},{q:"7 × 8",a:56},{q:"10 × 5",a:50},{q:"4 × 9",a:36},{q:"3 × 12",a:36}];
-const divQuestions=[{q:"36 ÷ 3",a:12},{q:"40 ÷ 5",a:8},{q:"56 ÷ 7",a:8},{q:"54 ÷ 6",a:9},{q:"44 ÷ 4",a:11},{q:"48 ÷ 6",a:8},{q:"63 ÷ 9",a:7},{q:"30 ÷ 5",a:6},{q:"72 ÷ 8",a:9},{q:"81 ÷ 9",a:9}];
-const shopQuestions=[{q:"タイヤ300円 + ライト200円",a:500},{q:"エンジン500円 + バッテリー300円",a:800},{q:"ホイール400円 + シート200円",a:600},{q:"ライト200円 + ミラー100円",a:300},{q:"タイヤ300円 × 2",a:600},{q:"1000円 - 300円",a:700},{q:"1000円 - 450円",a:550},{q:"500円 + 250円",a:750},{q:"800円 - 200円",a:600},{q:"600円 + 300円",a:900},{q:"700円 - 400円",a:300},{q:"900円 - 600円",a:300},{q:"200円 × 3",a:600},{q:"100円 × 5",a:500},{q:"120円 + 80円",a:200}];
-const missionQuestions=[{q:"300円のタイヤを2つ買うと？",a:600},{q:"500円持っていて200円使ったら？",a:300},{q:"100円のライトを5こ買うと？",a:500},{q:"800円から300円引くと？",a:500},{q:"200円を3回足すと？",a:600},{q:"900円から600円引くと？",a:300},{q:"50円を4回足すと？",a:200},{q:"600円を2で割ると？",a:300},{q:"400円に200円足すと？",a:600},{q:"700円から100円引くと？",a:600}];
-const allMath=[...addQuestions,...subQuestions,...mulQuestions,...divQuestions,...shopQuestions,...missionQuestions];
-let current;
-function newQ(){current=allMath[Math.floor(Math.random()*allMath.length)];document.getElementById('q').textContent=current.q;document.getElementById('ans').value='';}
+const parts = ['タイヤ','エンジン','ガソリン','ライト','ハンドル','ブレーキ','ミラー','バッテリー','シート','ホイール'];
+const scenes = ['ガレージ','ピット','サーキット','ドライブコース','サービス工場'];
+const cars = KurumaApp.CAR_LIBRARY;
+const baseQuestions = [
+  { type:'add', car:'PRIUS', item:'タイヤ', left:4, right:2, unit:'本', story:'よびのタイヤをつみます。' },
+  { type:'add', car:'AQUA', item:'ガソリン', left:20, right:15, unit:'L', story:'ドライブ前にガソリンを足します。' },
+  { type:'add', car:'YARIS', item:'ライト', left:2, right:4, unit:'こ', story:'明るいライトを追加します。' },
+  { type:'add', car:'COROLLA', item:'エンジン点検', left:3, right:5, unit:'回', story:'午前と午後の点検回数を合わせます。' },
+  { type:'add', car:'CROWN', item:'ホイール', left:4, right:4, unit:'こ', story:'前のセットと後ろのセットを合わせます。' },
+  { type:'sub', car:'ALPHARD', item:'シート', left:8, right:3, unit:'席', story:'使っていない席をたたみます。' },
+  { type:'sub', car:'HARRIER', item:'ガソリン', left:50, right:18, unit:'L', story:'ドライブでガソリンを使いました。' },
+  { type:'sub', car:'RAV4', item:'タイヤ', left:10, right:4, unit:'本', story:'交換したタイヤを箱から出します。' },
+  { type:'sub', car:'LAND CRUISER', item:'荷物', left:12, right:5, unit:'こ', story:'キャンプ道具をおろしました。' },
+  { type:'sub', car:'NOAH', item:'ミニカー', left:15, right:7, unit:'台', story:'友だちにミニカーをわたしました。' },
+  { type:'mul', car:'VOXY', item:'タイヤ', left:4, right:3, unit:'本', story:'3台ぶんのタイヤを数えます。' },
+  { type:'mul', car:'SUPRA', item:'エンジン音', left:6, right:5, unit:'回', story:'5セットのエンジン音チェックです。' },
+  { type:'div', car:'SKYLINE', item:'ガソリン', left:36, right:4, unit:'L', story:'4台に同じ量ずつ分けます。' },
+  { type:'div', car:'GT-R', item:'ホイール', left:24, right:6, unit:'こ', story:'6箱に同じ数ずつ入れます。' }
+];
+function randomItem(list){return list[Math.floor(Math.random()*list.length)];}
+function randomCar(){return randomItem(cars).name;}
+function makeRandomQuestion(){const type=randomItem(['add','add','add','sub','sub','sub','mul','div']);const car=randomCar();const item=randomItem(parts);let left,right;if(type==='add'){left=rand(2,60);right=rand(1,40);}if(type==='sub'){left=rand(10,90);right=rand(1,left-1);}if(type==='mul'){left=rand(2,9);right=rand(2,6);}if(type==='div'){right=rand(2,9);const answer=rand(2,9);left=right*answer;}return {type,car,item,left,right,unit:type==='div'?'こ':'こ',story:`${randomItem(scenes)}で${item}を数えよう。`};}
+function rand(min,max){return Math.floor(Math.random()*(max-min+1))+min;}
+function symbol(type){return ({add:'+',sub:'-',mul:'×',div:'÷'})[type];}
+function answerOf(q){if(q.type==='add')return q.left+q.right;if(q.type==='sub')return q.left-q.right;if(q.type==='mul')return q.left*q.right;return q.left/q.right;}
+function textOf(q){const car=KurumaApp.getCarLabel(q.car);if(q.type==='add')return `${car}の${q.item}が${q.left}${q.unit}あります。さらに${q.right}${q.unit}ふえました。ぜんぶで何${q.unit}？`;if(q.type==='sub')return `${car}の${q.item}が${q.left}${q.unit}あります。${q.right}${q.unit}使いました。のこりは何${q.unit}？`;if(q.type==='mul')return `${car} ${q.right}台ぶん。1台に${q.item}が${q.left}${q.unit}ずつ。ぜんぶで何${q.unit}？`;return `${car}の${q.item} ${q.left}${q.unit}を${q.right}台で同じ数ずつ分けます。1台ぶんは何${q.unit}？`;}
+function formulaOf(q){return `${q.left}${symbol(q.type)}${q.right}`;}
+function newQ(){current=Math.random()<0.65?makeRandomQuestion():randomItem(baseQuestions);current.answer=answerOf(current);document.getElementById('badge').textContent=`${current.type==='add'?'➕':current.type==='sub'?'➖':current.type==='mul'?'✖️':'➗'} ${randomItem(scenes)}`;document.getElementById('formulaHint').textContent=`式ヒント：${current.left} ${symbol(current.type)} ${current.right}`;document.getElementById('q').textContent=textOf(current);document.getElementById('story').textContent=`${current.story} 答えだけでも、「${formulaOf(current)}」のような式でも入力できます。`;document.getElementById('ans').value='';document.getElementById('status').textContent='';document.getElementById('ans').focus();}
 function runEmoji(){const lane=document.getElementById('emojiLane');lane.innerHTML='';const e=document.createElement('div');e.className='race-car';e.textContent='🚗';e.style.color=['#00e5ff','#ff3d81','#9cff57','#ffd740','#9b7bff'][Math.floor(Math.random()*5)];lane.appendChild(e);requestAnimationFrame(()=>e.classList.add('go'))}
-function judge(){const v=Number(document.getElementById('ans').value);if(!Number.isFinite(v))return;const st=document.getElementById('status');if(v===current.a){KurumaApp.horn();const s=KurumaApp.addPoint();st.textContent=`せいかい！ +1ポイント（Lv.${s.level}）`;st.className='status ok';runEmoji();setTimeout(newQ,700);}else{KurumaApp.miss();st.textContent='おしい！ すうじをみなおそう';st.className='status miss';}}
-function addDigit(d){const i=document.getElementById('ans');i.value+=d;judge();}
-['7','8','9','4','5','6','1','2','3','0','00'].forEach(n=>{const b=document.createElement('button');b.className='pad-btn blue';b.textContent=n;b.onclick=()=>addDigit(n);document.getElementById('numPad').appendChild(b);});
-document.getElementById('clear').addEventListener('click',()=>document.getElementById('ans').value='');
+function evaluateExpression(raw){const clean=raw.replace(/\s/g,'').replace(/[＋]/g,'+').replace(/[−ー]/g,'-').replace(/[×xX＊*]/g,'*').replace(/[÷／/]/g,'/');if(!clean)return NaN;if(!/^-?\d+(?:[+\-*/]-?\d+)*$/.test(clean))return NaN;return clean.split(/([+\-*/])/).reduce((acc, token, idx, arr)=>{if(idx===0)return Number(token);if(/[+\-*/]/.test(token))return acc;const op=arr[idx-1];const n=Number(token);if(op==='+')return acc+n;if(op==='-')return acc-n;if(op==='*')return acc*n;if(op==='/')return acc/n;return acc;},0);}
+let current;let answered=false;
+function judge(){if(answered)return;const raw=document.getElementById('ans').value;const v=evaluateExpression(raw);if(!Number.isFinite(v))return;const st=document.getElementById('status');if(Math.abs(v-current.answer)<0.0001){answered=true;KurumaApp.horn();const s=KurumaApp.addPoint();st.textContent=`せいかい！ ${formulaOf(current)} = ${current.answer}。+1ポイント（Lv.${s.level}）`;st.className='status ok';runEmoji();setTimeout(()=>{answered=false;newQ();},950);}else{KurumaApp.miss();st.textContent='おしい！ 式と答えをもういちど見てみよう';st.className='status miss';}}
+function addToken(d){const i=document.getElementById('ans');i.value+=d;i.focus();judge();}
+['7','8','9','+','4','5','6','-','1','2','3','×','0','00','÷','='].forEach(n=>{const b=document.createElement('button');b.className='pad-btn blue';b.textContent=n;b.type='button';b.onclick=()=>{if(n==='=')judge();else addToken(n);};document.getElementById('numPad').appendChild(b);});
+document.getElementById('clear').addEventListener('click',()=>{document.getElementById('ans').value='';document.getElementById('status').textContent='';document.getElementById('ans').focus();});
+document.getElementById('skip').addEventListener('click',()=>{answered=false;newQ();});
 document.getElementById('ans').addEventListener('input',judge);newQ();
 </script></body></html>

@@ -1,4 +1,46 @@
-const ALL_CARS = ["PRIUS","AQUA","YARIS","COROLLA","CROWN","ALPHARD","HARRIER","RAV4","LAND CRUISER","NOAH","VOXY","SUPRA","86","SKYLINE","GT-R","FAIRLADY Z","NOTE","SERENA","X-TRAIL","LEAF","CIVIC","FIT","FREED","VEZEL","N-BOX","ROADSTER","CX-5","RX-7","IMPREZA","FORESTER","BRZ","SWIFT","JIMNY","TANTO","MOVE","MINI COOPER","GOLF","POLO","A3","PORSCHE 911"];
+const CAR_LIBRARY = [
+  { name: "PRIUS", kana: "プリウス" },
+  { name: "AQUA", kana: "アクア" },
+  { name: "YARIS", kana: "ヤリス" },
+  { name: "COROLLA", kana: "カローラ" },
+  { name: "CROWN", kana: "クラウン" },
+  { name: "ALPHARD", kana: "アルファード" },
+  { name: "HARRIER", kana: "ハリアー" },
+  { name: "RAV4", kana: "ラブフォー" },
+  { name: "LAND CRUISER", kana: "ランドクルーザー" },
+  { name: "NOAH", kana: "ノア" },
+  { name: "VOXY", kana: "ヴォクシー" },
+  { name: "SUPRA", kana: "スープラ" },
+  { name: "86", kana: "ハチロク" },
+  { name: "SKYLINE", kana: "スカイライン" },
+  { name: "GT-R", kana: "ジーティーアール" },
+  { name: "FAIRLADY Z", kana: "フェアレディゼット" },
+  { name: "NOTE", kana: "ノート" },
+  { name: "SERENA", kana: "セレナ" },
+  { name: "X-TRAIL", kana: "エクストレイル" },
+  { name: "LEAF", kana: "リーフ" },
+  { name: "CIVIC", kana: "シビック" },
+  { name: "FIT", kana: "フィット" },
+  { name: "FREED", kana: "フリード" },
+  { name: "VEZEL", kana: "ヴェゼル" },
+  { name: "N-BOX", kana: "エヌボックス" },
+  { name: "ROADSTER", kana: "ロードスター" },
+  { name: "CX-5", kana: "シーエックスファイブ" },
+  { name: "RX-7", kana: "アールエックスセブン" },
+  { name: "IMPREZA", kana: "インプレッサ" },
+  { name: "FORESTER", kana: "フォレスター" },
+  { name: "BRZ", kana: "ビーアールゼット" },
+  { name: "SWIFT", kana: "スイフト" },
+  { name: "JIMNY", kana: "ジムニー" },
+  { name: "TANTO", kana: "タント" },
+  { name: "MOVE", kana: "ムーヴ" },
+  { name: "MINI COOPER", kana: "ミニクーパー" },
+  { name: "GOLF", kana: "ゴルフ" },
+  { name: "POLO", kana: "ポロ" },
+  { name: "A3", kana: "エースリー" },
+  { name: "PORSCHE 911", kana: "ポルシェきゅういちいち" }
+];
+const ALL_CARS = CAR_LIBRARY.map((car) => car.name);
 const DEFAULT_STATE = { points: 0, level: 1, unlockedCars: ["PRIUS"], typingIndex: 0 };
 const key = "kurumaStudyStateV1";
 function loadState() { try { return { ...DEFAULT_STATE, ...JSON.parse(localStorage.getItem(key) || "{}") }; } catch { return { ...DEFAULT_STATE }; } }
@@ -23,6 +65,9 @@ function beep(freq, sec, type, gainValue) {
   osc.connect(gain); gain.connect(ctx.destination); osc.start();
   osc.stop(ctx.currentTime + sec);
 }
+function normalizeCarName(name) { return String(name).replace(/[\s-]/g, "").toUpperCase(); }
+function getCarData(name) { return CAR_LIBRARY.find((car) => car.name === name || normalizeCarName(car.name) === normalizeCarName(name)) || { name, kana: "" }; }
+function getCarLabel(name) { const car = getCarData(name); return `${car.name}${car.kana ? `（${car.kana}）` : ""}`; }
 function nextTypingWord() {
   const s = loadState();
   const words = s.unlockedCars;
@@ -31,4 +76,4 @@ function nextTypingWord() {
   saveState(s);
   return word;
 }
-window.KurumaApp = { loadState, saveState, addPoint, horn, miss, nextTypingWord, ALL_CARS };
+window.KurumaApp = { loadState, saveState, addPoint, horn, miss, nextTypingWord, ALL_CARS, CAR_LIBRARY, normalizeCarName, getCarData, getCarLabel };
