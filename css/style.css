@@ -549,3 +549,53 @@ body{width:100%;min-width:0}
   .garage-actions{grid-template-columns:1fr}
   .garage-actions .secondarybtn{min-height:37px}
 }
+
+
+/* ガレージポイントをはっきり見せ、購入前に合計金額を確認できるようにする */
+.garage-wallet{
+  margin:8px 0 10px;padding:13px;border:2px solid #ffd12a;border-radius:14px;
+  background:linear-gradient(135deg,#182f3d,#101f2a);box-shadow:0 0 0 3px #ffd12a18
+}
+.wallet-heading{display:flex;align-items:center;justify-content:space-between;gap:10px;font-size:clamp(13px,1.35vw,16px);font-weight:950}
+.wallet-heading>strong{white-space:nowrap;color:#ffe16a;font-size:clamp(20px,2.3vw,28px);font-variant-numeric:tabular-nums}
+.garage-wallet>p{margin:7px 0 10px;color:#c5e0ed;font-size:11px;line-height:1.5}
+.wallet-metrics{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px}
+.wallet-metrics>span{display:flex;align-items:center;justify-content:space-between;gap:5px;padding:8px;border-radius:9px;background:#050d14a8;color:#d5e8f2;font-size:11px}
+.wallet-metrics strong{color:#ffe16a;font-size:clamp(13px,1.35vw,17px);white-space:nowrap;font-variant-numeric:tabular-nums}
+.garage-panel .custom-option small{line-height:1.25;overflow-wrap:anywhere}
+.garage-panel .custom-option.is-locked{opacity:.62;border-style:dashed}
+.garage-panel .custom-option.is-selected{border-color:#ffd12a;box-shadow:inset 0 0 0 1px #ffd12a,0 0 10px #ffd12a25}
+
+/* ニトロゲージと発動ボタンを拡大し、タブレットでも押しやすくする */
+.nitro-panel{width:292px;min-height:108px;padding:10px 12px;gap:7px 10px;border-width:2px;border-color:#71dfff;background:linear-gradient(135deg,#071b2b,#102b3a)}
+.nitro-heading{font-size:14px;letter-spacing:.8px}
+.nitro-heading strong{font-size:22px}
+.nitro-track{height:14px;border:1px solid #8eeaff55}
+#nitroBtn{min-height:48px;padding:8px 12px;border-radius:11px;font-size:clamp(15px,1.5vw,19px);letter-spacing:.2px}
+.nitro-panel:has(#nitroBtn.ready){border-color:#ffe16a;box-shadow:0 0 0 3px #26caff28,0 0 22px #26caff50}
+.question{top:214px}
+@media(max-width:900px){
+  .nitro-panel{width:264px}
+  .question{top:212px}
+}
+@media(max-width:700px){
+  .nitro-panel{width:190px;min-height:91px;padding:8px 9px;gap:6px}
+  .nitro-heading{font-size:11px;letter-spacing:.3px}
+  .nitro-heading strong{font-size:18px}
+  .nitro-track{height:11px}
+  #nitroBtn{min-height:41px;padding:6px 7px;font-size:14px}
+  .question{top:198px}
+  .garage-wallet{padding:10px}
+  .wallet-heading{font-size:13px}
+  .wallet-heading>strong{font-size:22px}
+}
+@media(max-width:480px){
+  .nitro-panel{width:160px;min-height:85px;padding:7px;gap:5px}
+  .nitro-heading{font-size:10px}
+  .nitro-heading strong{font-size:16px}
+  .nitro-track{height:10px}
+  #nitroBtn{min-height:38px;padding:6px 3px;font-size:12px}
+  .question{top:194px;width:94%;padding:9px}
+  .wallet-metrics>span{align-items:flex-start;flex-direction:column;padding:7px;font-size:10px}
+  .wallet-metrics strong{font-size:14px}
+}
