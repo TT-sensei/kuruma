@@ -11,7 +11,7 @@
   const buttons = { left: el("left"), right: el("right") };
   const resultTitle = el("resultTitle"), resultText = el("resultText");
   const customCatalog = {
-    livery: { label: "カラー", options: [
+    livery: { label: "いろ", options: [
       { id: "stock", name: "ファクトリー", points: 0 }, { id: "neon", name: "ネオン", points: 25 },
       { id: "stripe", name: "レーシング", points: 45 }, { id: "carbon", name: "カーボン", points: 70 },
       { id: "sunset", name: "サンセット", points: 90 }, { id: "ice", name: "アイスブルー", points: 110 },
@@ -271,7 +271,7 @@
     renderCareer();
     if (status) {
       status.textContent =  "パーツをかったよ！ " + changedSlots.length +
-         "かしょをかえて、合計 " + cost + " ptつかったよ。のこりは " + career.points + " ptです。";
+          "しゅるいのパーツをかえて、合計 " + cost + " ptつかったよ。のこりは " + career.points + " ptだよ！";
       status.dataset.notice = "result";
     }
     renderCustomActions();
@@ -580,7 +580,7 @@
     hideQuestion();
     root.classList.remove("phase-start", "phase-battle", "phase-final");
     root.classList.add("phase-final");
-    el("phaseTag").textContent = "FINISH";
+    el("phaseTag").textContent = "ゴール";
     const total = raceQuestions.length;
     const won = playerDistance >= rivalDistance;
     const rewardThreshold = Math.ceil(total * 0.625);
