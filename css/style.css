@@ -1,48 +1,111 @@
-:root{--red:#e51b2b;--yellow:#ffd12a;--dark:#07131d;--road:#30353a}
+:root{--yellow:#ffd12a;--dark:#07131d;--road:#30353a;--accent:#ffd12a}
 *{box-sizing:border-box}
 body{margin:0;background:#111820;color:#fff;font-family:system-ui,"BIZ UDPGothic","Yu Gothic",sans-serif}
-.game{position:relative;max-width:960px;min-height:100vh;margin:auto;overflow:hidden;background:linear-gradient(#68c5f4 0 34%,#77a760 34% 100%)}
+button{font:inherit}
+.game{position:relative;isolation:isolate;max-width:1100px;min-height:100vh;margin:auto;overflow:hidden;background:linear-gradient(#68c5f4 0 34%,#77a760 34% 100%);transition:background .4s}
+.game.course-grand-prix{background:linear-gradient(#68c5f4 0 34%,#77a760 34% 100%)}
+.game.course-city{background:linear-gradient(#c5e5f5 0 34%,#aaaeb2 34% 100%)}
+.game.course-forest{background:linear-gradient(#9bd7ef 0 34%,#548b42 34% 100%)}
+.game.course-coast{background:linear-gradient(#70c9ef 0 31%,#f0d79a 31% 52%,#3198a3 52% 100%)}
+.game.course-night{background:linear-gradient(#101d42 0 34%,#203b3b 34% 100%)}
 .stands{position:absolute;top:18%;left:0;width:44%;height:145px;background:repeating-linear-gradient(#dbe2e7 0 12px,#52616e 13px 25px);clip-path:polygon(0 10%,90% 0,100% 100%,0 100%);border-top:12px solid #eef2f4}
 .stands:after{content:"";position:absolute;inset:20px;background-image:radial-gradient(#ffd22a 2px,transparent 3px),radial-gradient(#ed4050 2px,transparent 3px),radial-gradient(#fff 2px,transparent 3px);background-size:18px 18px,22px 20px,26px 17px}
+.course-city .stands{top:13%;height:180px;border:0;clip-path:none;background:repeating-linear-gradient(90deg,#87959f 0 35px,#d7dce0 36px 40px,#566672 41px 65px);opacity:.9}
+.course-city .stands:after{inset:10px;background-image:repeating-linear-gradient(0deg,transparent 0 23px,#f6e9a6 24px 29px,transparent 30px 40px);background-size:100% 40px}
+.course-forest .stands{background:repeating-linear-gradient(90deg,#285a36 0 24px,#44874e 25px 48px,#21452d 49px 60px);border-top-color:#b6d4a4}
+.course-forest .stands:after{background-image:radial-gradient(#b7d88a 3px,transparent 4px);background-size:24px 25px}
+.course-coast .stands{background:linear-gradient(#fff7dc 0 15%,#f1cf7d 16% 100%);border-top-color:#fff}
+.course-coast .stands:after{background-image:radial-gradient(#fff 2px,transparent 3px),radial-gradient(#e4a84d 2px,transparent 3px);background-size:24px 20px,19px 17px}
+.course-night .stands{background:repeating-linear-gradient(#202a4d 0 12px,#11182e 13px 25px);border-top-color:#92a7e2}
+.course-night .stands:after{background-image:radial-gradient(#ffd56b 3px,transparent 4px),radial-gradient(#8dd9ff 2px,transparent 3px);background-size:28px 25px,19px 20px}
 .pit{position:absolute;top:20%;right:0;width:39%;height:150px;background:linear-gradient(#eef2f4 0 28%,#26343f 29% 35%,#d3dbe0 36% 67%,#15212a 68%);clip-path:polygon(10% 0,100% 0,100% 100%,0 100%)}
 .pit:before{content:"PIT LANE";position:absolute;top:15px;left:25%;color:#1c2b36;font-weight:1000;letter-spacing:3px}
+.course-city .pit{background:linear-gradient(#a9bbc7 0 28%,#26343f 29% 35%,#e2e6e9 36% 67%,#15212a 68%)}
+.course-forest .pit{background:linear-gradient(#a2c98f 0 28%,#263b2a 29% 35%,#d3e3c9 36% 67%,#152a20 68%)}
+.course-coast .pit{background:linear-gradient(#fff1ca 0 28%,#26343f 29% 35%,#e4d2a7 36% 67%,#15212a 68%)}
+.course-night .pit{background:linear-gradient(#b7c5f4 0 28%,#26343f 29% 35%,#7f8cad 36% 67%,#0b1024 68%)}
+.course-night .pit:before{color:#10182c}
 .fence{position:absolute;z-index:3;top:33%;width:100%;height:70px;border-block:4px solid #bfc9cf;background:repeating-linear-gradient(55deg,transparent 0 13px,#c7d0d4 14px 15px),repeating-linear-gradient(-55deg,transparent 0 13px,#c7d0d4 14px 15px)}
+.course-night .fence{border-color:#a4b8ed;background:repeating-linear-gradient(55deg,transparent 0 13px,#a4b8ed 14px 15px),repeating-linear-gradient(-55deg,transparent 0 13px,#a4b8ed 14px 15px)}
 .road{position:absolute;z-index:4;bottom:0;left:50%;width:110%;height:67%;transform:translateX(-50%);clip-path:polygon(42% 0,58% 0,100% 100%,0 100%);background:linear-gradient(90deg,#1e2226,#41464b 46%,#2c3034 78%,#1d2125);box-shadow:inset 55px 0 45px #0006,inset -55px 0 45px #0006}
 .road:before,.road:after{content:"";position:absolute;top:0;bottom:0;width:6%;background:repeating-linear-gradient(#fff 0 36px,#d92335 37px 72px)}
 .road:before{left:0}.road:after{right:0}
+.course-city .road:before,.course-city .road:after{background:repeating-linear-gradient(#fff 0 36px,#e1b52b 37px 72px)}
+.course-coast .road:before,.course-coast .road:after{background:repeating-linear-gradient(#fff 0 36px,#2f9caa 37px 72px)}
+.course-night .road{background:linear-gradient(90deg,#111523,#343b50 46%,#242a3c 78%,#111523)}
+.course-night .road:before,.course-night .road:after{box-shadow:0 0 12px #6f9eff}
 .line{height:100%;background:repeating-linear-gradient(transparent 0 45px,#fff7b8 46px 80px,transparent 81px 142px);clip-path:polygon(49.5% 0,50.5% 0,53% 100%,47% 100%);animation:drive .48s linear infinite}
 @keyframes drive{to{background-position:0 142px}}
-.hud{position:absolute;z-index:20;top:14px;left:14px;right:14px;display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
-.pill{background:#07131de8;border:1px solid #ffffff66;border-radius:999px;padding:9px 14px;font-weight:900}
-.question{position:absolute;z-index:21;top:75px;left:50%;width:min(90%,540px);transform:translate(-50%,-20px);padding:14px;border:3px solid #ffffffaa;border-radius:18px;background:#07131def;text-align:center;opacity:0;transition:.3s}
+.hud{position:absolute;z-index:20;top:12px;left:12px;right:12px;display:flex;justify-content:space-between;gap:7px;flex-wrap:wrap}
+.pill{background:#07131de8;border:1px solid #ffffff66;border-radius:999px;padding:8px 13px;font-size:clamp(12px,1.8vw,15px);font-weight:900}
+.question{position:absolute;z-index:21;top:76px;left:50%;width:min(90%,600px);transform:translate(-50%,-20px);padding:14px 18px;border:3px solid #ffffffaa;border-radius:18px;background:#07131df5;text-align:center;opacity:0;transition:.3s;min-height:112px;display:flex;flex-direction:column;justify-content:center;gap:6px}
 .question.show{opacity:1;transform:translate(-50%,0)}
-.question small{display:block;color:#b7e4ff;font-weight:800}
-.question strong{font-size:clamp(34px,8vw,58px)}
-.choice{position:absolute;z-index:22;bottom:26%;width:34%;max-width:250px;min-height:68px;padding:14px;border:0;border-radius:16px;background:#fff;color:#17212a;font-size:clamp(30px,7vw,46px);font-weight:1000;box-shadow:0 8px 0 #a9b4bc,0 15px 28px #0007;opacity:0;pointer-events:none;cursor:pointer;transition:opacity .3s,transform .15s}
-.choice.left{left:5%}.choice.right{right:5%}
+.question small{display:block;color:#b7e4ff;font-weight:800;font-size:clamp(12px,2vw,15px)}
+.question strong{font-size:clamp(27px,5.5vw,48px);line-height:1.35}
+.feedback{min-height:1.5em;font-size:clamp(13px,2vw,17px);font-weight:800;line-height:1.5}
+.choice{position:absolute;z-index:22;bottom:25%;width:34%;max-width:270px;min-height:70px;padding:12px;border:3px solid #ffffffb0;border-radius:16px;background:#fff;color:#17212a;font-size:clamp(22px,4.8vw,42px);font-weight:1000;box-shadow:0 8px 0 #a9b4bc,0 15px 28px #0007;opacity:0;pointer-events:none;cursor:pointer;transition:opacity .3s,transform .15s;overflow-wrap:anywhere}
+.choice.left{left:4%}.choice.right{right:4%}
 .choice.show{opacity:1;pointer-events:auto}
 .choice:active{transform:translateY(4px);box-shadow:0 4px 0 #a9b4bc}
-.choice:focus-visible,.mainbtn:focus-visible{outline:5px solid #39a9ff;outline-offset:4px}
-.car{position:absolute;z-index:15;left:50%;bottom:34px;width:240px;height:160px;transform:translateX(-50%);transition:left .7s,transform .7s}
+.choice:focus-visible,.mainbtn:focus-visible,.vehicle-option:focus-visible,.select-option:focus-visible{outline:4px solid #39a9ff;outline-offset:3px}
+.car{position:absolute;z-index:15;left:50%;bottom:30px;width:240px;height:160px;transform:translateX(-50%);transition:left .7s,transform .7s;--paint-dark:#510108;--paint-mid:#c90b19;--paint-light:#ff3e4d}
 .car:after{content:"";position:absolute;left:25px;right:25px;bottom:-5px;height:32px;border-radius:50%;background:#000b;filter:blur(9px)}
 .car.left-turn{left:24%;transform:translateX(-50%) rotate(-8deg)}
 .car.right-turn{left:76%;transform:translateX(-50%) rotate(8deg)}
 .tire{position:absolute;bottom:18px;width:36px;height:68px;border-radius:12px;background:linear-gradient(90deg,#030405,#383e43,#030405)}
 .tire.l{left:3px}.tire.r{right:3px}
-.body{position:absolute;inset:31px 18px 18px;background:linear-gradient(90deg,#510108,#c90b19 18%,#ff3e4d 49%,#b30614 82%,#450106);clip-path:polygon(20% 0,80% 0,97% 38%,100% 80%,88% 100%,12% 100%,0 80%,3% 38%);border-radius:35% 35% 20% 20%;box-shadow:inset 0 17px 18px #ff888888,inset 0 -30px 25px #3b0008c9}
-.roof{position:absolute;z-index:2;top:5px;left:60px;width:120px;height:72px;background:linear-gradient(145deg,#daf9ff,#3f7894 30%,#071924 72%);clip-path:polygon(25% 0,75% 0,100% 100%,0 100%);border:6px solid var(--red);border-radius:45% 45% 8% 8%}
+.body{position:absolute;inset:31px 18px 18px;background:linear-gradient(90deg,var(--paint-dark),var(--paint-mid) 18%,var(--paint-light) 49%,var(--paint-mid) 82%,var(--paint-dark));clip-path:polygon(20% 0,80% 0,97% 38%,100% 80%,88% 100%,12% 100%,0 80%,3% 38%);border-radius:35% 35% 20% 20%;box-shadow:inset 0 17px 18px #ffffff40,inset 0 -30px 25px #0005}
+.roof{position:absolute;z-index:2;top:5px;left:60px;width:120px;height:72px;background:linear-gradient(145deg,#daf9ff,#3f7894 30%,#071924 72%);clip-path:polygon(25% 0,75% 0,100% 100%,0 100%);border:6px solid var(--paint-light);border-radius:45% 45% 8% 8%}
 .wing{position:absolute;z-index:6;left:4px;top:17px;width:232px;height:18px;border-radius:4px;background:linear-gradient(#343b42,#030405 70%);box-shadow:0 8px 0 -5px #000}
 .lamp{position:absolute;z-index:8;bottom:48px;width:54px;height:13px;border-radius:9px;background:repeating-linear-gradient(90deg,#ff1932 0 9px,#6e0009 10px 13px);box-shadow:0 0 15px #ff001f}
 .lamp.l{left:40px}.lamp.r{right:40px}
 .diffuser{position:absolute;z-index:7;left:45px;bottom:16px;width:150px;height:29px;background:repeating-linear-gradient(100deg,#020304 0 13px,#242a30 14px 20px);clip-path:polygon(0 0,100% 0,88% 100%,12% 100%)}
-.number{position:absolute;z-index:9;left:50%;bottom:49px;transform:translateX(-50%);background:#111820;padding:4px 8px;border-radius:4px;font-weight:900}
-.overlay{position:absolute;z-index:40;inset:0;display:grid;place-items:center;padding:20px;background:#06121cbd;transition:opacity .3s}
+.vehicle-extra{position:absolute;z-index:7;pointer-events:none}
+.number{position:absolute;z-index:9;left:50%;bottom:49px;transform:translateX(-50%);background:#111820;padding:4px 8px;border-radius:4px;color:white;font-size:11px;font-weight:1000;white-space:nowrap}
+.car--police{--paint-dark:#e3edf2;--paint-mid:#fbfdff;--paint-light:#eff6fb}
+.car--police .body{background:linear-gradient(90deg,#e8f2f8 0 22%,#176fb0 23% 43%,#fbfdff 44% 100%);box-shadow:inset 0 12px 16px #fff,inset 0 -20px 22px #7e9aaf}
+.car--police .roof{border-color:#f6fbff;background:linear-gradient(145deg,#b5e7ff,#263d53 35%,#081321 75%)}
+.car--police .wing{background:linear-gradient(#f0f5f8,#7b8a94 70%,#202a34)}
+.car--police .vehicle-extra{top:23px;left:91px;width:58px;height:15px;border:2px solid #182432;border-radius:4px;background:linear-gradient(90deg,#e72f43 0 45%,#fff 46% 53%,#287af1 54%);box-shadow:0 0 10px #8fd8ff}
+.car--fire{--paint-dark:#9c1b0b;--paint-mid:#e7331c;--paint-light:#ff5935}
+.car--fire .body{background:linear-gradient(90deg,#a31c0b 0 14%,#ed391e 15% 100%);box-shadow:inset 0 12px 18px #ffb19b88,inset 0 -22px 22px #5c1009}
+.car--fire .roof{border-color:#ffd64b;background:linear-gradient(145deg,#fff2bc,#5d6873 35%,#152331 75%)}
+.car--fire .vehicle-extra{top:37px;left:78px;width:84px;height:58px;border-left:7px solid #f4d356;border-right:7px solid #f4d356;background:repeating-linear-gradient(0deg,transparent 0 11px,#f4d356 12px 15px);filter:drop-shadow(0 2px 1px #541)}
+.car--truck{width:264px;height:172px;--paint-dark:#07517b;--paint-mid:#138fc2;--paint-light:#54c9ed}
+.car--truck .body{inset:25px 29px 15px;clip-path:polygon(10% 0,90% 0,100% 12%,100% 88%,88% 100%,12% 100%,0 88%,0 12%);border-radius:8px;background:linear-gradient(90deg,#07517b,#138fc2 18%,#54c9ed 49%,#138fc2 82%,#07517b)}
+.car--truck .roof{top:76px;left:80px;width:104px;height:44px;clip-path:polygon(8% 0,92% 0,100% 100%,0 100%);border:4px solid #c4edff;border-radius:8px 8px 3px 3px;background:linear-gradient(145deg,#d9f8ff,#3f7894 35%,#071924 75%)}
+.car--truck .wing{display:none}
+.car--truck .vehicle-extra{top:31px;left:68px;width:128px;height:46px;border:5px solid #91d7ed;border-radius:5px;background:repeating-linear-gradient(90deg,#0c638f 0 18px,#70c8e9 19px 22px);box-shadow:inset 0 0 0 2px #07517b}
+.car--truck .tire{height:58px;width:32px}
+.car--truck .number{bottom:47px}
+.overlay{position:absolute;z-index:40;inset:0;display:grid;place-items:center;padding:14px;background:#06121cbd;transition:opacity .3s;overflow-y:auto}
 .overlay.hide{opacity:0;pointer-events:none}
-.card{width:min(94%,540px);padding:28px;border:2px solid #ffffff55;border-radius:24px;background:#081722f2;text-align:center}
-.card h1,.card h2{margin:0 0 10px;font-size:clamp(28px,7vw,46px)}
-.card p{line-height:1.7}
-.mainbtn{border:0;border-radius:15px;padding:14px 30px;background:var(--yellow);color:#17212a;font-size:20px;font-weight:1000;cursor:pointer;box-shadow:0 6px 0 #bc8c00}
+.card{width:min(94%,560px);padding:clamp(18px,3vw,28px);border:2px solid #ffffff55;border-radius:24px;background:#081722f5;text-align:center;box-shadow:0 18px 45px #0005}
+.start-card{width:min(96%,760px);max-height:calc(100vh - 28px);overflow-y:auto}
+.card h1,.card h2{margin:0 0 10px;font-size:clamp(24px,4.5vw,38px)}
+.card h2{font-size:clamp(17px,2.5vw,21px)}
+.card p{line-height:1.65}
+.eyebrow{margin:0 0 4px;color:#8edbff;font-size:12px;font-weight:1000;letter-spacing:2px}
+.intro{margin:8px 0 14px;font-size:clamp(14px,2vw,17px)}
+.setup-section{margin:12px 0 0;padding-top:10px;border-top:1px solid #ffffff20}
+.setup-section h2{text-align:left;margin:0 0 8px;color:#eaf7ff}
+.vehicle-options{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.vehicle-option,.select-option{border:2px solid #607584;border-radius:13px;background:#132a39;color:white;cursor:pointer;font-weight:850;transition:background .15s,border-color .15s,transform .15s}
+.vehicle-option{display:flex;min-height:86px;padding:9px 5px;align-items:center;justify-content:center;flex-direction:column;gap:5px}
+.vehicle-option .vehicle-icon{font-size:clamp(25px,4vw,38px);line-height:1.15}
+.vehicle-option .vehicle-name{font-size:clamp(11px,1.6vw,14px);line-height:1.25}
+.vehicle-option.selected,.select-option.selected{border-color:var(--yellow);background:#34452d;box-shadow:inset 0 0 0 1px var(--yellow)}
+.vehicle-option:active,.select-option:active{transform:scale(.98)}
+.pill-options{display:flex;flex-wrap:wrap;gap:8px}
+.select-option{padding:9px 13px;min-height:40px;font-size:clamp(12px,1.7vw,15px)}
+.selection-note{margin:7px 0 0;color:#c9e9ff;font-size:13px}
+.course-preview{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:8px;margin:16px 0 12px;padding:11px;border-radius:12px;background:#142c3a;border:1px solid #406273}
+.course-preview strong{color:var(--yellow);font-size:18px}
+.course-preview span{width:100%;font-size:12px;color:#bad5e3}
+.mainbtn{width:100%;border:0;border-radius:15px;padding:14px 24px;background:var(--yellow);color:#17212a;font-size:clamp(18px,2.5vw,21px);font-weight:1000;cursor:pointer;box-shadow:0 6px 0 #bc8c00}
+.mainbtn:active{transform:translateY(3px);box-shadow:0 3px 0 #bc8c00}
 .result{display:none}.result.show{display:grid}
-.feedback{min-height:1.5em;font-weight:800}
-@media(max-width:540px){.game{min-height:650px}.stands{width:55%;height:115px}.pit{width:45%;height:120px}.car{transform:translateX(-50%) scale(.82)}.car.left-turn{transform:translateX(-50%) scale(.82) rotate(-8deg)}.car.right-turn{transform:translateX(-50%) scale(.82) rotate(8deg)}.choice{bottom:27%;width:38%;padding:12px 6px}.question{top:92px}}
+.result .card{max-width:520px}
+@media(max-width:580px){.game{min-height:650px}.stands{width:55%;height:115px}.pit{width:45%;height:120px}.car{transform:translateX(-50%) scale(.78);transform-origin:center bottom}.car.left-turn{left:23%;transform:translateX(-50%) scale(.78) rotate(-8deg)}.car.right-turn{left:77%;transform:translateX(-50%) scale(.78) rotate(8deg)}.car--truck{transform:translateX(-50%) scale(.72);transform-origin:center bottom}.car--truck.left-turn{transform:translateX(-50%) scale(.72) rotate(-8deg)}.car--truck.right-turn{transform:translateX(-50%) scale(.72) rotate(8deg)}.choice{bottom:25%;width:39%;padding:10px 6px;font-size:clamp(20px,6vw,31px)}.question{top:100px;width:92%;padding:10px}.hud{top:8px;left:8px;right:8px}.pill{padding:7px 9px}.vehicle-options{gap:6px}.vehicle-option{min-height:76px}.card{border-radius:18px}.start-card{padding:15px}.setup-section{margin-top:9px;padding-top:8px}.course-preview{margin:10px 0;padding:8px}}
+@media(max-width:370px){.vehicle-name{font-size:10px!important}.vehicle-option{padding:6px 2px}.pill-options{gap:5px}.select-option{padding:8px 9px}.car{transform:translateX(-50%) scale(.7)}.car.left-turn{transform:translateX(-50%) scale(.7) rotate(-8deg)}.car.right-turn{transform:translateX(-50%) scale(.7) rotate(8deg)}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
