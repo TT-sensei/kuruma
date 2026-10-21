@@ -415,8 +415,10 @@
     el("phaseTag").textContent = "FINISH";
     const total = raceQuestions.length;
     const won = playerDistance >= rivalDistance;
-    const eventPoints = currentEvent.isSpecial ? score * (currentEvent.pointBonus || 0) + (currentEvent.finishBonus || 0) : 0;
-    const reward = currentEvent.isSpecial ? 5 + score * 2 + eventPoints + (won ? 3 : 0) : 0;
+    const rewardThreshold = Math.ceil(total * 0.625);
+    const earnsReward = currentEvent.isSpecial && score >= rewardThreshold;
+    const eventPoints = earnsReward ? score * (currentEvent.pointBonus || 0) + (currentEvent.finishBonus || 0) : 0;
+    const reward = earnsReward ? 5 + score * 2 + eventPoints + (won ? 3 : 0) : 0;
     const wasBest = score > career.bestScore;
     career.races++;
     career.totalCorrect += score;
@@ -434,7 +436,9 @@
     resultText.textContent = total + "問中 " + score + "問正解。 " +
       (score === total ? "パーフェクト！ " : "解説を確認して次のレースに生かそう。 ") +
       (currentEvent.isSpecial
-        ? "今回の獲得ポイント：" + reward + " pt" + (eventPoints ? "（イベントボーナス +" + eventPoints + " ptを含む）" : "")
+        ? (earnsReward
+          ? "今回の獲得ポイント：" + reward + " pt" + (eventPoints ? "（イベントボーナス +" + eventPoints + " ptを含む）" : "")
+          : "ポイント獲得には " + rewardThreshold + "問以上の正解が必要です。今回はポイントなし。解説を確認して、次のレースで再挑戦しよう。")
         : "今日はスペシャルレースの上限に達しています。通常レースと学習は引き続き楽しめます。ポイントは明日また獲得できます。");
     el("resultRecords").textContent =
       "イベント：" + currentEvent.name + " ／ 最高速度 " + raceBestSpeed + " km/h ／ 連続正解 " + raceBestStreak +
