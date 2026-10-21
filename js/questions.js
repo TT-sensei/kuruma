@@ -1915,8 +1915,8 @@ window.GAME_DATA = {
         "label": "じゅうしょ"
       },
       {
-        "value": "でんしゃ",
-        "label": "でんしゃ"
+        "value": "じゅうじょ",
+        "label": "じゅうじょ"
       }
     ],
     "correctValue": "じゅうしょ",
@@ -1934,8 +1934,8 @@ window.GAME_DATA = {
         "label": "どうろ"
       },
       {
-        "value": "りょうきんひょう",
-        "label": "りょうきんひょう"
+        "value": "とうろ",
+        "label": "とうろ"
       }
     ],
     "correctValue": "どうろ",
@@ -1953,8 +1953,8 @@ window.GAME_DATA = {
         "label": "しんごう"
       },
       {
-        "value": "しようほうほう",
-        "label": "しようほうほう"
+        "value": "しんこう",
+        "label": "しんこう"
       }
     ],
     "correctValue": "しんごう",
@@ -1972,8 +1972,8 @@ window.GAME_DATA = {
         "label": "とけい"
       },
       {
-        "value": "でんき",
-        "label": "でんき"
+        "value": "とっけい",
+        "label": "とっけい"
       }
     ],
     "correctValue": "とけい",
@@ -1991,8 +1991,8 @@ window.GAME_DATA = {
         "label": "まいにち"
       },
       {
-        "value": "かわ",
-        "label": "かわ"
+        "value": "まいじつ",
+        "label": "まいじつ"
       }
     ],
     "correctValue": "まいにち",
@@ -2010,8 +2010,8 @@ window.GAME_DATA = {
         "label": "きょうしつ"
       },
       {
-        "value": "しょうかき",
-        "label": "しょうかき"
+        "value": "きょうじつ",
+        "label": "きょうじつ"
       }
     ],
     "correctValue": "きょうしつ",
@@ -2029,8 +2029,8 @@ window.GAME_DATA = {
         "label": "しゅくだい"
       },
       {
-        "value": "おうだんほどう",
-        "label": "おうだんほどう"
+        "value": "しゅくたい",
+        "label": "しゅくたい"
       }
     ],
     "correctValue": "しゅくだい",
@@ -2048,8 +2048,8 @@ window.GAME_DATA = {
         "label": "しょくじ"
       },
       {
-        "value": "なまえ",
-        "label": "なまえ"
+        "value": "しょくし",
+        "label": "しょくし"
       }
     ],
     "correctValue": "しょくじ",
@@ -2067,8 +2067,8 @@ window.GAME_DATA = {
         "label": "かいもの"
       },
       {
-        "value": "れんらくちょう",
-        "label": "れんらくちょう"
+        "value": "ばいもの",
+        "label": "ばいもの"
       }
     ],
     "correctValue": "かいもの",
@@ -2086,8 +2086,8 @@ window.GAME_DATA = {
         "label": "いりぐち"
       },
       {
-        "value": "とけい",
-        "label": "とけい"
+        "value": "いりくち",
+        "label": "いりくち"
       }
     ],
     "correctValue": "いりぐち",
@@ -2105,8 +2105,8 @@ window.GAME_DATA = {
         "label": "でぐち"
       },
       {
-        "value": "じゅうでんざんりょう",
-        "label": "じゅうでんざんりょう"
+        "value": "でくち",
+        "label": "でくち"
       }
     ],
     "correctValue": "でぐち",
@@ -2124,8 +2124,8 @@ window.GAME_DATA = {
         "label": "えきまえ"
       },
       {
-        "value": "きゅうじつ",
-        "label": "きゅうじつ"
+        "value": "えきぜん",
+        "label": "えきぜん"
       }
     ],
     "correctValue": "えきまえ",
@@ -2143,8 +2143,8 @@ window.GAME_DATA = {
         "label": "でんき"
       },
       {
-        "value": "じしんじょうほう",
-        "label": "じしんじょうほう"
+        "value": "でんぎ",
+        "label": "でんぎ"
       }
     ],
     "correctValue": "でんき",
@@ -2162,8 +2162,8 @@ window.GAME_DATA = {
         "label": "すいどう"
       },
       {
-        "value": "あんぜん",
-        "label": "あんぜん"
+        "value": "みずみち",
+        "label": "みずみち"
       }
     ],
     "correctValue": "すいどう",
@@ -2181,8 +2181,8 @@ window.GAME_DATA = {
         "label": "だいどころ"
       },
       {
-        "value": "しんさつけん",
-        "label": "しんさつけん"
+        "value": "だいしょ",
+        "label": "だいしょ"
       }
     ],
     "correctValue": "だいどころ",
@@ -2200,8 +2200,8 @@ window.GAME_DATA = {
         "label": "てんき"
       },
       {
-        "value": "けんこうしんだん",
-        "label": "けんこうしんだん"
+        "value": "てんぎ",
+        "label": "てんぎ"
       }
     ],
     "correctValue": "てんき",
@@ -2219,8 +2219,8 @@ window.GAME_DATA = {
         "label": "かぞく"
       },
       {
-        "value": "てんき",
-        "label": "てんき"
+        "value": "かそく",
+        "label": "かそく"
       }
     ],
     "correctValue": "かぞく",
@@ -2238,8 +2238,8 @@ window.GAME_DATA = {
         "label": "じてんしゃ"
       },
       {
-        "value": "みず",
-        "label": "みず"
+        "value": "じどうしゃ",
+        "label": "じどうしゃ"
       }
     ],
     "correctValue": "じてんしゃ",
@@ -2257,8 +2257,8 @@ window.GAME_DATA = {
         "label": "しゃしん"
       },
       {
-        "value": "ひなんじょ",
-        "label": "ひなんじょ"
+        "value": "しゃじん",
+        "label": "しゃじん"
       }
     ],
     "correctValue": "しゃしん",
@@ -2276,8 +2276,8 @@ window.GAME_DATA = {
         "label": "なまえ"
       },
       {
-        "value": "うんてんめんきょ",
-        "label": "うんてんめんきょ"
+        "value": "めいぜん",
+        "label": "めいぜん"
       }
     ],
     "correctValue": "なまえ",
@@ -2295,8 +2295,8 @@ window.GAME_DATA = {
         "label": "じかんわり"
       },
       {
-        "value": "どうろ",
-        "label": "どうろ"
+        "value": "じかんばり",
+        "label": "じかんばり"
       }
     ],
     "correctValue": "じかんわり",
@@ -2314,8 +2314,8 @@ window.GAME_DATA = {
         "label": "もちもの"
       },
       {
-        "value": "やま",
-        "label": "やま"
+        "value": "じぶつ",
+        "label": "じぶつ"
       }
     ],
     "correctValue": "もちもの",
@@ -2333,8 +2333,8 @@ window.GAME_DATA = {
         "label": "うせつ"
       },
       {
-        "value": "きょうしつ",
-        "label": "きょうしつ"
+        "value": "みぎおり",
+        "label": "みぎおり"
       }
     ],
     "correctValue": "うせつ",
@@ -2352,8 +2352,8 @@ window.GAME_DATA = {
         "label": "させつ"
       },
       {
-        "value": "ほんにんかくにん",
-        "label": "ほんにんかくにん"
+        "value": "ひだりおり",
+        "label": "ひだりおり"
       }
     ],
     "correctValue": "させつ",
@@ -2371,8 +2371,8 @@ window.GAME_DATA = {
         "label": "きゅうじつ"
       },
       {
-        "value": "かぞく",
-        "label": "かぞく"
+        "value": "きゅうにち",
+        "label": "きゅうにち"
       }
     ],
     "correctValue": "きゅうじつ",
@@ -2390,8 +2390,8 @@ window.GAME_DATA = {
         "label": "おうだんほどう"
       },
       {
-        "value": "しょうみきげん",
-        "label": "しょうみきげん"
+        "value": "おうたんほどう",
+        "label": "おうたんほどう"
       }
     ],
     "correctValue": "おうだんほどう",
@@ -2409,8 +2409,8 @@ window.GAME_DATA = {
         "label": "こうつうあんぜん"
       },
       {
-        "value": "しんこう",
-        "label": "しんこう"
+        "value": "こうつうあんしん",
+        "label": "こうつうあんしん"
       }
     ],
     "correctValue": "こうつうあんぜん",
@@ -2428,8 +2428,8 @@ window.GAME_DATA = {
         "label": "しょうかき"
       },
       {
-        "value": "やっきょく",
-        "label": "やっきょく"
+        "value": "しょうひき",
+        "label": "しょうひき"
       }
     ],
     "correctValue": "しょうかき",
@@ -2447,8 +2447,8 @@ window.GAME_DATA = {
         "label": "ひじょうぐち"
       },
       {
-        "value": "ていきけん",
-        "label": "ていきけん"
+        "value": "ひじょうこう",
+        "label": "ひじょうこう"
       }
     ],
     "correctValue": "ひじょうぐち",
@@ -2466,8 +2466,8 @@ window.GAME_DATA = {
         "label": "ひなんじょ"
       },
       {
-        "value": "えきまえ",
-        "label": "えきまえ"
+        "value": "ひなんしょ",
+        "label": "ひなんしょ"
       }
     ],
     "correctValue": "ひなんじょ",
@@ -2485,8 +2485,8 @@ window.GAME_DATA = {
         "label": "じしんじょうほう"
       },
       {
-        "value": "でんしゃ",
-        "label": "でんしゃ"
+        "value": "じしんせいほう",
+        "label": "じしんせいほう"
       }
     ],
     "correctValue": "じしんじょうほう",
@@ -2504,8 +2504,8 @@ window.GAME_DATA = {
         "label": "きおん"
       },
       {
-        "value": "りょうきんひょう",
-        "label": "りょうきんひょう"
+        "value": "きとう",
+        "label": "きとう"
       }
     ],
     "correctValue": "きおん",
@@ -2523,8 +2523,8 @@ window.GAME_DATA = {
         "label": "しつど"
       },
       {
-        "value": "しようほうほう",
-        "label": "しようほうほう"
+        "value": "しつと",
+        "label": "しつと"
       }
     ],
     "correctValue": "しつど",
@@ -2542,8 +2542,8 @@ window.GAME_DATA = {
         "label": "しょうみきげん"
       },
       {
-        "value": "でんき",
-        "label": "でんき"
+        "value": "しょうみきかん",
+        "label": "しょうみきかん"
       }
     ],
     "correctValue": "しょうみきげん",
@@ -2561,8 +2561,8 @@ window.GAME_DATA = {
         "label": "しょうひきげん"
       },
       {
-        "value": "かわ",
-        "label": "かわ"
+        "value": "しょうひきかん",
+        "label": "しょうひきかん"
       }
     ],
     "correctValue": "しょうひきげん",
@@ -2580,8 +2580,8 @@ window.GAME_DATA = {
         "label": "りょうきんひょう"
       },
       {
-        "value": "しょうかき",
-        "label": "しょうかき"
+        "value": "りょうきんびょう",
+        "label": "りょうきんびょう"
       }
     ],
     "correctValue": "りょうきんひょう",
@@ -2599,8 +2599,8 @@ window.GAME_DATA = {
         "label": "げんきんばらい"
       },
       {
-        "value": "おうだんほどう",
-        "label": "おうだんほどう"
+        "value": "げんきんはらい",
+        "label": "げんきんはらい"
       }
     ],
     "correctValue": "げんきんばらい",
@@ -2618,8 +2618,8 @@ window.GAME_DATA = {
         "label": "でんしけっさい"
       },
       {
-        "value": "なまえ",
-        "label": "なまえ"
+        "value": "でんしけつさい",
+        "label": "でんしけつさい"
       }
     ],
     "correctValue": "でんしけっさい",
@@ -2637,8 +2637,8 @@ window.GAME_DATA = {
         "label": "りょうしゅうしょ"
       },
       {
-        "value": "れんらくちょう",
-        "label": "れんらくちょう"
+        "value": "りょうしゅうしょう",
+        "label": "りょうしゅうしょう"
       }
     ],
     "correctValue": "りょうしゅうしょ",
@@ -2656,8 +2656,8 @@ window.GAME_DATA = {
         "label": "よやくかくにん"
       },
       {
-        "value": "とけい",
-        "label": "とけい"
+        "value": "よやくがくにん",
+        "label": "よやくがくにん"
       }
     ],
     "correctValue": "よやくかくにん",
@@ -2675,8 +2675,8 @@ window.GAME_DATA = {
         "label": "うけつけじかん"
       },
       {
-        "value": "じゅうでんざんりょう",
-        "label": "じゅうでんざんりょう"
+        "value": "うけとりじかん",
+        "label": "うけとりじかん"
       }
     ],
     "correctValue": "うけつけじかん",
@@ -2694,8 +2694,8 @@ window.GAME_DATA = {
         "label": "しんさつけん"
       },
       {
-        "value": "きゅうじつ",
-        "label": "きゅうじつ"
+        "value": "しんさつかん",
+        "label": "しんさつかん"
       }
     ],
     "correctValue": "しんさつけん",
@@ -2713,8 +2713,8 @@ window.GAME_DATA = {
         "label": "しょほうせん"
       },
       {
-        "value": "じしんじょうほう",
-        "label": "じしんじょうほう"
+        "value": "しょほうせつ",
+        "label": "しょほうせつ"
       }
     ],
     "correctValue": "しょほうせん",
@@ -2732,8 +2732,8 @@ window.GAME_DATA = {
         "label": "やっきょく"
       },
       {
-        "value": "あんぜん",
-        "label": "あんぜん"
+        "value": "やくきょく",
+        "label": "やくきょく"
       }
     ],
     "correctValue": "やっきょく",
@@ -2751,8 +2751,8 @@ window.GAME_DATA = {
         "label": "えいぎょうじかん"
       },
       {
-        "value": "しんさつけん",
-        "label": "しんさつけん"
+        "value": "えいぎょうにち",
+        "label": "えいぎょうにち"
       }
     ],
     "correctValue": "えいぎょうじかん",
@@ -2770,8 +2770,8 @@ window.GAME_DATA = {
         "label": "のりかえあんない"
       },
       {
-        "value": "けんこうしんだん",
-        "label": "けんこうしんだん"
+        "value": "のりかえあんねい",
+        "label": "のりかえあんねい"
       }
     ],
     "correctValue": "のりかえあんない",
@@ -2789,8 +2789,8 @@ window.GAME_DATA = {
         "label": "はっしゃじこく"
       },
       {
-        "value": "てんき",
-        "label": "てんき"
+        "value": "はつしゃじこく",
+        "label": "はつしゃじこく"
       }
     ],
     "correctValue": "はっしゃじこく",
@@ -2808,8 +2808,8 @@ window.GAME_DATA = {
         "label": "とうちゃくよてい"
       },
       {
-        "value": "みず",
-        "label": "みず"
+        "value": "とうちゃくよけい",
+        "label": "とうちゃくよけい"
       }
     ],
     "correctValue": "とうちゃくよてい",
@@ -2827,8 +2827,8 @@ window.GAME_DATA = {
         "label": "しようほうほう"
       },
       {
-        "value": "ひなんじょ",
-        "label": "ひなんじょ"
+        "value": "しようぼうほう",
+        "label": "しようぼうほう"
       }
     ],
     "correctValue": "しようほうほう",
@@ -2846,8 +2846,8 @@ window.GAME_DATA = {
         "label": "ちゅういじこう"
       },
       {
-        "value": "うんてんめんきょ",
-        "label": "うんてんめんきょ"
+        "value": "ちゅういじこうと",
+        "label": "ちゅういじこうと"
       }
     ],
     "correctValue": "ちゅういじこう",
@@ -2865,8 +2865,8 @@ window.GAME_DATA = {
         "label": "ていしゅつきげん"
       },
       {
-        "value": "どうろ",
-        "label": "どうろ"
+        "value": "ていしゅつきかん",
+        "label": "ていしゅつきかん"
       }
     ],
     "correctValue": "ていしゅつきげん",
@@ -2884,8 +2884,8 @@ window.GAME_DATA = {
         "label": "れんらくちょう"
       },
       {
-        "value": "やま",
-        "label": "やま"
+        "value": "れんらくじょう",
+        "label": "れんらくじょう"
       }
     ],
     "correctValue": "れんらくちょう",
@@ -2903,8 +2903,8 @@ window.GAME_DATA = {
         "label": "みぶんしょうめいしょ"
       },
       {
-        "value": "きょうしつ",
-        "label": "きょうしつ"
+        "value": "みぶんしょうめいじょ",
+        "label": "みぶんしょうめいじょ"
       }
     ],
     "correctValue": "みぶんしょうめいしょ",
@@ -2922,8 +2922,8 @@ window.GAME_DATA = {
         "label": "こじんじょうほう"
       },
       {
-        "value": "ほんにんかくにん",
-        "label": "ほんにんかくにん"
+        "value": "こじんせいほう",
+        "label": "こじんせいほう"
       }
     ],
     "correctValue": "こじんじょうほう",
@@ -2941,8 +2941,8 @@ window.GAME_DATA = {
         "label": "ぼうはんたいさく"
       },
       {
-        "value": "かぞく",
-        "label": "かぞく"
+        "value": "ぼうばんたいさく",
+        "label": "ぼうばんたいさく"
       }
     ],
     "correctValue": "ぼうはんたいさく",
@@ -2960,8 +2960,8 @@ window.GAME_DATA = {
         "label": "しゃりょうつうこうどめ"
       },
       {
-        "value": "しょうみきげん",
-        "label": "しょうみきげん"
+        "value": "しゃりょうつうこうとめ",
+        "label": "しゃりょうつうこうとめ"
       }
     ],
     "correctValue": "しゃりょうつうこうどめ",
@@ -2979,8 +2979,8 @@ window.GAME_DATA = {
         "label": "いっぽうつうこう"
       },
       {
-        "value": "しんこう",
-        "label": "しんこう"
+        "value": "いちほうつうこう",
+        "label": "いちほうつうこう"
       }
     ],
     "correctValue": "いっぽうつうこう",
@@ -2998,8 +2998,8 @@ window.GAME_DATA = {
         "label": "じょこううんてん"
       },
       {
-        "value": "やっきょく",
-        "label": "やっきょく"
+        "value": "じょうこううんてん",
+        "label": "じょうこううんてん"
       }
     ],
     "correctValue": "じょこううんてん",
@@ -3017,8 +3017,8 @@ window.GAME_DATA = {
         "label": "ゆうせんどうろ"
       },
       {
-        "value": "ていきけん",
-        "label": "ていきけん"
+        "value": "ゆうぜんどうろ",
+        "label": "ゆうぜんどうろ"
       }
     ],
     "correctValue": "ゆうせんどうろ",
@@ -3036,8 +3036,8 @@ window.GAME_DATA = {
         "label": "しゃかんきょり"
       },
       {
-        "value": "えきまえ",
-        "label": "えきまえ"
+        "value": "しゃかんきょうり",
+        "label": "しゃかんきょうり"
       }
     ],
     "correctValue": "しゃかんきょり",
@@ -3055,8 +3055,8 @@ window.GAME_DATA = {
         "label": "せいげんそくど"
       },
       {
-        "value": "でんしゃ",
-        "label": "でんしゃ"
+        "value": "せいげんぞくど",
+        "label": "せいげんぞくど"
       }
     ],
     "correctValue": "せいげんそくど",
@@ -3074,8 +3074,8 @@ window.GAME_DATA = {
         "label": "うんてんめんきょ"
       },
       {
-        "value": "りょうきんひょう",
-        "label": "りょうきんひょう"
+        "value": "うんてんめんきょう",
+        "label": "うんてんめんきょう"
       }
     ],
     "correctValue": "うんてんめんきょ",
@@ -3093,8 +3093,8 @@ window.GAME_DATA = {
         "label": "ていきけん"
       },
       {
-        "value": "しようほうほう",
-        "label": "しようほうほう"
+        "value": "ていきかん",
+        "label": "ていきかん"
       }
     ],
     "correctValue": "ていきけん",
@@ -3112,8 +3112,8 @@ window.GAME_DATA = {
         "label": "うんこうじょうきょう"
       },
       {
-        "value": "でんき",
-        "label": "でんき"
+        "value": "うんこうじょうこう",
+        "label": "うんこうじょうこう"
       }
     ],
     "correctValue": "うんこうじょうきょう",
@@ -3131,8 +3131,8 @@ window.GAME_DATA = {
         "label": "さいがいじょうほう"
       },
       {
-        "value": "かわ",
-        "label": "かわ"
+        "value": "さいがいせいほう",
+        "label": "さいがいせいほう"
       }
     ],
     "correctValue": "さいがいじょうほう",
@@ -3150,8 +3150,8 @@ window.GAME_DATA = {
         "label": "きんきゅうれんらくさき"
       },
       {
-        "value": "しょうかき",
-        "label": "しょうかき"
+        "value": "きんきゅうれんらくせん",
+        "label": "きんきゅうれんらくせん"
       }
     ],
     "correctValue": "きんきゅうれんらくさき",
@@ -3169,8 +3169,8 @@ window.GAME_DATA = {
         "label": "おうきゅうしょち"
       },
       {
-        "value": "おうだんほどう",
-        "label": "おうだんほどう"
+        "value": "おうきゅうしょじ",
+        "label": "おうきゅうしょじ"
       }
     ],
     "correctValue": "おうきゅうしょち",
@@ -3188,8 +3188,8 @@ window.GAME_DATA = {
         "label": "けんこうしんだん"
       },
       {
-        "value": "なまえ",
-        "label": "なまえ"
+        "value": "けんこうしんたん",
+        "label": "けんこうしんたん"
       }
     ],
     "correctValue": "けんこうしんだん",
@@ -3207,8 +3207,8 @@ window.GAME_DATA = {
         "label": "ふくようほうほう"
       },
       {
-        "value": "れんらくちょう",
-        "label": "れんらくちょう"
+        "value": "ふくようぼうほう",
+        "label": "ふくようぼうほう"
       }
     ],
     "correctValue": "ふくようほうほう",
@@ -3226,8 +3226,8 @@ window.GAME_DATA = {
         "label": "えいようせいぶん"
       },
       {
-        "value": "とけい",
-        "label": "とけい"
+        "value": "えいようせいふん",
+        "label": "えいようせいふん"
       }
     ],
     "correctValue": "えいようせいぶん",
@@ -3245,8 +3245,8 @@ window.GAME_DATA = {
         "label": "げんざいりょうめい"
       },
       {
-        "value": "じゅうでんざんりょう",
-        "label": "じゅうでんざんりょう"
+        "value": "げんざいりょうな",
+        "label": "げんざいりょうな"
       }
     ],
     "correctValue": "げんざいりょうめい",
@@ -3264,8 +3264,8 @@ window.GAME_DATA = {
         "label": "ほぞんほうほう"
       },
       {
-        "value": "きゅうじつ",
-        "label": "きゅうじつ"
+        "value": "ほぞんぼうほう",
+        "label": "ほぞんぼうほう"
       }
     ],
     "correctValue": "ほぞんほうほう",
@@ -3283,8 +3283,8 @@ window.GAME_DATA = {
         "label": "ほしょうきかん"
       },
       {
-        "value": "じしんじょうほう",
-        "label": "じしんじょうほう"
+        "value": "ほしょうきげん",
+        "label": "ほしょうきげん"
       }
     ],
     "correctValue": "ほしょうきかん",
@@ -3302,8 +3302,8 @@ window.GAME_DATA = {
         "label": "とりあつかいせつめいしょ"
       },
       {
-        "value": "あんぜん",
-        "label": "あんぜん"
+        "value": "とりあつかいせつめいじょ",
+        "label": "とりあつかいせつめいじょ"
       }
     ],
     "correctValue": "とりあつかいせつめいしょ",
@@ -3321,8 +3321,8 @@ window.GAME_DATA = {
         "label": "こしょうげんいん"
       },
       {
-        "value": "しんさつけん",
-        "label": "しんさつけん"
+        "value": "こしょうげんにん",
+        "label": "こしょうげんにん"
       }
     ],
     "correctValue": "こしょうげんいん",
@@ -3340,8 +3340,8 @@ window.GAME_DATA = {
         "label": "しゅうりうけつけ"
       },
       {
-        "value": "けんこうしんだん",
-        "label": "けんこうしんだん"
+        "value": "しゅうりうけとり",
+        "label": "しゅうりうけとり"
       }
     ],
     "correctValue": "しゅうりうけつけ",
@@ -3359,8 +3359,8 @@ window.GAME_DATA = {
         "label": "けいやくないよう"
       },
       {
-        "value": "てんき",
-        "label": "てんき"
+        "value": "けいやくないよ",
+        "label": "けいやくないよ"
       }
     ],
     "correctValue": "けいやくないよう",
@@ -3378,8 +3378,8 @@ window.GAME_DATA = {
         "label": "かいやくてつづき"
       },
       {
-        "value": "みず",
-        "label": "みず"
+        "value": "かいやくてつづけ",
+        "label": "かいやくてつづけ"
       }
     ],
     "correctValue": "かいやくてつづき",
@@ -3397,8 +3397,8 @@ window.GAME_DATA = {
         "label": "りようきやく"
       },
       {
-        "value": "ひなんじょ",
-        "label": "ひなんじょ"
+        "value": "りようきそく",
+        "label": "りようきそく"
       }
     ],
     "correctValue": "りようきやく",
@@ -3416,8 +3416,8 @@ window.GAME_DATA = {
         "label": "つうしんりょうきん"
       },
       {
-        "value": "うんてんめんきょ",
-        "label": "うんてんめんきょ"
+        "value": "つうしんりょうぎん",
+        "label": "つうしんりょうぎん"
       }
     ],
     "correctValue": "つうしんりょうきん",
@@ -3435,8 +3435,8 @@ window.GAME_DATA = {
         "label": "じゅうでんざんりょう"
       },
       {
-        "value": "どうろ",
-        "label": "どうろ"
+        "value": "じゅうでんさんりょう",
+        "label": "じゅうでんさんりょう"
       }
     ],
     "correctValue": "じゅうでんざんりょう",
@@ -3454,8 +3454,8 @@ window.GAME_DATA = {
         "label": "でんげんかくにん"
       },
       {
-        "value": "やま",
-        "label": "やま"
+        "value": "でんげんがくにん",
+        "label": "でんげんがくにん"
       }
     ],
     "correctValue": "でんげんかくにん",
@@ -3473,8 +3473,8 @@ window.GAME_DATA = {
         "label": "せっていへんこう"
       },
       {
-        "value": "きょうしつ",
-        "label": "きょうしつ"
+        "value": "せっていへんごう",
+        "label": "せっていへんごう"
       }
     ],
     "correctValue": "せっていへんこう",
@@ -3492,8 +3492,8 @@ window.GAME_DATA = {
         "label": "りようしゃとうろく"
       },
       {
-        "value": "ほんにんかくにん",
-        "label": "ほんにんかくにん"
+        "value": "りようしゃとろく",
+        "label": "りようしゃとろく"
       }
     ],
     "correctValue": "りようしゃとうろく",
@@ -3511,8 +3511,8 @@ window.GAME_DATA = {
         "label": "あんしょうばんごう"
       },
       {
-        "value": "かぞく",
-        "label": "かぞく"
+        "value": "あんじょうばんごう",
+        "label": "あんじょうばんごう"
       }
     ],
     "correctValue": "あんしょうばんごう",
@@ -3530,8 +3530,8 @@ window.GAME_DATA = {
         "label": "ほんにんかくにん"
       },
       {
-        "value": "しょうみきげん",
-        "label": "しょうみきげん"
+        "value": "ほんにんがくにん",
+        "label": "ほんにんがくにん"
       }
     ],
     "correctValue": "ほんにんかくにん",
@@ -3549,8 +3549,8 @@ window.GAME_DATA = {
         "label": "うけつけばんごう"
       },
       {
-        "value": "しんこう",
-        "label": "しんこう"
+        "value": "うけつけばんごうと",
+        "label": "うけつけばんごうと"
       }
     ],
     "correctValue": "うけつけばんごう",
@@ -3568,8 +3568,8 @@ window.GAME_DATA = {
         "label": "もうしこみしょるい"
       },
       {
-        "value": "やっきょく",
-        "label": "やっきょく"
+        "value": "もうしこみしょれい",
+        "label": "もうしこみしょれい"
       }
     ],
     "correctValue": "もうしこみしょるい",
@@ -3587,8 +3587,8 @@ window.GAME_DATA = {
         "label": "きにゅうらん"
       },
       {
-        "value": "ていきけん",
-        "label": "ていきけん"
+        "value": "きにゅうばん",
+        "label": "きにゅうばん"
       }
     ],
     "correctValue": "きにゅうらん",
@@ -3606,8 +3606,8 @@ window.GAME_DATA = {
         "label": "きにゅうれい"
       },
       {
-        "value": "えきまえ",
-        "label": "えきまえ"
+        "value": "きにゅうらい",
+        "label": "きにゅうらい"
       }
     ],
     "correctValue": "きにゅうれい",
@@ -3625,8 +3625,8 @@ window.GAME_DATA = {
         "label": "しゅうごうばしょ"
       },
       {
-        "value": "でんしゃ",
-        "label": "でんしゃ"
+        "value": "しゅうごうじょ",
+        "label": "しゅうごうじょ"
       }
     ],
     "correctValue": "しゅうごうばしょ",
@@ -3644,8 +3644,8 @@ window.GAME_DATA = {
         "label": "しゅうごうじこく"
       },
       {
-        "value": "りょうきんひょう",
-        "label": "りょうきんひょう"
+        "value": "しゅうごうじこう",
+        "label": "しゅうごうじこう"
       }
     ],
     "correctValue": "しゅうごうじこく",
@@ -3663,8 +3663,8 @@ window.GAME_DATA = {
         "label": "きゅうけいじかん"
       },
       {
-        "value": "しようほうほう",
-        "label": "しようほうほう"
+        "value": "きゅうけいにち",
+        "label": "きゅうけいにち"
       }
     ],
     "correctValue": "きゅうけいじかん",
@@ -3682,8 +3682,8 @@ window.GAME_DATA = {
         "label": "さぎょうてじゅん"
       },
       {
-        "value": "でんき",
-        "label": "でんき"
+        "value": "さぎょうてじゅんばん",
+        "label": "さぎょうてじゅんばん"
       }
     ],
     "correctValue": "さぎょうてじゅん",
@@ -3701,8 +3701,8 @@ window.GAME_DATA = {
         "label": "かくにんじこう"
       },
       {
-        "value": "かわ",
-        "label": "かわ"
+        "value": "かくにんじこうと",
+        "label": "かくにんじこうと"
       }
     ],
     "correctValue": "かくにんじこう",
@@ -3720,8 +3720,8 @@ window.GAME_DATA = {
         "label": "よていへんこう"
       },
       {
-        "value": "しょうかき",
-        "label": "しょうかき"
+        "value": "よていへんごう",
+        "label": "よていへんごう"
       }
     ],
     "correctValue": "よていへんこう",
@@ -3739,8 +3739,8 @@ window.GAME_DATA = {
         "label": "てんこうふりょう"
       },
       {
-        "value": "おうだんほどう",
-        "label": "おうだんほどう"
+        "value": "てんこうぶりょう",
+        "label": "てんこうぶりょう"
       }
     ],
     "correctValue": "てんこうふりょう",
@@ -3758,8 +3758,8 @@ window.GAME_DATA = {
         "label": "こんざつじょうきょう"
       },
       {
-        "value": "なまえ",
-        "label": "なまえ"
+        "value": "こんざつじょうこう",
+        "label": "こんざつじょうこう"
       }
     ],
     "correctValue": "こんざつじょうきょう",
@@ -3777,8 +3777,8 @@ window.GAME_DATA = {
         "label": "えいぎょうじかんがい"
       },
       {
-        "value": "れんらくちょう",
-        "label": "れんらくちょう"
+        "value": "えいぎょうじかんそと",
+        "label": "えいぎょうじかんそと"
       }
     ],
     "correctValue": "えいぎょうじかんがい",
@@ -3796,8 +3796,8 @@ window.GAME_DATA = {
         "label": "といあわせさき"
       },
       {
-        "value": "とけい",
-        "label": "とけい"
+        "value": "といあわせせん",
+        "label": "といあわせせん"
       }
     ],
     "correctValue": "といあわせさき",
