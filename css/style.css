@@ -1,0 +1,48 @@
+:root{--red:#e51b2b;--yellow:#ffd12a;--dark:#07131d;--road:#30353a}
+*{box-sizing:border-box}
+body{margin:0;background:#111820;color:#fff;font-family:system-ui,"BIZ UDPGothic","Yu Gothic",sans-serif}
+.game{position:relative;max-width:960px;min-height:100vh;margin:auto;overflow:hidden;background:linear-gradient(#68c5f4 0 34%,#77a760 34% 100%)}
+.stands{position:absolute;top:18%;left:0;width:44%;height:145px;background:repeating-linear-gradient(#dbe2e7 0 12px,#52616e 13px 25px);clip-path:polygon(0 10%,90% 0,100% 100%,0 100%);border-top:12px solid #eef2f4}
+.stands:after{content:"";position:absolute;inset:20px;background-image:radial-gradient(#ffd22a 2px,transparent 3px),radial-gradient(#ed4050 2px,transparent 3px),radial-gradient(#fff 2px,transparent 3px);background-size:18px 18px,22px 20px,26px 17px}
+.pit{position:absolute;top:20%;right:0;width:39%;height:150px;background:linear-gradient(#eef2f4 0 28%,#26343f 29% 35%,#d3dbe0 36% 67%,#15212a 68%);clip-path:polygon(10% 0,100% 0,100% 100%,0 100%)}
+.pit:before{content:"PIT LANE";position:absolute;top:15px;left:25%;color:#1c2b36;font-weight:1000;letter-spacing:3px}
+.fence{position:absolute;z-index:3;top:33%;width:100%;height:70px;border-block:4px solid #bfc9cf;background:repeating-linear-gradient(55deg,transparent 0 13px,#c7d0d4 14px 15px),repeating-linear-gradient(-55deg,transparent 0 13px,#c7d0d4 14px 15px)}
+.road{position:absolute;z-index:4;bottom:0;left:50%;width:110%;height:67%;transform:translateX(-50%);clip-path:polygon(42% 0,58% 0,100% 100%,0 100%);background:linear-gradient(90deg,#1e2226,#41464b 46%,#2c3034 78%,#1d2125);box-shadow:inset 55px 0 45px #0006,inset -55px 0 45px #0006}
+.road:before,.road:after{content:"";position:absolute;top:0;bottom:0;width:6%;background:repeating-linear-gradient(#fff 0 36px,#d92335 37px 72px)}
+.road:before{left:0}.road:after{right:0}
+.line{height:100%;background:repeating-linear-gradient(transparent 0 45px,#fff7b8 46px 80px,transparent 81px 142px);clip-path:polygon(49.5% 0,50.5% 0,53% 100%,47% 100%);animation:drive .48s linear infinite}
+@keyframes drive{to{background-position:0 142px}}
+.hud{position:absolute;z-index:20;top:14px;left:14px;right:14px;display:flex;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.pill{background:#07131de8;border:1px solid #ffffff66;border-radius:999px;padding:9px 14px;font-weight:900}
+.question{position:absolute;z-index:21;top:75px;left:50%;width:min(90%,540px);transform:translate(-50%,-20px);padding:14px;border:3px solid #ffffffaa;border-radius:18px;background:#07131def;text-align:center;opacity:0;transition:.3s}
+.question.show{opacity:1;transform:translate(-50%,0)}
+.question small{display:block;color:#b7e4ff;font-weight:800}
+.question strong{font-size:clamp(34px,8vw,58px)}
+.choice{position:absolute;z-index:22;bottom:26%;width:34%;max-width:250px;min-height:68px;padding:14px;border:0;border-radius:16px;background:#fff;color:#17212a;font-size:clamp(30px,7vw,46px);font-weight:1000;box-shadow:0 8px 0 #a9b4bc,0 15px 28px #0007;opacity:0;pointer-events:none;cursor:pointer;transition:opacity .3s,transform .15s}
+.choice.left{left:5%}.choice.right{right:5%}
+.choice.show{opacity:1;pointer-events:auto}
+.choice:active{transform:translateY(4px);box-shadow:0 4px 0 #a9b4bc}
+.choice:focus-visible,.mainbtn:focus-visible{outline:5px solid #39a9ff;outline-offset:4px}
+.car{position:absolute;z-index:15;left:50%;bottom:34px;width:240px;height:160px;transform:translateX(-50%);transition:left .7s,transform .7s}
+.car:after{content:"";position:absolute;left:25px;right:25px;bottom:-5px;height:32px;border-radius:50%;background:#000b;filter:blur(9px)}
+.car.left-turn{left:24%;transform:translateX(-50%) rotate(-8deg)}
+.car.right-turn{left:76%;transform:translateX(-50%) rotate(8deg)}
+.tire{position:absolute;bottom:18px;width:36px;height:68px;border-radius:12px;background:linear-gradient(90deg,#030405,#383e43,#030405)}
+.tire.l{left:3px}.tire.r{right:3px}
+.body{position:absolute;inset:31px 18px 18px;background:linear-gradient(90deg,#510108,#c90b19 18%,#ff3e4d 49%,#b30614 82%,#450106);clip-path:polygon(20% 0,80% 0,97% 38%,100% 80%,88% 100%,12% 100%,0 80%,3% 38%);border-radius:35% 35% 20% 20%;box-shadow:inset 0 17px 18px #ff888888,inset 0 -30px 25px #3b0008c9}
+.roof{position:absolute;z-index:2;top:5px;left:60px;width:120px;height:72px;background:linear-gradient(145deg,#daf9ff,#3f7894 30%,#071924 72%);clip-path:polygon(25% 0,75% 0,100% 100%,0 100%);border:6px solid var(--red);border-radius:45% 45% 8% 8%}
+.wing{position:absolute;z-index:6;left:4px;top:17px;width:232px;height:18px;border-radius:4px;background:linear-gradient(#343b42,#030405 70%);box-shadow:0 8px 0 -5px #000}
+.lamp{position:absolute;z-index:8;bottom:48px;width:54px;height:13px;border-radius:9px;background:repeating-linear-gradient(90deg,#ff1932 0 9px,#6e0009 10px 13px);box-shadow:0 0 15px #ff001f}
+.lamp.l{left:40px}.lamp.r{right:40px}
+.diffuser{position:absolute;z-index:7;left:45px;bottom:16px;width:150px;height:29px;background:repeating-linear-gradient(100deg,#020304 0 13px,#242a30 14px 20px);clip-path:polygon(0 0,100% 0,88% 100%,12% 100%)}
+.number{position:absolute;z-index:9;left:50%;bottom:49px;transform:translateX(-50%);background:#111820;padding:4px 8px;border-radius:4px;font-weight:900}
+.overlay{position:absolute;z-index:40;inset:0;display:grid;place-items:center;padding:20px;background:#06121cbd;transition:opacity .3s}
+.overlay.hide{opacity:0;pointer-events:none}
+.card{width:min(94%,540px);padding:28px;border:2px solid #ffffff55;border-radius:24px;background:#081722f2;text-align:center}
+.card h1,.card h2{margin:0 0 10px;font-size:clamp(28px,7vw,46px)}
+.card p{line-height:1.7}
+.mainbtn{border:0;border-radius:15px;padding:14px 30px;background:var(--yellow);color:#17212a;font-size:20px;font-weight:1000;cursor:pointer;box-shadow:0 6px 0 #bc8c00}
+.result{display:none}.result.show{display:grid}
+.feedback{min-height:1.5em;font-weight:800}
+@media(max-width:540px){.game{min-height:650px}.stands{width:55%;height:115px}.pit{width:45%;height:120px}.car{transform:translateX(-50%) scale(.82)}.car.left-turn{transform:translateX(-50%) scale(.82) rotate(-8deg)}.car.right-turn{transform:translateX(-50%) scale(.82) rotate(8deg)}.choice{bottom:27%;width:38%;padding:12px 6px}.question{top:92px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation:none!important;transition:none!important}}
