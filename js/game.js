@@ -225,7 +225,7 @@
     if (price > career.points) {
       const status = el("customStatus");
       if (status) {
-        status.textContent = "このパーツは " + price + " pt。今の残高は " + career.points + " ptです。問題に正解してポイントをためよう。";
+        status.textContent = "このパーツは " + price + " pt。いまのポイントは " + career.points + " ptだよ。もんだいをといてためよう。";
         status.dataset.notice = "result";
       }
       return;
@@ -283,7 +283,7 @@
     renderCareer();
     const status = el("customStatus");
     if (status) {
-      status.textContent = "未確定の変更を取り消しました。ポイントは減っていません。";
+      status.textContent = "まだきめていないへんこうをやめたよ。ポイントはへっていません。";
       status.dataset.notice = "result";
     }
     renderCustomActions();
@@ -305,7 +305,7 @@
           : selected
             ? "えらんでいるよ・" + price + " pt"
             : !affordable
-              ? price + " pt・あと" + (price - career.points) + " pt"
+              ? price + " pt・あと" + (price - career.points) + " ptひつよう"
               : saved
                 ? price + " ptでもどす"
                 : price + " ptでかえる";
@@ -516,14 +516,14 @@
       if (currentEvent.streakBonus && streak >= 2) charge += currentEvent.streakBonus;
       nitro = Math.min(100, nitro + charge);
       feedbackEl.textContent =  "せいかい！ " + (gain > 0 ? "はやさ +" + gain + " km/h。 " :  "さいこうのはやさ！ ") +
-        (streak >= 2 ? "連続正解 " + streak + "！ " : "") + currentQuestion.explanation;
+        (streak >= 2 ? streak + "もん れんぞくせいかい！ " : "") + currentQuestion.explanation;
     } else {
       streak = 0;
       el("streak").textContent = "0";
       const correctChoice = currentQuestion.choices.find(choice => String(choice.value) === String(currentQuestion.correctValue));
       const correctLabel = correctChoice ? correctChoice.label : String(currentQuestion.correctValue);
       const loss = updateSpeed(-15);
-      feedbackEl.textContent =  "ざんねん！ " + (loss < 0 ? "時速 " + loss + " km/h。 " :  "これいじょうおそくならないよ。 ") +
+      feedbackEl.textContent =  "ざんねん！ " + (loss < 0 ? "はやさ " + loss + " km/h。 " :  "これいじょうおそくならないよ。 ") +
         "ただしいこたえは「" + correctLabel + "」。" + currentQuestion.explanation;
     }
     updateNitro();
@@ -554,7 +554,7 @@
   const badgeInfo = {
     first: { name: "はじめてのゴール", description: "さいしょのレースをゴール" },
     streak: { name: "れんぞくせいかい", description: "3もんつづけてせいかい" },
-    perfect: { name: "パーフェクト", description: "1レースで全問正解" },
+    perfect: { name: "パーフェクト", description: "1レースですべてもんだいにせいかい" },
     nitro: { name: "はじめてのニトロ", description: "ニトロをつかった" },
     regular: { name: "サーキットのじょうれん", description: "5レースをゴール" },
     winner: { name: "トップランナー", description: "1いを3かいとった" }
@@ -604,14 +604,14 @@
     resultText.textContent = total + "もん中 " + score + "もんせいかい！ " +
       (score === total ? "パーフェクト！ " : "かいせつをみて、つぎのレースにいかそう。 ") +
       (earnsReward
-        ? "もらったポイント：" + reward + " pt" + (eventPoints ? "（イベントボーナス +" + eventPoints + " ptを含む）" : "")
+        ? "もらったポイント：" + reward + " pt" + (eventPoints ? "（イベントで +" + eventPoints + " pt）" : "")
         : "ポイントをもらうには " + rewardThreshold + "もんいじょうのせいかいがひつようだよ。こんかいはポイントなし。かいせつをみて、つぎもがんばろう！");
     el("resultRecords").textContent =
       "イベント：" + currentEvent.name + " ／ さいこうのはやさ " + raceBestSpeed + " km/h ／ れんぞくせいかい " + raceBestStreak +
-      "もん ／ ニトロ " + nitroUses + "かい" + (wasBest ? " ／ 🆕 自己ベスト更新！" : "");
+      "もん ／ ニトロ " + nitroUses + "かい" + (wasBest ? " ／ 🆕 ベストこうしん！" : "");
     el("badgeNotice").textContent = newBadges.length
       ? "あたらしいバッジをゲット！ " + newBadges.map(id => badgeInfo[id].name).join("・")
-      : (career.badges.length ? "あつめたバッジ：" + career.badges.map(id => badgeInfo[id].name).join("・") : "レースを続けて称号を集めよう。");
+      : (career.badges.length ? "あつめたバッジ：" + career.badges.map(id => badgeInfo[id].name).join("・") : "レースをしてバッジをあつめよう。");
     el("nextRaceNote").textContent = vehicles[selectedVehicle].name + "・" + liveryNames[selectedLivery] +
       "のマシンだよ。つぎはべつのコースとイベントがまっているよ！";
     result.classList.add("show");
