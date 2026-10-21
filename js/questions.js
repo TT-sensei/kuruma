@@ -1,5 +1,4 @@
-/* 全200問。生活に結びつく漢字の読みと、かけ算中心の計算問題。
-   grade は出題レベル（1=基礎、2=標準、3=チャレンジ）。基本は2択です。 */
+/* 全200問。国語は生活に結びつく漢字の読み。算数は九九中心、繰り上がり・繰り下がりなしの3桁計算、あまりのないわり算。 */
 window.GAME_DATA = {
   game: { questionsPerRace: 8, questionDelayMs: 650, resultDelayMs: 1550 },
   questions: [
@@ -8,60 +7,41 @@ window.GAME_DATA = {
     "subject": "算数",
     "grade": 1,
     "topic": "かけ算",
-    "prompt": "9 × 7 ＝ ？",
+    "prompt": "9 × 2 ＝ ？",
     "choices": [
       {
-        "value": 63,
-        "label": "63"
+        "value": 18,
+        "label": "18"
       },
       {
-        "value": 56,
-        "label": "56"
+        "value": 27,
+        "label": "27"
       }
     ],
-    "correctValue": 63,
-    "explanation": "9×7＝63です。"
+    "correctValue": 18,
+    "explanation": "9×2＝18です。"
   },
   {
     "id": "mul-002",
     "subject": "算数",
     "grade": 1,
     "topic": "かけ算",
-    "prompt": "9 × 9 ＝ ？",
+    "prompt": "8 × 7 ＝ ？",
     "choices": [
       {
-        "value": 81,
-        "label": "81"
+        "value": 56,
+        "label": "56"
       },
       {
-        "value": 90,
-        "label": "90"
+        "value": 49,
+        "label": "49"
       }
     ],
-    "correctValue": 81,
-    "explanation": "9×9＝81です。"
+    "correctValue": 56,
+    "explanation": "8×7＝56です。"
   },
   {
     "id": "mul-003",
-    "subject": "算数",
-    "grade": 1,
-    "topic": "かけ算",
-    "prompt": "9 × 6 ＝ ？",
-    "choices": [
-      {
-        "value": 54,
-        "label": "54"
-      },
-      {
-        "value": 48,
-        "label": "48"
-      }
-    ],
-    "correctValue": 54,
-    "explanation": "9×6＝54です。"
-  },
-  {
-    "id": "mul-004",
     "subject": "算数",
     "grade": 1,
     "topic": "かけ算",
@@ -72,15 +52,91 @@ window.GAME_DATA = {
         "label": "72"
       },
       {
-        "value": 81,
-        "label": "81"
+        "value": 73,
+        "label": "73"
       }
     ],
     "correctValue": 72,
     "explanation": "9×8＝72です。"
   },
   {
+    "id": "mul-004",
+    "subject": "算数",
+    "grade": 1,
+    "topic": "かけ算",
+    "prompt": "9 × 6 ＝ ？",
+    "choices": [
+      {
+        "value": 54,
+        "label": "54"
+      },
+      {
+        "value": 63,
+        "label": "63"
+      }
+    ],
+    "correctValue": 54,
+    "explanation": "9×6＝54です。"
+  },
+  {
     "id": "mul-005",
+    "subject": "算数",
+    "grade": 1,
+    "topic": "かけ算",
+    "prompt": "9 × 4 ＝ ？",
+    "choices": [
+      {
+        "value": 36,
+        "label": "36"
+      },
+      {
+        "value": 32,
+        "label": "32"
+      }
+    ],
+    "correctValue": 36,
+    "explanation": "9×4＝36です。"
+  },
+  {
+    "id": "mul-006",
+    "subject": "算数",
+    "grade": 1,
+    "topic": "かけ算",
+    "prompt": "8 × 9 ＝ ？",
+    "choices": [
+      {
+        "value": 72,
+        "label": "72"
+      },
+      {
+        "value": 73,
+        "label": "73"
+      }
+    ],
+    "correctValue": 72,
+    "explanation": "8×9＝72です。"
+  },
+  {
+    "id": "mul-007",
+    "subject": "算数",
+    "grade": 1,
+    "topic": "かけ算",
+    "prompt": "9 × 3 ＝ ？",
+    "choices": [
+      {
+        "value": 27,
+        "label": "27"
+      },
+      {
+        "value": 36,
+        "label": "36"
+      }
+    ],
+    "correctValue": 27,
+    "explanation": "9×3＝27です。"
+  },
+  {
+    "id": "mul-008",
     "subject": "算数",
     "grade": 1,
     "topic": "かけ算",
@@ -99,7 +155,64 @@ window.GAME_DATA = {
     "explanation": "9×5＝45です。"
   },
   {
-    "id": "mul-006",
+    "id": "mul-009",
+    "subject": "算数",
+    "grade": 1,
+    "topic": "かけ算",
+    "prompt": "9 × 7 ＝ ？",
+    "choices": [
+      {
+        "value": 63,
+        "label": "63"
+      },
+      {
+        "value": 64,
+        "label": "64"
+      }
+    ],
+    "correctValue": 63,
+    "explanation": "9×7＝63です。"
+  },
+  {
+    "id": "mul-010",
+    "subject": "算数",
+    "grade": 1,
+    "topic": "かけ算",
+    "prompt": "9 × 9 ＝ ？",
+    "choices": [
+      {
+        "value": 81,
+        "label": "81"
+      },
+      {
+        "value": 90,
+        "label": "90"
+      }
+    ],
+    "correctValue": 81,
+    "explanation": "9×9＝81です。"
+  },
+  {
+    "id": "mul-011",
+    "subject": "算数",
+    "grade": 1,
+    "topic": "かけ算",
+    "prompt": "8 × 8 ＝ ？",
+    "choices": [
+      {
+        "value": 64,
+        "label": "64"
+      },
+      {
+        "value": 56,
+        "label": "56"
+      }
+    ],
+    "correctValue": 64,
+    "explanation": "8×8＝64です。"
+  },
+  {
+    "id": "mul-012",
     "subject": "算数",
     "grade": 1,
     "topic": "かけ算",
@@ -110,15 +223,15 @@ window.GAME_DATA = {
         "label": "4"
       },
       {
-        "value": 6,
-        "label": "6"
+        "value": 5,
+        "label": "5"
       }
     ],
     "correctValue": 4,
     "explanation": "2×2＝4です。"
   },
   {
-    "id": "mul-007",
+    "id": "mul-013",
     "subject": "算数",
     "grade": 1,
     "topic": "かけ算",
@@ -129,15 +242,15 @@ window.GAME_DATA = {
         "label": "6"
       },
       {
-        "value": 3,
-        "label": "3"
+        "value": 8,
+        "label": "8"
       }
     ],
     "correctValue": 6,
     "explanation": "2×3＝6です。"
   },
   {
-    "id": "mul-008",
+    "id": "mul-014",
     "subject": "算数",
     "grade": 1,
     "topic": "かけ算",
@@ -148,15 +261,15 @@ window.GAME_DATA = {
         "label": "8"
       },
       {
-        "value": 10,
-        "label": "10"
+        "value": 4,
+        "label": "4"
       }
     ],
     "correctValue": 8,
     "explanation": "2×4＝8です。"
   },
   {
-    "id": "mul-009",
+    "id": "mul-015",
     "subject": "算数",
     "grade": 1,
     "topic": "かけ算",
@@ -167,15 +280,15 @@ window.GAME_DATA = {
         "label": "10"
       },
       {
-        "value": 5,
-        "label": "5"
+        "value": 11,
+        "label": "11"
       }
     ],
     "correctValue": 10,
     "explanation": "2×5＝10です。"
   },
   {
-    "id": "mul-010",
+    "id": "mul-016",
     "subject": "算数",
     "grade": 1,
     "topic": "かけ算",
@@ -194,7 +307,7 @@ window.GAME_DATA = {
     "explanation": "2×6＝12です。"
   },
   {
-    "id": "mul-011",
+    "id": "mul-017",
     "subject": "算数",
     "grade": 1,
     "topic": "かけ算",
@@ -213,7 +326,7 @@ window.GAME_DATA = {
     "explanation": "2×7＝14です。"
   },
   {
-    "id": "mul-012",
+    "id": "mul-018",
     "subject": "算数",
     "grade": 1,
     "topic": "かけ算",
@@ -224,15 +337,15 @@ window.GAME_DATA = {
         "label": "16"
       },
       {
-        "value": 18,
-        "label": "18"
+        "value": 17,
+        "label": "17"
       }
     ],
     "correctValue": 16,
     "explanation": "2×8＝16です。"
   },
   {
-    "id": "mul-013",
+    "id": "mul-019",
     "subject": "算数",
     "grade": 1,
     "topic": "かけ算",
@@ -243,15 +356,15 @@ window.GAME_DATA = {
         "label": "18"
       },
       {
-        "value": 9,
-        "label": "9"
+        "value": 20,
+        "label": "20"
       }
     ],
     "correctValue": 18,
     "explanation": "2×9＝18です。"
   },
   {
-    "id": "mul-014",
+    "id": "mul-020",
     "subject": "算数",
     "grade": 1,
     "topic": "かけ算",
@@ -262,17 +375,17 @@ window.GAME_DATA = {
         "label": "6"
       },
       {
-        "value": 9,
-        "label": "9"
+        "value": 4,
+        "label": "4"
       }
     ],
     "correctValue": 6,
     "explanation": "3×2＝6です。"
   },
   {
-    "id": "mul-015",
+    "id": "mul-021",
     "subject": "算数",
-    "grade": 1,
+    "grade": 2,
     "topic": "かけ算",
     "prompt": "3 × 3 ＝ ？",
     "choices": [
@@ -281,17 +394,17 @@ window.GAME_DATA = {
         "label": "9"
       },
       {
-        "value": 6,
-        "label": "6"
+        "value": 10,
+        "label": "10"
       }
     ],
     "correctValue": 9,
     "explanation": "3×3＝9です。"
   },
   {
-    "id": "mul-016",
+    "id": "mul-022",
     "subject": "算数",
-    "grade": 1,
+    "grade": 2,
     "topic": "かけ算",
     "prompt": "3 × 4 ＝ ？",
     "choices": [
@@ -308,9 +421,9 @@ window.GAME_DATA = {
     "explanation": "3×4＝12です。"
   },
   {
-    "id": "mul-017",
+    "id": "mul-023",
     "subject": "算数",
-    "grade": 1,
+    "grade": 2,
     "topic": "かけ算",
     "prompt": "3 × 5 ＝ ？",
     "choices": [
@@ -327,9 +440,9 @@ window.GAME_DATA = {
     "explanation": "3×5＝15です。"
   },
   {
-    "id": "mul-018",
+    "id": "mul-024",
     "subject": "算数",
-    "grade": 1,
+    "grade": 2,
     "topic": "かけ算",
     "prompt": "3 × 6 ＝ ？",
     "choices": [
@@ -338,17 +451,17 @@ window.GAME_DATA = {
         "label": "18"
       },
       {
-        "value": 21,
-        "label": "21"
+        "value": 19,
+        "label": "19"
       }
     ],
     "correctValue": 18,
     "explanation": "3×6＝18です。"
   },
   {
-    "id": "mul-019",
+    "id": "mul-025",
     "subject": "算数",
-    "grade": 1,
+    "grade": 2,
     "topic": "かけ算",
     "prompt": "3 × 7 ＝ ？",
     "choices": [
@@ -357,17 +470,17 @@ window.GAME_DATA = {
         "label": "21"
       },
       {
-        "value": 14,
-        "label": "14"
+        "value": 24,
+        "label": "24"
       }
     ],
     "correctValue": 21,
     "explanation": "3×7＝21です。"
   },
   {
-    "id": "mul-020",
+    "id": "mul-026",
     "subject": "算数",
-    "grade": 1,
+    "grade": 2,
     "topic": "かけ算",
     "prompt": "3 × 8 ＝ ？",
     "choices": [
@@ -376,15 +489,15 @@ window.GAME_DATA = {
         "label": "24"
       },
       {
-        "value": 27,
-        "label": "27"
+        "value": 16,
+        "label": "16"
       }
     ],
     "correctValue": 24,
     "explanation": "3×8＝24です。"
   },
   {
-    "id": "mul-021",
+    "id": "mul-027",
     "subject": "算数",
     "grade": 2,
     "topic": "かけ算",
@@ -395,15 +508,15 @@ window.GAME_DATA = {
         "label": "27"
       },
       {
-        "value": 18,
-        "label": "18"
+        "value": 28,
+        "label": "28"
       }
     ],
     "correctValue": 27,
     "explanation": "3×9＝27です。"
   },
   {
-    "id": "mul-022",
+    "id": "mul-028",
     "subject": "算数",
     "grade": 2,
     "topic": "かけ算",
@@ -422,7 +535,7 @@ window.GAME_DATA = {
     "explanation": "4×2＝8です。"
   },
   {
-    "id": "mul-023",
+    "id": "mul-029",
     "subject": "算数",
     "grade": 2,
     "topic": "かけ算",
@@ -441,7 +554,7 @@ window.GAME_DATA = {
     "explanation": "4×3＝12です。"
   },
   {
-    "id": "mul-024",
+    "id": "mul-030",
     "subject": "算数",
     "grade": 2,
     "topic": "かけ算",
@@ -452,15 +565,15 @@ window.GAME_DATA = {
         "label": "16"
       },
       {
-        "value": 20,
-        "label": "20"
+        "value": 17,
+        "label": "17"
       }
     ],
     "correctValue": 16,
     "explanation": "4×4＝16です。"
   },
   {
-    "id": "mul-025",
+    "id": "mul-031",
     "subject": "算数",
     "grade": 2,
     "topic": "かけ算",
@@ -471,15 +584,15 @@ window.GAME_DATA = {
         "label": "20"
       },
       {
-        "value": 15,
-        "label": "15"
+        "value": 24,
+        "label": "24"
       }
     ],
     "correctValue": 20,
     "explanation": "4×5＝20です。"
   },
   {
-    "id": "mul-026",
+    "id": "mul-032",
     "subject": "算数",
     "grade": 2,
     "topic": "かけ算",
@@ -490,15 +603,15 @@ window.GAME_DATA = {
         "label": "24"
       },
       {
-        "value": 28,
-        "label": "28"
+        "value": 18,
+        "label": "18"
       }
     ],
     "correctValue": 24,
     "explanation": "4×6＝24です。"
   },
   {
-    "id": "mul-027",
+    "id": "mul-033",
     "subject": "算数",
     "grade": 2,
     "topic": "かけ算",
@@ -509,15 +622,15 @@ window.GAME_DATA = {
         "label": "28"
       },
       {
-        "value": 21,
-        "label": "21"
+        "value": 29,
+        "label": "29"
       }
     ],
     "correctValue": 28,
     "explanation": "4×7＝28です。"
   },
   {
-    "id": "mul-028",
+    "id": "mul-034",
     "subject": "算数",
     "grade": 2,
     "topic": "かけ算",
@@ -536,7 +649,7 @@ window.GAME_DATA = {
     "explanation": "4×8＝32です。"
   },
   {
-    "id": "mul-029",
+    "id": "mul-035",
     "subject": "算数",
     "grade": 2,
     "topic": "かけ算",
@@ -555,7 +668,7 @@ window.GAME_DATA = {
     "explanation": "4×9＝36です。"
   },
   {
-    "id": "mul-030",
+    "id": "mul-036",
     "subject": "算数",
     "grade": 2,
     "topic": "かけ算",
@@ -566,15 +679,15 @@ window.GAME_DATA = {
         "label": "10"
       },
       {
-        "value": 15,
-        "label": "15"
+        "value": 11,
+        "label": "11"
       }
     ],
     "correctValue": 10,
     "explanation": "5×2＝10です。"
   },
   {
-    "id": "mul-031",
+    "id": "mul-037",
     "subject": "算数",
     "grade": 2,
     "topic": "かけ算",
@@ -585,15 +698,15 @@ window.GAME_DATA = {
         "label": "15"
       },
       {
-        "value": 12,
-        "label": "12"
+        "value": 20,
+        "label": "20"
       }
     ],
     "correctValue": 15,
     "explanation": "5×3＝15です。"
   },
   {
-    "id": "mul-032",
+    "id": "mul-038",
     "subject": "算数",
     "grade": 2,
     "topic": "かけ算",
@@ -604,15 +717,15 @@ window.GAME_DATA = {
         "label": "20"
       },
       {
-        "value": 25,
-        "label": "25"
+        "value": 16,
+        "label": "16"
       }
     ],
     "correctValue": 20,
     "explanation": "5×4＝20です。"
   },
   {
-    "id": "mul-033",
+    "id": "mul-039",
     "subject": "算数",
     "grade": 2,
     "topic": "かけ算",
@@ -623,15 +736,15 @@ window.GAME_DATA = {
         "label": "25"
       },
       {
-        "value": 20,
-        "label": "20"
+        "value": 26,
+        "label": "26"
       }
     ],
     "correctValue": 25,
     "explanation": "5×5＝25です。"
   },
   {
-    "id": "mul-034",
+    "id": "mul-040",
     "subject": "算数",
     "grade": 2,
     "topic": "かけ算",
@@ -650,7 +763,7 @@ window.GAME_DATA = {
     "explanation": "5×6＝30です。"
   },
   {
-    "id": "mul-035",
+    "id": "mul-041",
     "subject": "算数",
     "grade": 2,
     "topic": "かけ算",
@@ -669,7 +782,7 @@ window.GAME_DATA = {
     "explanation": "5×7＝35です。"
   },
   {
-    "id": "mul-036",
+    "id": "mul-042",
     "subject": "算数",
     "grade": 2,
     "topic": "かけ算",
@@ -680,17 +793,17 @@ window.GAME_DATA = {
         "label": "40"
       },
       {
-        "value": 45,
-        "label": "45"
+        "value": 41,
+        "label": "41"
       }
     ],
     "correctValue": 40,
     "explanation": "5×8＝40です。"
   },
   {
-    "id": "mul-037",
+    "id": "mul-043",
     "subject": "算数",
-    "grade": 2,
+    "grade": 3,
     "topic": "かけ算",
     "prompt": "5 × 9 ＝ ？",
     "choices": [
@@ -699,17 +812,17 @@ window.GAME_DATA = {
         "label": "45"
       },
       {
-        "value": 36,
-        "label": "36"
+        "value": 50,
+        "label": "50"
       }
     ],
     "correctValue": 45,
     "explanation": "5×9＝45です。"
   },
   {
-    "id": "mul-038",
+    "id": "mul-044",
     "subject": "算数",
-    "grade": 2,
+    "grade": 3,
     "topic": "かけ算",
     "prompt": "6 × 2 ＝ ？",
     "choices": [
@@ -718,17 +831,17 @@ window.GAME_DATA = {
         "label": "12"
       },
       {
-        "value": 18,
-        "label": "18"
+        "value": 10,
+        "label": "10"
       }
     ],
     "correctValue": 12,
     "explanation": "6×2＝12です。"
   },
   {
-    "id": "mul-039",
+    "id": "mul-045",
     "subject": "算数",
-    "grade": 2,
+    "grade": 3,
     "topic": "かけ算",
     "prompt": "6 × 3 ＝ ？",
     "choices": [
@@ -737,17 +850,17 @@ window.GAME_DATA = {
         "label": "18"
       },
       {
-        "value": 15,
-        "label": "15"
+        "value": 19,
+        "label": "19"
       }
     ],
     "correctValue": 18,
     "explanation": "6×3＝18です。"
   },
   {
-    "id": "mul-040",
+    "id": "mul-046",
     "subject": "算数",
-    "grade": 2,
+    "grade": 3,
     "topic": "かけ算",
     "prompt": "6 × 4 ＝ ？",
     "choices": [
@@ -764,9 +877,9 @@ window.GAME_DATA = {
     "explanation": "6×4＝24です。"
   },
   {
-    "id": "mul-041",
+    "id": "mul-047",
     "subject": "算数",
-    "grade": 2,
+    "grade": 3,
     "topic": "かけ算",
     "prompt": "6 × 5 ＝ ？",
     "choices": [
@@ -783,9 +896,9 @@ window.GAME_DATA = {
     "explanation": "6×5＝30です。"
   },
   {
-    "id": "mul-042",
+    "id": "mul-048",
     "subject": "算数",
-    "grade": 2,
+    "grade": 3,
     "topic": "かけ算",
     "prompt": "6 × 6 ＝ ？",
     "choices": [
@@ -794,15 +907,15 @@ window.GAME_DATA = {
         "label": "36"
       },
       {
-        "value": 42,
-        "label": "42"
+        "value": 37,
+        "label": "37"
       }
     ],
     "correctValue": 36,
     "explanation": "6×6＝36です。"
   },
   {
-    "id": "mul-043",
+    "id": "mul-049",
     "subject": "算数",
     "grade": 3,
     "topic": "かけ算",
@@ -813,15 +926,15 @@ window.GAME_DATA = {
         "label": "42"
       },
       {
-        "value": 35,
-        "label": "35"
+        "value": 48,
+        "label": "48"
       }
     ],
     "correctValue": 42,
     "explanation": "6×7＝42です。"
   },
   {
-    "id": "mul-044",
+    "id": "mul-050",
     "subject": "算数",
     "grade": 3,
     "topic": "かけ算",
@@ -832,15 +945,15 @@ window.GAME_DATA = {
         "label": "48"
       },
       {
-        "value": 54,
-        "label": "54"
+        "value": 40,
+        "label": "40"
       }
     ],
     "correctValue": 48,
     "explanation": "6×8＝48です。"
   },
   {
-    "id": "mul-045",
+    "id": "mul-051",
     "subject": "算数",
     "grade": 3,
     "topic": "かけ算",
@@ -851,15 +964,15 @@ window.GAME_DATA = {
         "label": "54"
       },
       {
-        "value": 45,
-        "label": "45"
+        "value": 55,
+        "label": "55"
       }
     ],
     "correctValue": 54,
     "explanation": "6×9＝54です。"
   },
   {
-    "id": "mul-046",
+    "id": "mul-052",
     "subject": "算数",
     "grade": 3,
     "topic": "かけ算",
@@ -878,7 +991,7 @@ window.GAME_DATA = {
     "explanation": "7×2＝14です。"
   },
   {
-    "id": "mul-047",
+    "id": "mul-053",
     "subject": "算数",
     "grade": 3,
     "topic": "かけ算",
@@ -897,7 +1010,7 @@ window.GAME_DATA = {
     "explanation": "7×3＝21です。"
   },
   {
-    "id": "mul-048",
+    "id": "mul-054",
     "subject": "算数",
     "grade": 3,
     "topic": "かけ算",
@@ -908,15 +1021,15 @@ window.GAME_DATA = {
         "label": "28"
       },
       {
-        "value": 35,
-        "label": "35"
+        "value": 29,
+        "label": "29"
       }
     ],
     "correctValue": 28,
     "explanation": "7×4＝28です。"
   },
   {
-    "id": "mul-049",
+    "id": "mul-055",
     "subject": "算数",
     "grade": 3,
     "topic": "かけ算",
@@ -927,15 +1040,15 @@ window.GAME_DATA = {
         "label": "35"
       },
       {
-        "value": 30,
-        "label": "30"
+        "value": 42,
+        "label": "42"
       }
     ],
     "correctValue": 35,
     "explanation": "7×5＝35です。"
   },
   {
-    "id": "mul-050",
+    "id": "mul-056",
     "subject": "算数",
     "grade": 3,
     "topic": "かけ算",
@@ -946,15 +1059,15 @@ window.GAME_DATA = {
         "label": "42"
       },
       {
-        "value": 49,
-        "label": "49"
+        "value": 36,
+        "label": "36"
       }
     ],
     "correctValue": 42,
     "explanation": "7×6＝42です。"
   },
   {
-    "id": "mul-051",
+    "id": "mul-057",
     "subject": "算数",
     "grade": 3,
     "topic": "かけ算",
@@ -965,15 +1078,15 @@ window.GAME_DATA = {
         "label": "49"
       },
       {
-        "value": 42,
-        "label": "42"
+        "value": 50,
+        "label": "50"
       }
     ],
     "correctValue": 49,
     "explanation": "7×7＝49です。"
   },
   {
-    "id": "mul-052",
+    "id": "mul-058",
     "subject": "算数",
     "grade": 3,
     "topic": "かけ算",
@@ -992,7 +1105,7 @@ window.GAME_DATA = {
     "explanation": "7×8＝56です。"
   },
   {
-    "id": "mul-053",
+    "id": "mul-059",
     "subject": "算数",
     "grade": 3,
     "topic": "かけ算",
@@ -1011,7 +1124,7 @@ window.GAME_DATA = {
     "explanation": "7×9＝63です。"
   },
   {
-    "id": "mul-054",
+    "id": "mul-060",
     "subject": "算数",
     "grade": 3,
     "topic": "かけ算",
@@ -1022,796 +1135,473 @@ window.GAME_DATA = {
         "label": "16"
       },
       {
-        "value": 24,
-        "label": "24"
+        "value": 17,
+        "label": "17"
       }
     ],
     "correctValue": 16,
     "explanation": "8×2＝16です。"
   },
   {
-    "id": "mul-055",
+    "id": "add-001",
     "subject": "算数",
-    "grade": 3,
-    "topic": "かけ算",
-    "prompt": "8 × 3 ＝ ？",
+    "grade": 1,
+    "topic": "たし算",
+    "prompt": "123 ＋ 245 ＝ ？",
     "choices": [
       {
-        "value": 24,
-        "label": "24"
+        "value": 368,
+        "label": "368"
       },
       {
-        "value": 21,
-        "label": "21"
+        "value": 378,
+        "label": "378"
       }
     ],
-    "correctValue": 24,
-    "explanation": "8×3＝24です。"
+    "correctValue": 368,
+    "explanation": "123＋245＝368です。"
   },
   {
-    "id": "mul-056",
+    "id": "add-002",
     "subject": "算数",
-    "grade": 3,
-    "topic": "かけ算",
-    "prompt": "8 × 4 ＝ ？",
+    "grade": 1,
+    "topic": "たし算",
+    "prompt": "314 ＋ 253 ＝ ？",
     "choices": [
       {
-        "value": 32,
-        "label": "32"
+        "value": 567,
+        "label": "567"
       },
       {
-        "value": 40,
-        "label": "40"
+        "value": 577,
+        "label": "577"
       }
     ],
-    "correctValue": 32,
-    "explanation": "8×4＝32です。"
+    "correctValue": 567,
+    "explanation": "314＋253＝567です。"
   },
   {
-    "id": "mul-057",
+    "id": "add-003",
     "subject": "算数",
-    "grade": 3,
-    "topic": "かけ算",
-    "prompt": "8 × 5 ＝ ？",
+    "grade": 1,
+    "topic": "たし算",
+    "prompt": "462 ＋ 317 ＝ ？",
     "choices": [
       {
-        "value": 40,
-        "label": "40"
+        "value": 779,
+        "label": "779"
       },
       {
-        "value": 35,
-        "label": "35"
+        "value": 789,
+        "label": "789"
       }
     ],
-    "correctValue": 40,
-    "explanation": "8×5＝40です。"
+    "correctValue": 779,
+    "explanation": "462＋317＝779です。"
   },
   {
-    "id": "mul-058",
+    "id": "add-004",
     "subject": "算数",
-    "grade": 3,
-    "topic": "かけ算",
-    "prompt": "8 × 6 ＝ ？",
+    "grade": 1,
+    "topic": "たし算",
+    "prompt": "521 ＋ 168 ＝ ？",
     "choices": [
       {
-        "value": 48,
-        "label": "48"
+        "value": 689,
+        "label": "689"
       },
       {
-        "value": 56,
-        "label": "56"
+        "value": 699,
+        "label": "699"
       }
     ],
-    "correctValue": 48,
-    "explanation": "8×6＝48です。"
+    "correctValue": 689,
+    "explanation": "521＋168＝689です。"
   },
   {
-    "id": "mul-059",
-    "subject": "算数",
-    "grade": 3,
-    "topic": "かけ算",
-    "prompt": "8 × 7 ＝ ？",
-    "choices": [
-      {
-        "value": 56,
-        "label": "56"
-      },
-      {
-        "value": 49,
-        "label": "49"
-      }
-    ],
-    "correctValue": 56,
-    "explanation": "8×7＝56です。"
-  },
-  {
-    "id": "mul-060",
-    "subject": "算数",
-    "grade": 3,
-    "topic": "かけ算",
-    "prompt": "8 × 8 ＝ ？",
-    "choices": [
-      {
-        "value": 64,
-        "label": "64"
-      },
-      {
-        "value": 72,
-        "label": "72"
-      }
-    ],
-    "correctValue": 64,
-    "explanation": "8×8＝64です。"
-  },
-  {
-    "id": "mul-061",
+    "id": "add-005",
     "subject": "算数",
     "grade": 2,
-    "topic": "かけ算",
-    "prompt": "12 × 4 ＝ ？",
+    "topic": "たし算",
+    "prompt": "243 ＋ 526 ＝ ？",
     "choices": [
       {
-        "value": 48,
-        "label": "48"
+        "value": 769,
+        "label": "769"
       },
       {
-        "value": 36,
-        "label": "36"
+        "value": 779,
+        "label": "779"
       }
     ],
-    "correctValue": 48,
-    "explanation": "12×4＝48です。"
+    "correctValue": 769,
+    "explanation": "243＋526＝769です。"
   },
   {
-    "id": "mul-062",
+    "id": "add-006",
     "subject": "算数",
     "grade": 2,
-    "topic": "かけ算",
-    "prompt": "14 × 3 ＝ ？",
+    "topic": "たし算",
+    "prompt": "135 ＋ 642 ＝ ？",
     "choices": [
       {
-        "value": 42,
-        "label": "42"
+        "value": 777,
+        "label": "777"
       },
       {
-        "value": 45,
-        "label": "45"
+        "value": 787,
+        "label": "787"
       }
     ],
-    "correctValue": 42,
-    "explanation": "14×3＝42です。"
+    "correctValue": 777,
+    "explanation": "135＋642＝777です。"
   },
   {
-    "id": "mul-063",
+    "id": "add-007",
     "subject": "算数",
     "grade": 2,
-    "topic": "かけ算",
-    "prompt": "16 × 5 ＝ ？",
+    "topic": "たし算",
+    "prompt": "407 ＋ 281 ＝ ？",
     "choices": [
       {
-        "value": 80,
-        "label": "80"
+        "value": 688,
+        "label": "688"
       },
       {
-        "value": 64,
-        "label": "64"
+        "value": 698,
+        "label": "698"
       }
     ],
-    "correctValue": 80,
-    "explanation": "16×5＝80です。"
+    "correctValue": 688,
+    "explanation": "407＋281＝688です。"
   },
   {
-    "id": "mul-064",
-    "subject": "算数",
-    "grade": 2,
-    "topic": "かけ算",
-    "prompt": "23 × 3 ＝ ？",
-    "choices": [
-      {
-        "value": 69,
-        "label": "69"
-      },
-      {
-        "value": 72,
-        "label": "72"
-      }
-    ],
-    "correctValue": 69,
-    "explanation": "23×3＝69です。"
-  },
-  {
-    "id": "mul-065",
-    "subject": "算数",
-    "grade": 2,
-    "topic": "かけ算",
-    "prompt": "24 × 4 ＝ ？",
-    "choices": [
-      {
-        "value": 96,
-        "label": "96"
-      },
-      {
-        "value": 72,
-        "label": "72"
-      }
-    ],
-    "correctValue": 96,
-    "explanation": "24×4＝96です。"
-  },
-  {
-    "id": "mul-066",
-    "subject": "算数",
-    "grade": 2,
-    "topic": "かけ算",
-    "prompt": "32 × 3 ＝ ？",
-    "choices": [
-      {
-        "value": 96,
-        "label": "96"
-      },
-      {
-        "value": 99,
-        "label": "99"
-      }
-    ],
-    "correctValue": 96,
-    "explanation": "32×3＝96です。"
-  },
-  {
-    "id": "mul-067",
-    "subject": "算数",
-    "grade": 2,
-    "topic": "かけ算",
-    "prompt": "18 × 6 ＝ ？",
-    "choices": [
-      {
-        "value": 108,
-        "label": "108"
-      },
-      {
-        "value": 90,
-        "label": "90"
-      }
-    ],
-    "correctValue": 108,
-    "explanation": "18×6＝108です。"
-  },
-  {
-    "id": "mul-068",
-    "subject": "算数",
-    "grade": 2,
-    "topic": "かけ算",
-    "prompt": "27 × 3 ＝ ？",
-    "choices": [
-      {
-        "value": 81,
-        "label": "81"
-      },
-      {
-        "value": 84,
-        "label": "84"
-      }
-    ],
-    "correctValue": 81,
-    "explanation": "27×3＝81です。"
-  },
-  {
-    "id": "mul-069",
-    "subject": "算数",
-    "grade": 2,
-    "topic": "かけ算",
-    "prompt": "35 × 4 ＝ ？",
-    "choices": [
-      {
-        "value": 140,
-        "label": "140"
-      },
-      {
-        "value": 105,
-        "label": "105"
-      }
-    ],
-    "correctValue": 140,
-    "explanation": "35×4＝140です。"
-  },
-  {
-    "id": "mul-070",
-    "subject": "算数",
-    "grade": 2,
-    "topic": "かけ算",
-    "prompt": "42 × 5 ＝ ？",
-    "choices": [
-      {
-        "value": 210,
-        "label": "210"
-      },
-      {
-        "value": 215,
-        "label": "215"
-      }
-    ],
-    "correctValue": 210,
-    "explanation": "42×5＝210です。"
-  },
-  {
-    "id": "mul-071",
+    "id": "add-008",
     "subject": "算数",
     "grade": 3,
-    "topic": "かけ算",
-    "prompt": "6 × 12 ＝ ？",
+    "topic": "たし算",
+    "prompt": "362 ＋ 415 ＝ ？",
     "choices": [
       {
-        "value": 72,
-        "label": "72"
+        "value": 777,
+        "label": "777"
       },
       {
-        "value": 66,
-        "label": "66"
+        "value": 787,
+        "label": "787"
       }
     ],
-    "correctValue": 72,
-    "explanation": "6×12＝72です。"
+    "correctValue": 777,
+    "explanation": "362＋415＝777です。"
   },
   {
-    "id": "mul-072",
+    "id": "add-009",
     "subject": "算数",
     "grade": 3,
-    "topic": "かけ算",
-    "prompt": "7 × 14 ＝ ？",
+    "topic": "たし算",
+    "prompt": "254 ＋ 123 ＝ ？",
     "choices": [
       {
-        "value": 98,
-        "label": "98"
+        "value": 377,
+        "label": "377"
       },
       {
-        "value": 112,
-        "label": "112"
+        "value": 387,
+        "label": "387"
       }
     ],
-    "correctValue": 98,
-    "explanation": "7×14＝98です。"
+    "correctValue": 377,
+    "explanation": "254＋123＝377です。"
   },
   {
-    "id": "mul-073",
+    "id": "add-010",
     "subject": "算数",
     "grade": 3,
-    "topic": "かけ算",
-    "prompt": "8 × 15 ＝ ？",
+    "topic": "たし算",
+    "prompt": "631 ＋ 248 ＝ ？",
     "choices": [
       {
-        "value": 120,
-        "label": "120"
+        "value": 879,
+        "label": "879"
       },
       {
-        "value": 112,
-        "label": "112"
+        "value": 889,
+        "label": "889"
       }
     ],
-    "correctValue": 120,
-    "explanation": "8×15＝120です。"
+    "correctValue": 879,
+    "explanation": "631＋248＝879です。"
   },
   {
-    "id": "mul-074",
-    "subject": "算数",
-    "grade": 3,
-    "topic": "かけ算",
-    "prompt": "25 × 4 ＝ ？",
-    "choices": [
-      {
-        "value": 100,
-        "label": "100"
-      },
-      {
-        "value": 104,
-        "label": "104"
-      }
-    ],
-    "correctValue": 100,
-    "explanation": "25×4＝100です。"
-  },
-  {
-    "id": "mul-075",
-    "subject": "算数",
-    "grade": 3,
-    "topic": "かけ算",
-    "prompt": "125 × 4 ＝ ？",
-    "choices": [
-      {
-        "value": 500,
-        "label": "500"
-      },
-      {
-        "value": 375,
-        "label": "375"
-      }
-    ],
-    "correctValue": 500,
-    "explanation": "125×4＝500です。"
-  },
-  {
-    "id": "mul-076",
-    "subject": "算数",
-    "grade": 3,
-    "topic": "かけ算",
-    "prompt": "15 × 6 ＝ ？",
-    "choices": [
-      {
-        "value": 90,
-        "label": "90"
-      },
-      {
-        "value": 96,
-        "label": "96"
-      }
-    ],
-    "correctValue": 90,
-    "explanation": "15×6＝90です。"
-  },
-  {
-    "id": "mul-077",
-    "subject": "算数",
-    "grade": 3,
-    "topic": "かけ算",
-    "prompt": "19 × 5 ＝ ？",
-    "choices": [
-      {
-        "value": 95,
-        "label": "95"
-      },
-      {
-        "value": 76,
-        "label": "76"
-      }
-    ],
-    "correctValue": 95,
-    "explanation": "19×5＝95です。"
-  },
-  {
-    "id": "mul-078",
-    "subject": "算数",
-    "grade": 3,
-    "topic": "かけ算",
-    "prompt": "22 × 4 ＝ ？",
-    "choices": [
-      {
-        "value": 88,
-        "label": "88"
-      },
-      {
-        "value": 92,
-        "label": "92"
-      }
-    ],
-    "correctValue": 88,
-    "explanation": "22×4＝88です。"
-  },
-  {
-    "id": "mul-079",
-    "subject": "算数",
-    "grade": 3,
-    "topic": "かけ算",
-    "prompt": "34 × 3 ＝ ？",
-    "choices": [
-      {
-        "value": 102,
-        "label": "102"
-      },
-      {
-        "value": 68,
-        "label": "68"
-      }
-    ],
-    "correctValue": 102,
-    "explanation": "34×3＝102です。"
-  },
-  {
-    "id": "mul-080",
-    "subject": "算数",
-    "grade": 3,
-    "topic": "かけ算",
-    "prompt": "48 × 2 ＝ ？",
-    "choices": [
-      {
-        "value": 96,
-        "label": "96"
-      },
-      {
-        "value": 98,
-        "label": "98"
-      }
-    ],
-    "correctValue": 96,
-    "explanation": "48×2＝96です。"
-  },
-  {
-    "id": "calc-006",
+    "id": "sub-001",
     "subject": "算数",
     "grade": 1,
     "topic": "ひき算",
-    "prompt": "120 − 45 ＝ ？",
+    "prompt": "785 − 342 ＝ ？",
     "choices": [
       {
-        "value": 75,
-        "label": "75"
+        "value": 443,
+        "label": "443"
       },
       {
-        "value": 85,
-        "label": "85"
+        "value": 433,
+        "label": "433"
       }
     ],
-    "correctValue": 75,
-    "explanation": "120−45＝75です。"
+    "correctValue": 443,
+    "explanation": "785−342＝443です。"
   },
   {
-    "id": "calc-007",
+    "id": "sub-002",
     "subject": "算数",
-    "grade": 2,
-    "topic": "たし算",
-    "prompt": "245 ＋ 320 ＝ ？",
+    "grade": 1,
+    "topic": "ひき算",
+    "prompt": "964 − 521 ＝ ？",
     "choices": [
       {
-        "value": 565,
-        "label": "565"
+        "value": 443,
+        "label": "443"
       },
       {
-        "value": 555,
-        "label": "555"
+        "value": 433,
+        "label": "433"
       }
     ],
-    "correctValue": 565,
-    "explanation": "245＋320＝565です。"
+    "correctValue": 443,
+    "explanation": "964−521＝443です。"
   },
   {
-    "id": "calc-008",
+    "id": "sub-003",
+    "subject": "算数",
+    "grade": 1,
+    "topic": "ひき算",
+    "prompt": "876 − 435 ＝ ？",
+    "choices": [
+      {
+        "value": 441,
+        "label": "441"
+      },
+      {
+        "value": 431,
+        "label": "431"
+      }
+    ],
+    "correctValue": 441,
+    "explanation": "876−435＝441です。"
+  },
+  {
+    "id": "sub-004",
+    "subject": "算数",
+    "grade": 1,
+    "topic": "ひき算",
+    "prompt": "658 − 214 ＝ ？",
+    "choices": [
+      {
+        "value": 444,
+        "label": "444"
+      },
+      {
+        "value": 434,
+        "label": "434"
+      }
+    ],
+    "correctValue": 444,
+    "explanation": "658−214＝444です。"
+  },
+  {
+    "id": "sub-005",
     "subject": "算数",
     "grade": 2,
     "topic": "ひき算",
-    "prompt": "700 − 265 ＝ ？",
+    "prompt": "997 − 664 ＝ ？",
     "choices": [
       {
-        "value": 435,
-        "label": "435"
+        "value": 333,
+        "label": "333"
       },
       {
-        "value": 445,
-        "label": "445"
+        "value": 323,
+        "label": "323"
       }
     ],
-    "correctValue": 435,
-    "explanation": "700−265＝435です。"
+    "correctValue": 333,
+    "explanation": "997−664＝333です。"
   },
   {
-    "id": "calc-009",
-    "subject": "算数",
-    "grade": 2,
-    "topic": "たし算",
-    "prompt": "38 ＋ 46 ＝ ？",
-    "choices": [
-      {
-        "value": 84,
-        "label": "84"
-      },
-      {
-        "value": 74,
-        "label": "74"
-      }
-    ],
-    "correctValue": 84,
-    "explanation": "38＋46＝84です。"
-  },
-  {
-    "id": "calc-010",
+    "id": "sub-006",
     "subject": "算数",
     "grade": 2,
     "topic": "ひき算",
-    "prompt": "92 − 37 ＝ ？",
+    "prompt": "548 − 126 ＝ ？",
     "choices": [
       {
-        "value": 55,
-        "label": "55"
+        "value": 422,
+        "label": "422"
       },
       {
-        "value": 65,
-        "label": "65"
+        "value": 412,
+        "label": "412"
       }
     ],
-    "correctValue": 55,
-    "explanation": "92−37＝55です。"
+    "correctValue": 422,
+    "explanation": "548−126＝422です。"
   },
   {
-    "id": "calc-011",
-    "subject": "算数",
-    "grade": 2,
-    "topic": "たし算",
-    "prompt": "408 ＋ 126 ＝ ？",
-    "choices": [
-      {
-        "value": 534,
-        "label": "534"
-      },
-      {
-        "value": 544,
-        "label": "544"
-      }
-    ],
-    "correctValue": 534,
-    "explanation": "408＋126＝534です。"
-  },
-  {
-    "id": "calc-012",
+    "id": "sub-007",
     "subject": "算数",
     "grade": 2,
     "topic": "ひき算",
-    "prompt": "631 − 204 ＝ ？",
+    "prompt": "769 − 347 ＝ ？",
     "choices": [
       {
-        "value": 427,
-        "label": "427"
+        "value": 422,
+        "label": "422"
       },
       {
-        "value": 417,
-        "label": "417"
+        "value": 412,
+        "label": "412"
       }
     ],
-    "correctValue": 427,
-    "explanation": "631−204＝427です。"
+    "correctValue": 422,
+    "explanation": "769−347＝422です。"
   },
   {
-    "id": "calc-013",
-    "subject": "算数",
-    "grade": 2,
-    "topic": "たし算",
-    "prompt": "175 ＋ 225 ＝ ？",
-    "choices": [
-      {
-        "value": 400,
-        "label": "400"
-      },
-      {
-        "value": 390,
-        "label": "390"
-      }
-    ],
-    "correctValue": 400,
-    "explanation": "175＋225＝400です。"
-  },
-  {
-    "id": "calc-014",
+    "id": "sub-008",
     "subject": "算数",
     "grade": 3,
     "topic": "ひき算",
-    "prompt": "1000 − 375 ＝ ？",
+    "prompt": "885 − 463 ＝ ？",
     "choices": [
       {
-        "value": 625,
-        "label": "625"
+        "value": 422,
+        "label": "422"
       },
       {
-        "value": 635,
-        "label": "635"
+        "value": 412,
+        "label": "412"
       }
     ],
-    "correctValue": 625,
-    "explanation": "1000−375＝625です。"
+    "correctValue": 422,
+    "explanation": "885−463＝422です。"
   },
   {
-    "id": "calc-015",
-    "subject": "算数",
-    "grade": 3,
-    "topic": "たし算",
-    "prompt": "59 ＋ 68 ＝ ？",
-    "choices": [
-      {
-        "value": 127,
-        "label": "127"
-      },
-      {
-        "value": 117,
-        "label": "117"
-      }
-    ],
-    "correctValue": 127,
-    "explanation": "59＋68＝127です。"
-  },
-  {
-    "id": "calc-016",
+    "id": "sub-009",
     "subject": "算数",
     "grade": 3,
     "topic": "ひき算",
-    "prompt": "250 − 86 ＝ ？",
+    "prompt": "674 − 251 ＝ ？",
     "choices": [
       {
-        "value": 164,
-        "label": "164"
+        "value": 423,
+        "label": "423"
       },
       {
-        "value": 154,
-        "label": "154"
+        "value": 413,
+        "label": "413"
       }
     ],
-    "correctValue": 164,
-    "explanation": "250−86＝164です。"
+    "correctValue": 423,
+    "explanation": "674−251＝423です。"
   },
   {
-    "id": "calc-017",
-    "subject": "算数",
-    "grade": 3,
-    "topic": "たし算",
-    "prompt": "324 ＋ 199 ＝ ？",
-    "choices": [
-      {
-        "value": 523,
-        "label": "523"
-      },
-      {
-        "value": 513,
-        "label": "513"
-      }
-    ],
-    "correctValue": 523,
-    "explanation": "324＋199＝523です。"
-  },
-  {
-    "id": "calc-018",
+    "id": "sub-010",
     "subject": "算数",
     "grade": 3,
     "topic": "ひき算",
-    "prompt": "805 − 467 ＝ ？",
+    "prompt": "958 − 736 ＝ ？",
     "choices": [
       {
-        "value": 338,
-        "label": "338"
+        "value": 222,
+        "label": "222"
       },
       {
-        "value": 348,
-        "label": "348"
+        "value": 212,
+        "label": "212"
       }
     ],
-    "correctValue": 338,
-    "explanation": "805−467＝338です。"
+    "correctValue": 222,
+    "explanation": "958−736＝222です。"
   },
   {
-    "id": "calc-019",
+    "id": "div-001",
     "subject": "算数",
-    "grade": 3,
-    "topic": "たし算",
-    "prompt": "46 ＋ 57 ＝ ？",
+    "grade": 1,
+    "topic": "わり算",
+    "prompt": "12 ÷ 3 ＝ ？",
     "choices": [
       {
-        "value": 103,
-        "label": "103"
+        "value": 4,
+        "label": "4"
       },
       {
-        "value": 93,
-        "label": "93"
+        "value": 5,
+        "label": "5"
       }
     ],
-    "correctValue": 103,
-    "explanation": "46＋57＝103です。"
+    "correctValue": 4,
+    "explanation": "3×4＝12なので、12÷3＝4です。"
   },
   {
-    "id": "calc-020",
+    "id": "div-002",
     "subject": "算数",
-    "grade": 3,
-    "topic": "ひき算",
-    "prompt": "420 − 185 ＝ ？",
+    "grade": 1,
+    "topic": "わり算",
+    "prompt": "18 ÷ 2 ＝ ？",
     "choices": [
       {
-        "value": 235,
-        "label": "235"
+        "value": 9,
+        "label": "9"
       },
       {
-        "value": 245,
-        "label": "245"
+        "value": 11,
+        "label": "11"
       }
     ],
-    "correctValue": 235,
-    "explanation": "420−185＝235です。"
+    "correctValue": 9,
+    "explanation": "2×9＝18なので、18÷2＝9です。"
   },
   {
-    "id": "div-1",
+    "id": "div-003",
     "subject": "算数",
-    "grade": 2,
+    "grade": 1,
+    "topic": "わり算",
+    "prompt": "24 ÷ 4 ＝ ？",
+    "choices": [
+      {
+        "value": 6,
+        "label": "6"
+      },
+      {
+        "value": 7,
+        "label": "7"
+      }
+    ],
+    "correctValue": 6,
+    "explanation": "4×6＝24なので、24÷4＝6です。"
+  },
+  {
+    "id": "div-004",
+    "subject": "算数",
+    "grade": 1,
+    "topic": "わり算",
+    "prompt": "35 ÷ 5 ＝ ？",
+    "choices": [
+      {
+        "value": 7,
+        "label": "7"
+      },
+      {
+        "value": 9,
+        "label": "9"
+      }
+    ],
+    "correctValue": 7,
+    "explanation": "5×7＝35なので、35÷5＝7です。"
+  },
+  {
+    "id": "div-005",
+    "subject": "算数",
+    "grade": 1,
     "topic": "わり算",
     "prompt": "42 ÷ 6 ＝ ？",
     "choices": [
@@ -1828,9 +1618,28 @@ window.GAME_DATA = {
     "explanation": "6×7＝42なので、42÷6＝7です。"
   },
   {
-    "id": "div-2",
+    "id": "div-006",
     "subject": "算数",
-    "grade": 2,
+    "grade": 1,
+    "topic": "わり算",
+    "prompt": "56 ÷ 7 ＝ ？",
+    "choices": [
+      {
+        "value": 8,
+        "label": "8"
+      },
+      {
+        "value": 10,
+        "label": "10"
+      }
+    ],
+    "correctValue": 8,
+    "explanation": "7×8＝56なので、56÷7＝8です。"
+  },
+  {
+    "id": "div-007",
+    "subject": "算数",
+    "grade": 1,
     "topic": "わり算",
     "prompt": "72 ÷ 8 ＝ ？",
     "choices": [
@@ -1839,17 +1648,131 @@ window.GAME_DATA = {
         "label": "9"
       },
       {
-        "value": 8,
-        "label": "8"
+        "value": 10,
+        "label": "10"
       }
     ],
     "correctValue": 9,
     "explanation": "8×9＝72なので、72÷8＝9です。"
   },
   {
-    "id": "div-3",
+    "id": "div-008",
     "subject": "算数",
-    "grade": 3,
+    "grade": 2,
+    "topic": "わり算",
+    "prompt": "81 ÷ 9 ＝ ？",
+    "choices": [
+      {
+        "value": 9,
+        "label": "9"
+      },
+      {
+        "value": 11,
+        "label": "11"
+      }
+    ],
+    "correctValue": 9,
+    "explanation": "9×9＝81なので、81÷9＝9です。"
+  },
+  {
+    "id": "div-009",
+    "subject": "算数",
+    "grade": 2,
+    "topic": "わり算",
+    "prompt": "16 ÷ 4 ＝ ？",
+    "choices": [
+      {
+        "value": 4,
+        "label": "4"
+      },
+      {
+        "value": 5,
+        "label": "5"
+      }
+    ],
+    "correctValue": 4,
+    "explanation": "4×4＝16なので、16÷4＝4です。"
+  },
+  {
+    "id": "div-010",
+    "subject": "算数",
+    "grade": 2,
+    "topic": "わり算",
+    "prompt": "27 ÷ 3 ＝ ？",
+    "choices": [
+      {
+        "value": 9,
+        "label": "9"
+      },
+      {
+        "value": 11,
+        "label": "11"
+      }
+    ],
+    "correctValue": 9,
+    "explanation": "3×9＝27なので、27÷3＝9です。"
+  },
+  {
+    "id": "div-011",
+    "subject": "算数",
+    "grade": 2,
+    "topic": "わり算",
+    "prompt": "32 ÷ 8 ＝ ？",
+    "choices": [
+      {
+        "value": 4,
+        "label": "4"
+      },
+      {
+        "value": 5,
+        "label": "5"
+      }
+    ],
+    "correctValue": 4,
+    "explanation": "8×4＝32なので、32÷8＝4です。"
+  },
+  {
+    "id": "div-012",
+    "subject": "算数",
+    "grade": 2,
+    "topic": "わり算",
+    "prompt": "45 ÷ 5 ＝ ？",
+    "choices": [
+      {
+        "value": 9,
+        "label": "9"
+      },
+      {
+        "value": 11,
+        "label": "11"
+      }
+    ],
+    "correctValue": 9,
+    "explanation": "5×9＝45なので、45÷5＝9です。"
+  },
+  {
+    "id": "div-013",
+    "subject": "算数",
+    "grade": 2,
+    "topic": "わり算",
+    "prompt": "54 ÷ 6 ＝ ？",
+    "choices": [
+      {
+        "value": 9,
+        "label": "9"
+      },
+      {
+        "value": 10,
+        "label": "10"
+      }
+    ],
+    "correctValue": 9,
+    "explanation": "6×9＝54なので、54÷6＝9です。"
+  },
+  {
+    "id": "div-014",
+    "subject": "算数",
+    "grade": 2,
     "topic": "わり算",
     "prompt": "63 ÷ 7 ＝ ？",
     "choices": [
@@ -1858,50 +1781,126 @@ window.GAME_DATA = {
         "label": "9"
       },
       {
-        "value": 8,
-        "label": "8"
+        "value": 11,
+        "label": "11"
       }
     ],
     "correctValue": 9,
     "explanation": "7×9＝63なので、63÷7＝9です。"
   },
   {
-    "id": "div-4",
+    "id": "div-015",
     "subject": "算数",
     "grade": 3,
     "topic": "わり算",
-    "prompt": "96 ÷ 12 ＝ ？",
+    "prompt": "64 ÷ 8 ＝ ？",
     "choices": [
       {
         "value": 8,
         "label": "8"
       },
       {
-        "value": 7,
-        "label": "7"
+        "value": 9,
+        "label": "9"
       }
     ],
     "correctValue": 8,
-    "explanation": "12×8＝96なので、96÷12＝8です。"
+    "explanation": "8×8＝64なので、64÷8＝8です。"
   },
   {
-    "id": "div-5",
+    "id": "div-016",
     "subject": "算数",
     "grade": 3,
     "topic": "わり算",
-    "prompt": "144 ÷ 12 ＝ ？",
+    "prompt": "36 ÷ 9 ＝ ？",
     "choices": [
       {
-        "value": 12,
-        "label": "12"
+        "value": 4,
+        "label": "4"
       },
       {
-        "value": 11,
-        "label": "11"
+        "value": 6,
+        "label": "6"
       }
     ],
-    "correctValue": 12,
-    "explanation": "12×12＝144なので、144÷12＝12です。"
+    "correctValue": 4,
+    "explanation": "9×4＝36なので、36÷9＝4です。"
+  },
+  {
+    "id": "div-017",
+    "subject": "算数",
+    "grade": 3,
+    "topic": "わり算",
+    "prompt": "48 ÷ 6 ＝ ？",
+    "choices": [
+      {
+        "value": 8,
+        "label": "8"
+      },
+      {
+        "value": 9,
+        "label": "9"
+      }
+    ],
+    "correctValue": 8,
+    "explanation": "6×8＝48なので、48÷6＝8です。"
+  },
+  {
+    "id": "div-018",
+    "subject": "算数",
+    "grade": 3,
+    "topic": "わり算",
+    "prompt": "21 ÷ 7 ＝ ？",
+    "choices": [
+      {
+        "value": 3,
+        "label": "3"
+      },
+      {
+        "value": 5,
+        "label": "5"
+      }
+    ],
+    "correctValue": 3,
+    "explanation": "7×3＝21なので、21÷7＝3です。"
+  },
+  {
+    "id": "div-019",
+    "subject": "算数",
+    "grade": 3,
+    "topic": "わり算",
+    "prompt": "28 ÷ 4 ＝ ？",
+    "choices": [
+      {
+        "value": 7,
+        "label": "7"
+      },
+      {
+        "value": 8,
+        "label": "8"
+      }
+    ],
+    "correctValue": 7,
+    "explanation": "4×7＝28なので、28÷4＝7です。"
+  },
+  {
+    "id": "div-020",
+    "subject": "算数",
+    "grade": 3,
+    "topic": "わり算",
+    "prompt": "40 ÷ 5 ＝ ？",
+    "choices": [
+      {
+        "value": 8,
+        "label": "8"
+      },
+      {
+        "value": 10,
+        "label": "10"
+      }
+    ],
+    "correctValue": 8,
+    "explanation": "5×8＝40なので、40÷5＝8です。"
   },
   {
     "id": "kanji-001",
