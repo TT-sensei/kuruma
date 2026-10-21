@@ -36,7 +36,8 @@
   const storageKey = "kuruma-study-career-v1";
   function loadCareer() {
     try {
-      const saved = JSON.parse(localStorage.getItem(storageKey) || "{}");
+      const parsed = JSON.parse(localStorage.getItem(storageKey) || "{}");
+      const saved = parsed && typeof parsed === "object" ? parsed : {};
       return Object.assign({}, defaultCareer, saved, {
         badges: Array.isArray(saved.badges) ? saved.badges : [],
         selectedLivery: liveryNames[saved.selectedLivery] ? saved.selectedLivery : "stock"
