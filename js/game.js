@@ -327,8 +327,37 @@
     el("careerBadges").textContent = labels.length ? "あつめたバッジ：" + labels.join(" ／ ") : "レースをすると、バッジがふえていくよ。";
     renderCustomOptions();
   }
+  function updateQuitButton() {
+    const quitButton = el("quitBtn");
+    if (quitButton) quitButton.hidden = !raceActive;
+  }
+  function quitRace() {
+    if (!raceActive) return;
+    const confirmed = window.confirm("レースをとちゅうでやめる？\nこんかいのポイントはもらえないよ。");
+    if (!confirmed) return;
+    raceActive = false;
+    updateQuitButton();
+    clearTimeout(timer);
+    clearTimeout(nitroTimer);
+    clearTimeout(eventTimer);
+    locked = false;
+    currentQuestion = null;
+    raceQuestions = [];
+    root.classList.remove("nitro-active", "phase-start", "phase-battle", "phase-final");
+    el("eventBanner").classList.remove("event-pop");
+    car.classList.remove("nitro-flash", "left-turn", "right-turn");
+    hideQuestion();
+    result.classList.remove("show");
+    start.classList.remove("hide");
+    courseReady = false;
+    resetNitro();
+    scoreEl.textContent = "0";
+    progressEl.textContent = "0 / " + data.game.questionsPerRace;
+    el("streak").textContent = "0";
+    el("startBtn").focus({ preventScroll: true });
+  }
   function updateNitro() {
-    el("nitroFill").style.width = nitro + "%";
+     el("nitroFill").style.width = nitro + "%";
     el("nitroText").textContent = nitro + "%";
     el("nitroBtn").disabled = nitro < 100 || !raceActive;
     el("nitroBtn").classList.toggle("ready", nitro >= 100 && raceActive);
@@ -426,6 +455,7 @@
     playerDistance = 0;
     rivalDistance = 0;
     raceActive = false;
+    updateQuitButton();
     resetNitro();
     resetSpeed(currentEvent.startSpeed || 60);
     scoreEl.textContent = "0";
@@ -445,6 +475,7 @@
       return;
     }
     raceActive = true;
+    updateQuitButton();
     updateNitro();
     showQuestion();
   }
@@ -574,6 +605,7 @@
   function finishRace() {
     clearTimeout(timer);
     raceActive = false;
+    updateQuitButton();
     locked = false;
     root.classList.remove("nitro-active");
     car.classList.remove("nitro-flash", "left-turn", "right-turn");
@@ -654,6 +686,7 @@
     el("startBtn").focus({ preventScroll: true });
   });
   el("nitroBtn").addEventListener("click", activateNitro);
+  el("quitBtn").addEventListener("click", quitRace);
   Object.keys(buttons).forEach(side => buttons[side].addEventListener("click", () => choose(side)));
   document.addEventListener("keydown", event => {
     if (event.key === "Shift" && raceActive) {
@@ -671,4 +704,5 @@
   renderCareer();
   chooseCourse();
   updateNitro();
+  updateQuitButton();
 })();
