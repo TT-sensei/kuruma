@@ -11,10 +11,10 @@
   const buttons = { left: el("left"), right: el("right") };
   const resultTitle = el("resultTitle"), resultText = el("resultText");
   const vehicles = {
-    race: { name: "レーシングカー", number: "GT 01", icon: "🏎️" },
-    police: { name: "パトカー", number: "POLICE", icon: "🚓" },
-    fire: { name: "しょうぼうしゃ", number: "FIRE", icon: "🚒" },
-    truck: { name: "トラック", number: "TRUCK", icon: "🚚" }
+    red: { name: "GT レッド", number: "GT 01", detail: "スタンダード" },
+    blue: { name: "GT ブルー", number: "GT 03", detail: "ダブルウイング" },
+    yellow: { name: "GT イエロー", number: "GT 17", detail: "ハイウイング" },
+    black: { name: "GT ブラック", number: "GT 24", detail: "ロングウイング" }
   };
   const courses = [
     { id: "grand-prix", name: "グランプリ" },
@@ -23,7 +23,7 @@
     { id: "coast", name: "うみべのコース" },
     { id: "night", name: "ナイトコース" }
   ];
-  let selectedVehicle = "race";
+  let selectedVehicle = "red";
   let subjectFilter = "both";
   let gradeFilter = "all";
   let currentCourse = null;
@@ -55,7 +55,7 @@
       option.classList.toggle("selected", key === id);
       option.setAttribute("aria-pressed", String(key === id));
     });
-    car.classList.remove("car--race", "car--police", "car--fire", "car--truck", "left-turn", "right-turn");
+    car.classList.remove("car--red", "car--blue", "car--yellow", "car--black", "left-turn", "right-turn");
     car.classList.add("car--" + id);
     vehicleNumberEl.textContent = vehicle.number;
     vehiclePreviewEl.textContent = vehicle.name + "でスタート";
@@ -181,7 +181,7 @@
     resultTitle.style.color = score === total ? "#3be89c" : "#ffd12a";
     resultText.textContent = total + "問中 " + score + "問正解！" +
       (score === total ? " 全問正解、すばらしい！" : " まちがえた問題も、解説を見ながら少しずつ覚えよう。");
-    el("nextRaceNote").textContent = vehicles[selectedVehicle].name + "のまま、次は別のコースに挑戦しよう！";
+    el("nextRaceNote").textContent = vehicles[selectedVehicle].name + "（" + vehicles[selectedVehicle].detail + "）で、次は別のコースに挑戦しよう！";
     result.classList.add("show");
     el("retry").focus({ preventScroll: true });
   }
