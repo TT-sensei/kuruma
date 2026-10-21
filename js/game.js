@@ -76,7 +76,8 @@
     const chosen = Number(buttons[side].dataset.value);
     const correct = chosen === q.correctValue;
     car.classList.add(side + "-turn");
-    questionPanel.classList.remove("show");
+    // 解説を読めるよう、問題パネルは残して選択肢だけを隠します。
+    questionPanel.classList.add("show");
     if (correct) {
       score++;
       scoreEl.textContent = String(score);
