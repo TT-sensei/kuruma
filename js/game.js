@@ -34,6 +34,41 @@
   ];
   const defaultCareer = { points: 0, races: 0, bestScore: 0, bestSpeed: 0, bestStreak: 0, totalCorrect: 0, wins: 0, totalNitro: 0, badges: [], selectedLivery: "stock" };
   const storageKey = "kuruma-study-career-v1";
+  const dailyStorageKey = "kuruma-study-daily-v1";
+  const dailySpecialLimit = 3;
+  const normalEvent = { id: "standard", name: "通常レース", description: "スペシャルイベントの対象回数外です。通常レースは何度でも楽しめます。", startSpeed: 60, nitroBonus: 0, streakBonus: 0, pointBonus: 0, finishBonus: 0, isSpecial: false };
+  function localDayKey() {
+    const d = new Date();
+    return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0");
+  }
+  function readDailyState() {
+    const today = localDayKey();
+    try {
+      const saved = JSON.parse(localStorage.getItem(dailyStorageKey) || "null");
+      if (!saved || saved.date !== today) return { date: today, used: 0 };
+      return { date: today, used: Math.max(0, Math.min(dailySpecialLimit, Number(saved.used) || 0)) };
+    } catch (_) { return { date: today, used: 0 }; }
+  }
+  let dailyState = readDailyState();
+  function saveDailyState() {
+    try { localStorage.setItem(dailyStorageKey, JSON.stringify(dailyState)); } catch (_) {}
+  }
+  function refreshDailyState() {
+    if (dailyState.date !== localDayKey()) dailyState = { date: localDayKey(), used: 0 };
+    renderDailyState();
+  }
+  function remainingSpecialRaces() { return Math.max(0, dailySpecialLimit - dailyState.used); }
+  function renderDailyState() {
+    const remaining = remainingSpecialRaces();
+    const count = el("dailySpecialCount");
+    if (count) count.textContent = String(remaining);
+    const message = el("dailyLimitMessage");
+    if (message) message.textContent = remaining > 0
+      ? "スペシャルイベントとポイントボーナスは1日3回まで。通常レースは何度でもプレイできます。"
+      : "今日のスペシャルレースは終了。通常レースと学習は引き続き何度でもプレイできます。";
+    const resultNote = el("dailySpecialResult");
+    if (resultNote) resultNote.textContent = "今日のスペシャルレース残り：" + remaining + " / " + dailySpecialLimit + "回";
+  }
   function loadCareer() {
     try {
       const parsed = JSON.parse(localStorage.getItem(storageKey) || "{}");
@@ -186,8 +221,9 @@
   function hideQuestion() {
     questionPanel.classList.remove("show");
     feedbackEl.textContent = "";
+    el("thinkMeter").classList.remove("active");
     Object.values(buttons).forEach(button => {
-      button.classList.remove("show");
+      button.classList.remove("show", "thinking");
       button.disabled = true;
     });
   }
@@ -203,9 +239,17 @@
     resetScene();
     clearTimeout(nitroTimer);
     root.classList.remove("nitro-active");
+    refreshDailyState();
     if (!courseReady) chooseCourse();
     courseReady = false;
-    currentEvent = events[Math.floor(Math.random() * events.length)];
+    if (remainingSpecialRaces() > 0) {
+      dailyState.used++;
+      saveDailyState();
+      currentEvent = Object.assign({}, events[Math.floor(Math.random() * events.length)], { isSpecial: true });
+    } else {
+      currentEvent = normalEvent;
+    }
+    renderDailyState();
     score = 0;
     index = 0;
     streak = 0;
@@ -267,11 +311,26 @@
     updatePhase();
     timer = setTimeout(() => {
       questionPanel.classList.add("show");
-      Object.values(buttons).forEach(button => button.classList.add("show"));
+      Object.values(buttons).forEach(button => {
+        button.classList.add("show");
+        button.disabled = true;
+        button.classList.add("thinking");
+      });
+      el("questionHint").textContent = "問題を読んで考えよう。少し待ってから答えを選べます。";
+      el("thinkMeter").classList.add("active");
+      timer = setTimeout(() => {
+        if (!raceActive || !currentQuestion) return;
+        Object.values(buttons).forEach(button => {
+          button.disabled = false;
+          button.classList.remove("thinking");
+        });
+        el("questionHint").textContent = q.subject + "・" + ({1:"基礎",2:"標準",3:"チャレンジ"}[q.grade] || "標準") + "レベル";
+        el("thinkMeter").classList.remove("active");
+      }, 1400);
     }, data.game.questionDelayMs);
   }
   function choose(side) {
-    if (locked || !raceActive || !currentQuestion || !buttons[side].classList.contains("show")) return;
+    if (locked || !raceActive || !currentQuestion || !buttons[side].classList.contains("show") || buttons[side].disabled) return;
     locked = true;
     Object.values(buttons).forEach(button => { button.disabled = true; button.classList.remove("show"); });
     const chosen = buttons[side].dataset.value;
@@ -356,8 +415,8 @@
     el("phaseTag").textContent = "FINISH";
     const total = raceQuestions.length;
     const won = playerDistance >= rivalDistance;
-    const eventPoints = score * (currentEvent.pointBonus || 0) + (currentEvent.finishBonus || 0);
-    const reward = 5 + score * 2 + eventPoints + (won ? 3 : 0);
+    const eventPoints = currentEvent.isSpecial ? score * (currentEvent.pointBonus || 0) + (currentEvent.finishBonus || 0) : 0;
+    const reward = currentEvent.isSpecial ? 5 + score * 2 + eventPoints + (won ? 3 : 0) : 0;
     const wasBest = score > career.bestScore;
     career.races++;
     career.totalCorrect += score;
@@ -373,8 +432,10 @@
     resultTitle.textContent = won ? "1位でフィニッシュ！ 🏆" : "ゴール！ 次は巻き返そう 🏁";
     resultTitle.style.color = won ? "#3be89c" : "#ffd12a";
     resultText.textContent = total + "問中 " + score + "問正解。 " +
-      (score === total ? "パーフェクト！ " : "答えを振り返って次のレースに生かそう。 ") +
-      "今回の獲得ポイント：" + reward + " pt" + (currentEvent.pointBonus ? "（正解ボーナス +" + eventPoints + " ptを含む）" : "");
+      (score === total ? "パーフェクト！ " : "解説を確認して次のレースに生かそう。 ") +
+      (currentEvent.isSpecial
+        ? "今回の獲得ポイント：" + reward + " pt" + (eventPoints ? "（イベントボーナス +" + eventPoints + " ptを含む）" : "")
+        : "今日はスペシャルレースの上限に達しています。通常レースと学習は引き続き楽しめます。ポイントは明日また獲得できます。");
     el("resultRecords").textContent =
       "イベント：" + currentEvent.name + " ／ 最高速度 " + raceBestSpeed + " km/h ／ 連続正解 " + raceBestStreak +
       "問 ／ ニトロ " + nitroUses + "回" + (wasBest ? " ／ 🆕 自己ベスト更新！" : "");
@@ -383,6 +444,7 @@
       : (career.badges.length ? "獲得した称号：" + career.badges.map(id => badgeInfo[id].name).join("・") : "レースを続けて称号を集めよう。");
     el("nextRaceNote").textContent = vehicles[selectedVehicle].name + "・" + liveryNames[selectedLivery] +
       "仕様。次は別のコースとイベントが待っている！";
+    renderDailyState();
     result.classList.add("show");
     updateNitro();
     el("retry").focus({ preventScroll: true });
@@ -411,6 +473,15 @@
   }
   el("startBtn").addEventListener("click", begin);
   el("retry").addEventListener("click", begin);
+  el("garageBtn").addEventListener("click", () => {
+    result.classList.remove("show");
+    start.classList.remove("hide");
+    resetScene();
+    courseReady = false;
+    refreshDailyState();
+    renderCareer();
+    el("startBtn").focus({ preventScroll: true });
+  });
   el("nitroBtn").addEventListener("click", activateNitro);
   Object.keys(buttons).forEach(side => buttons[side].addEventListener("click", () => choose(side)));
   document.addEventListener("keydown", event => {
@@ -427,6 +498,7 @@
   setVehicle(selectedVehicle);
   setLivery(selectedLivery);
   renderCareer();
+  refreshDailyState();
   chooseCourse();
   updateNitro();
 })();
