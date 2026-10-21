@@ -35,19 +35,31 @@
 
     <div id="start" class="overlay">
       <div class="card start-card">
-        <p class="eyebrow">CHOOSE YOUR VEHICLE</p>
+        <p class="eyebrow">CHOOSE YOUR GT MACHINE</p>
         <h1>🏎️ くるまスタディ・サーキット</h1>
         <p class="intro">すきなくるまをえらんで、8もんのレースにしゅっぱつ！<br>こたえは、ひだりとみぎの2たくです。</p>
 
         <section class="setup-section" aria-labelledby="vehicleHeading">
-          <h2 id="vehicleHeading">① のるくるま</h2>
-          <div class="vehicle-options" role="group" aria-label="車を選ぶ">
-            <button type="button" class="vehicle-option selected" data-vehicle="race" aria-pressed="true"><span class="vehicle-icon">🏎️</span><span class="vehicle-name">レーシングカー</span></button>
-            <button type="button" class="vehicle-option" data-vehicle="police" aria-pressed="false"><span class="vehicle-icon">🚓</span><span class="vehicle-name">パトカー</span></button>
-            <button type="button" class="vehicle-option" data-vehicle="fire" aria-pressed="false"><span class="vehicle-icon">🚒</span><span class="vehicle-name">しょうぼうしゃ</span></button>
-            <button type="button" class="vehicle-option" data-vehicle="truck" aria-pressed="false"><span class="vehicle-icon">🚚</span><span class="vehicle-name">トラック</span></button>
+          <h2 id="vehicleHeading">① レーシングカーをえらぼう</h2>
+          <div class="vehicle-options" role="group" aria-label="レーシングカーを選ぶ">
+            <button type="button" class="vehicle-option selected" data-vehicle="red" aria-pressed="true">
+              <span class="vehicle-illustration paint-red" aria-hidden="true"><span class="mini-wing"></span><span class="mini-roof"></span><span class="mini-body"></span><span class="mini-lamp left"></span><span class="mini-lamp right"></span><span class="mini-tyre left"></span><span class="mini-tyre right"></span></span>
+              <span class="vehicle-name">GT レッド</span><span class="vehicle-detail">スタンダード</span>
+            </button>
+            <button type="button" class="vehicle-option" data-vehicle="blue" aria-pressed="false">
+              <span class="vehicle-illustration paint-blue" aria-hidden="true"><span class="mini-wing"></span><span class="mini-roof"></span><span class="mini-body"></span><span class="mini-lamp left"></span><span class="mini-lamp right"></span><span class="mini-tyre left"></span><span class="mini-tyre right"></span></span>
+              <span class="vehicle-name">GT ブルー</span><span class="vehicle-detail">ダブルウイング</span>
+            </button>
+            <button type="button" class="vehicle-option" data-vehicle="yellow" aria-pressed="false">
+              <span class="vehicle-illustration paint-yellow" aria-hidden="true"><span class="mini-wing"></span><span class="mini-roof"></span><span class="mini-body"></span><span class="mini-lamp left"></span><span class="mini-lamp right"></span><span class="mini-tyre left"></span><span class="mini-tyre right"></span></span>
+              <span class="vehicle-name">GT イエロー</span><span class="vehicle-detail">ハイウイング</span>
+            </button>
+            <button type="button" class="vehicle-option" data-vehicle="black" aria-pressed="false">
+              <span class="vehicle-illustration paint-black" aria-hidden="true"><span class="mini-wing"></span><span class="mini-roof"></span><span class="mini-body"></span><span class="mini-lamp left"></span><span class="mini-lamp right"></span><span class="mini-tyre left"></span><span class="mini-tyre right"></span></span>
+              <span class="vehicle-name">GT ブラック</span><span class="vehicle-detail">ロングウイング</span>
+            </button>
           </div>
-          <p id="vehiclePreview" class="selection-note">レーシングカーでスタート</p>
+          <p id="vehiclePreview" class="selection-note">GT レッドでスタート</p>
         </section>
 
         <section class="setup-section" aria-labelledby="subjectHeading">
