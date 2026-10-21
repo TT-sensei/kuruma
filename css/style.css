@@ -230,3 +230,25 @@ button{font:inherit}
   .question{top:145px;min-height:98px;padding:10px 14px}
   .choice{bottom:22%;min-height:60px}
 }
+
+
+/* 学習に集中する時間と1日限定のスペシャルレース */
+.daily-ticket-note{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:5px 12px;margin:10px 0 4px;padding:10px 12px;border:1px solid #8d7939;border-radius:12px;background:#292817;color:#fff1b2;font-size:13px}
+.daily-ticket-note strong{font-size:14px;white-space:nowrap}
+.daily-ticket-note span{color:#e4e0c8;font-size:12px}
+.think-meter{height:5px;width:min(70%,300px);margin:3px auto 1px;border-radius:8px;background:#263845;overflow:hidden;opacity:0;transition:opacity .15s}
+.think-meter.active{opacity:1}
+.think-meter span{display:block;width:0;height:100%;border-radius:8px;background:linear-gradient(90deg,#30bfff,#ffe16a)}
+.think-meter.active span{animation:think-fill 1.4s linear forwards}
+@keyframes think-fill{to{width:100%}}
+.choice.thinking{filter:saturate(.45);opacity:.58!important;cursor:wait;box-shadow:0 5px 0 #73808a,0 10px 20px #0005}
+.choice:disabled{cursor:wait}
+.daily-special-result{margin:8px 0;color:#f7df7a;font-size:13px;font-weight:850}
+.secondarybtn{width:100%;margin-top:12px;padding:11px 16px;border:1px solid #7e9aaa;border-radius:13px;background:#183242;color:#effaff;font-size:15px;font-weight:850;cursor:pointer}
+.secondarybtn:active{transform:translateY(2px)}
+.secondarybtn:focus-visible{outline:4px solid #39a9ff;outline-offset:3px}
+@media(max-width:580px){
+  .daily-ticket-note{padding:8px;font-size:11px}
+  .daily-ticket-note strong{font-size:12px}
+  .daily-ticket-note span{font-size:11px}
+}
