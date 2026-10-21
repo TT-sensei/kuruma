@@ -18,7 +18,22 @@
       <div class="pill">コース <span id="courseName">グランプリ</span></div>
       <div class="pill">問題 <span id="progress">0 / 8</span></div>
       <div class="pill">得点 <span id="score">0</span></div>
+      <div class="pill">連続 <span id="streak">0</span></div>
       <div id="speedPanel" class="pill speed-panel" aria-live="polite" aria-label="現在の時速 60 キロメートル">🚦 時速 <strong id="speed">60</strong><span> km/h</span></div>
+    </div>
+
+    <div class="race-utility" aria-label="レース情報">
+      <div class="duel-panel">
+        <div class="duel-labels"><span>YOU</span><span>RIVAL</span></div>
+        <div class="duel-track" aria-label="ライバルとの位置"><span id="playerMarker" class="duel-marker you"></span><span id="rivalMarker" class="duel-marker rival"></span></div>
+        <strong id="positionText">並走中</strong>
+      </div>
+      <div id="eventBanner" class="event-banner" aria-live="polite"><strong id="eventName">RACE EVENT</strong><span id="phaseTag">スタート</span></div>
+      <div class="nitro-panel">
+        <div class="nitro-heading"><span>⚡ NITRO</span><strong id="nitroText">0%</strong></div>
+        <div class="nitro-track"><span id="nitroFill"></span></div>
+        <button id="nitroBtn" type="button" disabled>⚡ ニトロ発動</button>
+      </div>
     </div>
 
     <section id="question" class="question" aria-live="polite">
@@ -62,6 +77,25 @@
           <p id="vehiclePreview" class="selection-note">GT レッドでスタート</p>
         </section>
 
+        <section class="setup-section garage-section" aria-labelledby="garageHeading">
+          <h2 id="garageHeading">④ ガレージ：マシンをカスタム</h2>
+          <p class="garage-help">レースでポイントを集めると、新しいカラーリングが使えるようになります。</p>
+          <div class="livery-options" role="group" aria-label="カラーリングを選ぶ">
+            <button type="button" class="livery-option selected" data-livery="stock" data-unlock="0" aria-pressed="true"><span class="livery-swatch stock"></span><strong>ファクトリー</strong><small>最初から</small></button>
+            <button type="button" class="livery-option" data-livery="neon" data-unlock="25" aria-pressed="false"><span class="livery-swatch neon"></span><strong>ネオン</strong><small>25 ptで解放</small></button>
+            <button type="button" class="livery-option" data-livery="stripe" data-unlock="60" aria-pressed="false"><span class="livery-swatch stripe"></span><strong>レーシング</strong><small>60 ptで解放</small></button>
+            <button type="button" class="livery-option" data-livery="carbon" data-unlock="100" aria-pressed="false"><span class="livery-swatch carbon"></span><strong>カーボン</strong><small>100 ptで解放</small></button>
+          </div>
+          <p id="liveryPreview" class="selection-note">ファクトリー仕様を選択中</p>
+          <div class="career-summary" aria-label="これまでの記録">
+            <span>🏁 完走 <strong id="careerRaces">0</strong></span>
+            <span>🏆 ベスト <strong id="careerBest">0 / 8</strong></span>
+            <span>⚡ 最速 <strong id="careerSpeed">0 km/h</strong></span>
+            <span>🪙 ポイント <strong id="careerPoints">0</strong></span>
+          </div>
+          <div id="careerBadges" class="career-badges" aria-live="polite"></div>
+        </section>
+
         <section class="setup-section" aria-labelledby="subjectHeading">
           <h2 id="subjectHeading">② 教科</h2>
           <div class="pill-options" role="group" aria-label="学習する教科">
@@ -81,7 +115,7 @@
           </div>
         </section>
 
-        <div class="course-preview" aria-live="polite">次のコース：<strong id="coursePreview">グランプリ</strong><span>5種類のコースから、レースごとにランダムで選ばれます。</span></div>
+        <div class="course-preview" aria-live="polite">次のコース：<strong id="coursePreview">グランプリ</strong><span>5種類のコースから、レースごとにランダムで選ばれます。毎回変わるレースイベントも発生！</span></div>
         <button id="startBtn" type="button" class="mainbtn">レース開始</button>
       </div>
     </div>
@@ -91,6 +125,8 @@
         <p class="eyebrow">FINISH!</p>
         <h2 id="resultTitle"></h2>
         <p id="resultText"></p>
+        <div id="resultRecords" class="result-records"></div>
+        <p id="badgeNotice" class="badge-notice" aria-live="polite"></p>
         <p id="nextRaceNote" class="selection-note">車はそのまま、次のレースへ！</p>
         <button id="retry" type="button" class="mainbtn">もう一度挑戦</button>
       </div>
