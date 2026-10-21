@@ -78,7 +78,7 @@
   const events = [
     { id: "tailwind", name: "おいかぜスタート", description: "スタートのはやさが80 km/hになるよ！", startSpeed: 80, nitroBonus: 0, pointBonus: 0, finishBonus: 0 },
     { id: "nitro-day", name: "ニトロデー", description: "せいかいすると、ニトロがいつもよりたまるよ！", startSpeed: 60, nitroBonus: 12, pointBonus: 0, finishBonus: 0 },
-    { id: "bonus-points", name: "ポイントボーナス", description: "1もんせいかいするごとに、ポイントが1ptふえるよ！", startSpeed: 60, nitroBonus: 0, pointBonus: 1, finishBonus: 0 },
+    { id: "bonus-points", name: "ポイントボーナス", description: "せいかいポイントに、1もんごとに1ptプラス！", startSpeed: 60, nitroBonus: 0, pointBonus: 1, finishBonus: 0 },
     { id: "crew-support", name: "クルーおうえんデー", description: "5もんいじょうせいかいすると、6ptプラス！", startSpeed: 60, nitroBonus: 0, pointBonus: 0, finishBonus: 6 },
     { id: "streak-festival", name: "れんぞくせいかいフェス", description: "れんぞくでせいかいすると、ニトロがもっとたまるよ！", startSpeed: 60, nitroBonus: 0, streakBonus: 10, pointBonus: 0, finishBonus: 0 }
   ];
@@ -615,10 +615,8 @@
     el("phaseTag").textContent = "ゴール";
     const total = raceQuestions.length;
     const won = playerDistance >= rivalDistance;
-    const rewardThreshold = Math.ceil(total * 0.625);
-    const earnsReward = score >= rewardThreshold;
-    const eventPoints = earnsReward ? score * (currentEvent.pointBonus || 0) + (currentEvent.finishBonus || 0) : 0;
-    const reward = earnsReward ? 5 + score * 2 + eventPoints + (won ? 3 : 0) : 0;
+    const eventPoints = score * (currentEvent.pointBonus || 0) + (score >= 5 ? (currentEvent.finishBonus || 0) : 0);
+    const reward = score * 5 + eventPoints + (won ? 3 : 0);
     const wasBest = score > career.bestScore;
     career.races++;
     career.totalCorrect += score;
@@ -635,9 +633,7 @@
     resultTitle.style.color = won ? "#3be89c" : "#ffd12a";
     resultText.textContent = total + "もん中 " + score + "もんせいかい！ " +
       (score === total ? "パーフェクト！ " : "かいせつをみて、つぎのレースにいかそう。 ") +
-      (earnsReward
-        ? "もらったポイント：" + reward + " pt" + (eventPoints ? "（イベントで +" + eventPoints + " pt）" : "")
-        : "ポイントをもらうには " + rewardThreshold + "もんいじょうのせいかいがひつようだよ。こんかいはポイントなし。かいせつをみて、つぎもがんばろう！");
+      "せいかい1もんにつき5 pt！ もらったポイント：" + reward + " pt" + (eventPoints ? "（イベントで +" + eventPoints + " pt）" : "") + (won ? "（1いボーナス +3 pt）" : "");
     el("resultRecords").textContent =
       "イベント：" + currentEvent.name + " ／ さいこうのはやさ " + raceBestSpeed + " km/h ／ れんぞくせいかい " + raceBestStreak +
       "もん ／ ニトロ " + nitroUses + "かい" + (wasBest ? " ／ 🆕 ベストこうしん！" : "");
