@@ -34,7 +34,7 @@ button{font:inherit}
 .course-coast .road:before,.course-coast .road:after{background:repeating-linear-gradient(#fff 0 36px,#2f9caa 37px 72px)}
 .course-night .road{background:linear-gradient(90deg,#111523,#343b50 46%,#242a3c 78%,#111523)}
 .course-night .road:before,.course-night .road:after{box-shadow:0 0 12px #6f9eff}
-.line{height:100%;background:repeating-linear-gradient(transparent 0 45px,#fff7b8 46px 80px,transparent 81px 142px);clip-path:polygon(49.5% 0,50.5% 0,53% 100%,47% 100%);animation:drive var(--drive-duration,1.11s) linear infinite}
+.line{height:100%;background:repeating-linear-gradient(transparent 0 45px,#fff7b8 46px 80px,transparent 81px 142px);clip-path:polygon(49.5% 0,50.5% 0,53% 100%,47% 100%);animation:drive var(--drive-duration,0.48s) linear infinite}
 @keyframes drive{to{background-position:0 142px}}
 .hud{position:absolute;z-index:20;top:12px;left:12px;right:12px;display:flex;justify-content:space-between;gap:7px;flex-wrap:wrap}
 .pill{background:#07131de8;border:1px solid #ffffff66;border-radius:999px;padding:8px 13px;font-size:clamp(12px,1.8vw,15px);font-weight:900}
