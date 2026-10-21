@@ -232,10 +232,7 @@ button{font:inherit}
 }
 
 
-/* 学習に集中する時間と1日限定のスペシャルレース */
-.daily-ticket-note{display:flex;align-items:center;justify-content:center;flex-wrap:wrap;gap:5px 12px;margin:10px 0 4px;padding:10px 12px;border:1px solid #8d7939;border-radius:12px;background:#292817;color:#fff1b2;font-size:13px}
-.daily-ticket-note strong{font-size:14px;white-space:nowrap}
-.daily-ticket-note span{color:#e4e0c8;font-size:12px}
+/* 学習中の考える時間とガレージカスタム */
 .think-meter{height:5px;width:min(70%,300px);margin:3px auto 1px;border-radius:8px;background:#263845;overflow:hidden;opacity:0;transition:opacity .15s}
 .think-meter.active{opacity:1}
 .think-meter span{display:block;width:0;height:100%;border-radius:8px;background:linear-gradient(90deg,#30bfff,#ffe16a)}
@@ -243,12 +240,212 @@ button{font:inherit}
 @keyframes think-fill{to{width:100%}}
 .choice.thinking{filter:saturate(.45);opacity:.58!important;cursor:wait;box-shadow:0 5px 0 #73808a,0 10px 20px #0005}
 .choice:disabled{cursor:wait}
-.daily-special-result{margin:8px 0;color:#f7df7a;font-size:13px;font-weight:850}
 .secondarybtn{width:100%;margin-top:12px;padding:11px 16px;border:1px solid #7e9aaa;border-radius:13px;background:#183242;color:#effaff;font-size:15px;font-weight:850;cursor:pointer}
 .secondarybtn:active{transform:translateY(2px)}
 .secondarybtn:focus-visible{outline:4px solid #39a9ff;outline-offset:3px}
-@media(max-width:580px){
-  .daily-ticket-note{padding:8px;font-size:11px}
-  .daily-ticket-note strong{font-size:12px}
-  .daily-ticket-note span{font-size:11px}
+.garage-section .garage-help{margin:2px 0 10px;text-align:left;color:#c3d5df;font-size:13px;line-height:1.65}
+.daily-custom-banner{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:6px 12px;margin:10px 0 14px;padding:12px 14px;border:1px solid #927d3c;border-radius:13px;background:linear-gradient(120deg,#302c18,#172b34);text-align:left}
+.daily-custom-banner strong{color:#ffe68b;font-size:14px}
+.daily-custom-banner strong span{display:inline-block;min-width:1em;text-align:center;font-size:20px}
+.daily-custom-banner>span{color:#e4e0c8;font-size:12px;line-height:1.45}
+.custom-category{margin:12px 0 0;padding-top:10px;border-top:1px solid #ffffff1b}
+.custom-category h3{margin:0 0 8px;text-align:left;color:#eaf7ff;font-size:clamp(14px,2vw,17px)}
+.custom-options{display:grid;grid-template-columns:repeat(auto-fit,minmax(94px,1fr));gap:7px}
+.custom-option{display:flex;min-width:0;min-height:78px;align-items:center;justify-content:center;gap:4px;flex-direction:column;padding:8px 4px;border:2px solid #496272;border-radius:11px;background:#122936;color:#f3f8fb;cursor:pointer;touch-action:manipulation;transition:transform .12s,border-color .12s,background .12s;overflow:hidden}
+.custom-option strong{max-width:100%;font-size:clamp(10px,1.3vw,12px);line-height:1.25;overflow-wrap:anywhere}
+.custom-option small{font-size:10px;line-height:1.2;color:#c2d2dc}
+.custom-option:active:not(:disabled){transform:translateY(2px)}
+.custom-option:focus-visible{outline:3px solid #39a9ff;outline-offset:2px}
+.custom-option.is-selected{border-color:#ffe16a;background:#3a3219;box-shadow:inset 0 0 0 1px #ffe16a55}
+.custom-option.is-selected small{color:#ffe68b}
+.custom-option:disabled{cursor:not-allowed;opacity:.54;filter:saturate(.5)}
+.custom-option.is-locked:not(.is-selected){background:#0e1b24}
+.custom-swatch{position:relative;display:block;flex:0 0 auto;width:44px;height:20px;border:1px solid #ffffff72;border-radius:6px;background:linear-gradient(90deg,#8c0c19,#f43e4e,#8c0c19);box-shadow:0 2px 5px #0005}
+.custom-preview{margin:14px 0 4px;padding:12px;border:1px solid #3f6172;border-radius:11px;background:#0d202c;color:#c7e7f6;text-align:left;font-size:12px;line-height:1.7;overflow-wrap:anywhere}
+.daily-custom-result{margin:8px 0;color:#f7df7a;font-size:13px;font-weight:850}
+
+/* カラーリング 追加塗装 */
+.car.livery--sunset{--paint-dark:#6d1733;--paint-mid:#fa5a32;--paint-light:#ffc45d}
+.car.livery--sunset .body{background:linear-gradient(90deg,#6d1733,#fa5a32 25%,#ffc45d 50%,#fa5a32 76%,#6d1733)}
+.car.livery--ice{--paint-dark:#17485f;--paint-mid:#69cee8;--paint-light:#e7ffff}
+.car.livery--ice .body{background:linear-gradient(90deg,#17485f,#69cee8 24%,#e7ffff 48%,#69cee8 76%,#17485f)}
+.car.livery--lime{--paint-dark:#214b18;--paint-mid:#66b92a;--paint-light:#d4ff51}
+.car.livery--lime .body{background:linear-gradient(90deg,#214b18,#66b92a 25%,#d4ff51 50%,#66b92a 75%,#214b18)}
+.car.livery--purple{--paint-dark:#24104f;--paint-mid:#763eea;--paint-light:#dfadff}
+.car.livery--purple .body{background:linear-gradient(90deg,#24104f,#763eea 25%,#dfadff 50%,#763eea 75%,#24104f)}
+.car.livery--sakura{--paint-dark:#813052;--paint-mid:#f184b5;--paint-light:#ffe5f4}
+.car.livery--sakura .body{background:linear-gradient(90deg,#813052,#f184b5 25%,#ffe5f4 50%,#f184b5 75%,#813052)}
+.car.livery--gold{--paint-dark:#68400a;--paint-mid:#bf8a19;--paint-light:#ffe8a1}
+.car.livery--gold .body{background:linear-gradient(90deg,#68400a,#bf8a19 25%,#ffe8a1 50%,#bf8a19 75%,#68400a)}
+.car.livery--ocean{--paint-dark:#063b46;--paint-mid:#008fa7;--paint-light:#91f5ff}
+.car.livery--ocean .body{background:linear-gradient(90deg,#063b46,#008fa7 25%,#91f5ff 50%,#008fa7 75%,#063b46)}
+.car.livery--flame{--paint-dark:#671400;--paint-mid:#f04b11;--paint-light:#ffe13d}
+.car.livery--flame .body{background:linear-gradient(90deg,#671400,#f04b11 25%,#ffe13d 50%,#f04b11 75%,#671400)}
+.car.livery--desert{--paint-dark:#4a3822;--paint-mid:#ad8958;--paint-light:#f3dfb5}
+.car.livery--desert .body{background:linear-gradient(90deg,#4a3822,#ad8958 25%,#f3dfb5 50%,#ad8958 75%,#4a3822)}
+.car.livery--candy{--paint-dark:#074944;--paint-mid:#14b99a;--paint-light:#f5a3e7}
+.car.livery--candy .body{background:linear-gradient(90deg,#074944,#14b99a 25%,#f5a3e7 50%,#14b99a 75%,#074944)}
+.car.livery--stealth{--paint-dark:#080d14;--paint-mid:#273b50;--paint-light:#879bad}
+.car.livery--stealth .body{background:repeating-linear-gradient(45deg,#ffffff09 0 4px,#00000018 4px 8px),linear-gradient(90deg,#080d14,#273b50 25%,#879bad 50%,#273b50 75%,#080d14)}
+.car.livery--sunset .roof,.car.livery--flame .roof{border-color:#ffc45d}
+.car.livery--ice .roof,.car.livery--ocean .roof{border-color:#8fefff}
+.car.livery--lime .roof{border-color:#d4ff51}
+.car.livery--purple .roof{border-color:#dfadff}
+.car.livery--sakura .roof{border-color:#ffe5f4}
+.car.livery--gold .roof{border-color:#ffe8a1}
+
+/* ステッカー・デカール */
+.car[class*="decal--"] .vehicle-extra{inset:34px 23px 28px}
+.car.decal--stripe .vehicle-extra:before,.car.decal--checker .vehicle-extra:before,.car.decal--flame .vehicle-extra:before,
+.car.decal--lightning .vehicle-extra:before,.car.decal--stars .vehicle-extra:before,.car.decal--sponsor .vehicle-extra:before,
+.car.decal--circuit .vehicle-extra:before,.car.decal--camo .vehicle-extra:before,.car.decal--digital .vehicle-extra:before{content:"";position:absolute;inset:0;clip-path:polygon(20% 0,80% 0,97% 38%,100% 80%,88% 100%,12% 100%,0 80%,3% 38%);pointer-events:none}
+.car.decal--stripe .vehicle-extra:before{background:linear-gradient(90deg,transparent 0 28%,#f4f7ff 29% 35%,#e92a3c 36% 42%,transparent 43% 100%);opacity:.95}
+.car.decal--checker .vehicle-extra:before{background:repeating-conic-gradient(#fff 0 25%,#161d24 0 50%) 0/18px 18px;opacity:.8}
+.car.decal--flame .vehicle-extra:before{background:linear-gradient(110deg,transparent 0 24%,#ffcf3c 25% 30%,#f33c12 31% 37%,#8e0617 38% 43%,transparent 44% 100%);opacity:.92}
+.car.decal--lightning .vehicle-extra:before{background:linear-gradient(110deg,transparent 0 33%,#f7fdff 34% 38%,#20bfff 39% 44%,transparent 45% 100%);opacity:.95}
+.car.decal--stars .vehicle-extra:before{background:radial-gradient(circle at 30% 45%,#fff 0 3px,transparent 4px),radial-gradient(circle at 68% 65%,#ffe16a 0 3px,transparent 4px),radial-gradient(circle at 76% 28%,#fff 0 2px,transparent 3px);opacity:.95}
+.car.decal--sponsor .vehicle-extra:before{background:linear-gradient(0deg,transparent 0 35%,#fff 36% 44%,#e83343 45% 53%,transparent 54% 100%);opacity:.8}
+.car.decal--circuit .vehicle-extra:before{background:repeating-linear-gradient(0deg,transparent 0 9px,#5df0ff 10px 12px),repeating-linear-gradient(90deg,transparent 0 18px,#5df0ff 19px 21px);opacity:.48}
+.car.decal--camo .vehicle-extra:before{background:radial-gradient(ellipse at 20% 25%,#303f43 0 15%,transparent 16%),radial-gradient(ellipse at 70% 60%,#81917c 0 17%,transparent 18%),radial-gradient(ellipse at 50% 30%,#171f25 0 20%,transparent 21%);opacity:.8}
+.car.decal--digital .vehicle-extra:before{background:repeating-linear-gradient(135deg,transparent 0 5px,#7bf0ff 6px 8px,transparent 9px 14px);opacity:.5}
+.car.decal--sponsor .vehicle-extra:after{content:"GT • SPORT";position:absolute;right:8px;bottom:8px;padding:1px 3px;border-radius:2px;background:#f5f7fa;color:#14212b;font-size:6px;font-weight:1000;letter-spacing:.5px}
+.car.decal--circuit .vehicle-extra:after{content:"TRACK";position:absolute;right:8px;bottom:8px;color:#b6fbff;font-size:7px;font-weight:1000}
+
+/* ウイング形状 */
+.car.spoiler--double .wing{height:22px;box-shadow:0 7px 0 -3px #090c10,0 15px 0 -5px #717f89}
+.car.spoiler--high .wing{top:6px;height:24px;left:18px;width:204px;background:linear-gradient(#f3f8ff,#536779 55%,#111923)}
+.car.spoiler--split .wing{left:16px;width:208px;height:14px;clip-path:polygon(0 0,100% 0,86% 100%,63% 70%,37% 70%,14% 100%)}
+.car.spoiler--carbon .wing{background:repeating-linear-gradient(45deg,#14191f 0 4px,#53616d 4px 6px)}
+.car.spoiler--aero .wing{left:24px;top:9px;width:192px;height:20px;clip-path:polygon(0 0,100% 0,80% 40%,68% 40%,68% 100%,32% 100%,32% 40%,20% 40%);background:linear-gradient(#d4e0e8,#273a4b 70%,#080d14)}
+.car.spoiler--wide .wing{left:-9px;width:258px;height:15px;background:linear-gradient(#e7edf2,#121820 70%)}
+
+/* ホイールカラー・リム */
+.car[class*="wheels--"] .tire:after{content:"";position:absolute;left:50%;top:50%;width:17px;height:17px;transform:translate(-50%,-50%);border:4px solid #adb8c0;border-radius:50%;background:#121920;box-shadow:inset 0 0 0 2px #dce5eb}
+.car.wheels--silver .tire:after{border-color:#e7edf2;background:#6d7c89}
+.car.wheels--gold .tire:after{border-color:#ffe17a;background:#8b5b12;box-shadow:inset 0 0 0 2px #fff1b4}
+.car.wheels--ice .tire:after{border-color:#85f0ff;background:#12627a;box-shadow:0 0 8px #39dfff}
+.car.wheels--red .tire:after{border-color:#ff4e5d;background:#780b18}
+.car.wheels--neon .tire:after{border-color:#54ffcf;background:#125c62;box-shadow:0 0 10px #54ffcf}
+.car.wheels--white .tire:after{border-color:#fff;background:#a4b7c1}
+.car.wheels--carbon .tire:after{border-color:#46525e;background:repeating-conic-gradient(#63727e 0 25%,#1b232b 0 50%) 0/6px 6px}
+.car.wheels--rainbow .tire:after{border-color:#fff;background:conic-gradient(#f33,#fc3,#3d8,#29f,#b5f,#f33);box-shadow:0 0 8px #9ff}
+
+/* ライト色 */
+.car.lights--ice .lamp{background:repeating-linear-gradient(90deg,#d7ffff 0 9px,#1aa8d1 10px 13px);box-shadow:0 0 14px #43e8ff}
+.car.lights--amber .lamp{background:repeating-linear-gradient(90deg,#fff1a1 0 9px,#e77a14 10px 13px);box-shadow:0 0 14px #ffac31}
+.car.lights--green .lamp{background:repeating-linear-gradient(90deg,#d8ff8a 0 9px,#318d42 10px 13px);box-shadow:0 0 14px #7eff89}
+.car.lights--purple .lamp{background:repeating-linear-gradient(90deg,#f4d0ff 0 9px,#8e39c8 10px 13px);box-shadow:0 0 14px #d577ff}
+.car.lights--gold .lamp{background:repeating-linear-gradient(90deg,#fff7b0 0 9px,#b98912 10px 13px);box-shadow:0 0 14px #ffde55}
+.car.lights--rainbow .lamp{background:repeating-linear-gradient(90deg,#ff7f9e 0 6px,#ffe36b 7px 12px,#60eeff 13px 18px);box-shadow:0 0 16px #b26dff}
+
+/* ルーフの飾り */
+.car.roof--stripe .roof{background-image:linear-gradient(90deg,transparent 0 40%,#f6f8ff 41% 47%,#e52d43 48% 54%,transparent 55%),linear-gradient(145deg,#daf9ff,#3f7894 30%,#071924 72%)}
+.car.roof--checker .roof{background-image:repeating-conic-gradient(#fff 0 25%,#151c23 0 50%);background-size:14px 14px}
+.car.roof--stars .roof{background-image:radial-gradient(circle at 30% 35%,#fff 0 3px,transparent 4px),radial-gradient(circle at 66% 65%,#ffe16a 0 3px,transparent 4px),linear-gradient(145deg,#283f77,#071924 72%)}
+.car.roof--flag .roof{background-image:repeating-conic-gradient(#f8f8f8 0 25%,#20242a 0 50%);background-size:18px 18px}
+.car.roof--number .roof:after{content:"GT";position:absolute;top:24px;left:0;right:0;text-align:center;color:#fff;font-size:16px;font-weight:1000;text-shadow:0 1px 4px #000}
+.car.roof--japan .roof:after{content:"";position:absolute;top:23px;left:calc(50% - 10px);width:20px;height:20px;border-radius:50%;background:#e72d43;box-shadow:0 0 0 4px #fff}
+.car.roof--digital .roof{background-image:repeating-linear-gradient(135deg,transparent 0 5px,#65efff 6px 8px,transparent 9px 14px),linear-gradient(145deg,#1c425c,#071924 72%)}
+
+/* エフェクトは見た目だけ。速度や正誤には影響しません */
+.car.aura--blue .body{filter:drop-shadow(0 0 10px #2acfff)}
+.car.aura--flame .body{filter:drop-shadow(0 0 10px #ff5e23)}
+.car.aura--purple .body{filter:drop-shadow(0 0 10px #bf63ff)}
+.car.aura--emerald .body{filter:drop-shadow(0 0 10px #43ffad)}
+.car.aura--gold .body{filter:drop-shadow(0 0 10px #ffd65b)}
+.car.aura--rainbow .body{filter:drop-shadow(0 0 7px #ff4d9a) drop-shadow(0 0 12px #4deaff)}
+.car.aura--blue:after{background:#2acfff80}
+.car.aura--flame:after{background:#ff5e2388}
+.car.aura--purple:after{background:#bf63ff88}
+.car.aura--emerald:after{background:#43ffad66}
+.car.aura--gold:after{background:#ffd65b88}
+.car.aura--rainbow:after{background:#e9b0ff99}
+
+/* パーツ見本：選択前に見た目が分かるようにする */
+.swatch-livery-stock{background:linear-gradient(90deg,#9b101c,#f43e4e,#8e0715)}
+.swatch-livery-neon{background:linear-gradient(90deg,#003c58,#18dfff,#00394f);box-shadow:0 0 8px #2adfff}
+.swatch-livery-stripe{background:linear-gradient(90deg,#173b7d 0 36%,#fff 37% 43%,#e73343 44% 49%,#1360bd 50%)}
+.swatch-livery-carbon{background:repeating-linear-gradient(45deg,#15191d 0 4px,#4d5964 4px 6px)}
+.swatch-livery-sunset{background:linear-gradient(90deg,#6d1733,#fa5a32,#ffc45d)}
+.swatch-livery-ice{background:linear-gradient(90deg,#17485f,#69cee8,#e7ffff)}
+.swatch-livery-lime{background:linear-gradient(90deg,#214b18,#66b92a,#d4ff51)}
+.swatch-livery-purple{background:linear-gradient(90deg,#24104f,#763eea,#dfadff)}
+.swatch-livery-sakura{background:linear-gradient(90deg,#813052,#f184b5,#ffe5f4)}
+.swatch-livery-gold{background:linear-gradient(90deg,#68400a,#bf8a19,#ffe8a1)}
+.swatch-livery-ocean{background:linear-gradient(90deg,#063b46,#008fa7,#91f5ff)}
+.swatch-livery-flame{background:linear-gradient(90deg,#671400,#f04b11,#ffe13d)}
+.swatch-livery-desert{background:linear-gradient(90deg,#4a3822,#ad8958,#f3dfb5)}
+.swatch-livery-candy{background:linear-gradient(90deg,#074944,#14b99a,#f5a3e7)}
+.swatch-livery-stealth{background:repeating-linear-gradient(45deg,#15191d 0 4px,#4d5964 4px 6px)}
+.swatch-decal-none{background:#24323c}
+.swatch-decal-stripe{background:linear-gradient(90deg,#234c83 0 30%,#fff 31% 38%,#ed3548 39% 45%,#234c83 46%)}
+.swatch-decal-checker{background:repeating-conic-gradient(#fff 0 25%,#20242a 0 50%) 0/10px 10px}
+.swatch-decal-flame{background:linear-gradient(110deg,#7c1116,#ffb32a,#ed4519)}
+.swatch-decal-lightning{background:linear-gradient(110deg,#1d5a91 35%,#e8fdff 36% 45%,#2ac8ff 46% 55%,#1d5a91 56%)}
+.swatch-decal-stars{background:radial-gradient(circle at 20% 50%,#fff 0 2px,transparent 3px),radial-gradient(circle at 50% 40%,#ffe16a 0 2px,transparent 3px),radial-gradient(circle at 80% 60%,#fff 0 2px,transparent 3px),#213a5a}
+.swatch-decal-sponsor{background:linear-gradient(0deg,#eee 0 40%,#d92a41 41% 60%,#173956 61%)}
+.swatch-decal-circuit{background:repeating-linear-gradient(0deg,#174858 0 5px,#55eaff 6px 7px),repeating-linear-gradient(90deg,transparent 0 9px,#55eaff 10px 11px)}
+.swatch-decal-camo{background:radial-gradient(ellipse at 20% 20%,#6e7b69 0 15%,transparent 16%),radial-gradient(ellipse at 70% 60%,#303d43 0 20%,transparent 21%),#17222a}
+.swatch-decal-digital{background:repeating-linear-gradient(135deg,#154154 0 4px,#65efff 5px 6px,#154154 7px 10px)}
+.swatch-spoiler-stock{background:linear-gradient(#aab5bd,#202932)}
+.swatch-spoiler-double{background:linear-gradient(#e4eef5 0 35%,#4a6271 36% 55%,#111820 56%)}
+.swatch-spoiler-high{background:linear-gradient(#f1f6fa,#526f83 60%,#0d1720)}
+.swatch-spoiler-split{background:linear-gradient(155deg,#e6eef5,#273b49)}
+.swatch-spoiler-carbon{background:repeating-linear-gradient(45deg,#15191d 0 4px,#65727d 4px 6px)}
+.swatch-spoiler-aero{background:linear-gradient(#d4e0e8,#273a4b 70%,#080d14)}
+.swatch-spoiler-wide{background:linear-gradient(#e7edf2,#121820 70%)}
+.custom-option:has(.swatch-wheels-stock) .custom-swatch,
+.custom-option:has(.swatch-wheels-silver) .custom-swatch,
+.custom-option:has(.swatch-wheels-gold) .custom-swatch,
+.custom-option:has(.swatch-wheels-ice) .custom-swatch,
+.custom-option:has(.swatch-wheels-red) .custom-swatch,
+.custom-option:has(.swatch-wheels-neon) .custom-swatch,
+.custom-option:has(.swatch-wheels-white) .custom-swatch,
+.custom-option:has(.swatch-wheels-carbon) .custom-swatch,
+.custom-option:has(.swatch-wheels-rainbow) .custom-swatch{width:23px;height:23px;border-radius:50%;border:4px solid #cad4dc;background:#17212a;box-shadow:inset 0 0 0 3px #17212a}
+.swatch-wheels-stock{border-color:#697782!important}
+.swatch-wheels-silver{border-color:#e7edf2!important;background:#6d7c89!important}
+.swatch-wheels-gold{border-color:#ffe17a!important;background:#8b5b12!important}
+.swatch-wheels-ice{border-color:#85f0ff!important;background:#12627a!important}
+.swatch-wheels-red{border-color:#ff4e5d!important;background:#780b18!important}
+.swatch-wheels-neon{border-color:#54ffcf!important;background:#125c62!important}
+.swatch-wheels-white{border-color:#fff!important;background:#a4b7c1!important}
+.swatch-wheels-carbon{border-color:#46525e!important;background:repeating-conic-gradient(#63727e 0 25%,#1b232b 0 50%) 0/6px 6px!important}
+.swatch-wheels-rainbow{border-color:#fff!important;background:conic-gradient(#f33,#fc3,#3d8,#29f,#b5f,#f33)!important}
+.swatch-lights-stock{background:linear-gradient(90deg,#ff1932,#6e0009)}
+.swatch-lights-ice{background:linear-gradient(90deg,#d7ffff,#1aa8d1)}
+.swatch-lights-amber{background:linear-gradient(90deg,#fff1a1,#e77a14)}
+.swatch-lights-green{background:linear-gradient(90deg,#d8ff8a,#318d42)}
+.swatch-lights-purple{background:linear-gradient(90deg,#f4d0ff,#8e39c8)}
+.swatch-lights-gold{background:linear-gradient(90deg,#fff7b0,#b98912)}
+.swatch-lights-rainbow{background:repeating-linear-gradient(90deg,#ff7f9e 0 6px,#ffe36b 7px 12px,#60eeff 13px 18px)}
+.swatch-roof-none{background:linear-gradient(135deg,#315a78,#07131d)}
+.swatch-roof-stripe{background:linear-gradient(90deg,#315a78 0 38%,#fff 39% 46%,#e52d43 47% 54%,#315a78 55%)}
+.swatch-roof-checker{background:repeating-conic-gradient(#fff 0 25%,#151c23 0 50%) 0/9px 9px}
+.swatch-roof-stars{background:radial-gradient(circle at 30% 35%,#fff 0 2px,transparent 3px),radial-gradient(circle at 66% 65%,#ffe16a 0 2px,transparent 3px),#273c70}
+.swatch-roof-flag{background:repeating-conic-gradient(#f8f8f8 0 25%,#20242a 0 50%) 0/10px 10px}
+.swatch-roof-number{background:#263b4b;color:#fff}
+.swatch-roof-japan{background:radial-gradient(circle,#e72d43 0 6px,#fff 7px 12px,#315a78 13px)}
+.swatch-roof-digital{background:repeating-linear-gradient(135deg,#1c425c 0 5px,#65efff 6px 8px)}
+.swatch-aura-none{background:#202c35}
+.swatch-aura-blue{background:linear-gradient(90deg,#17485f,#2acfff);box-shadow:0 0 8px #2acfff}
+.swatch-aura-flame{background:linear-gradient(90deg,#671400,#ff5e23,#ffe13d);box-shadow:0 0 8px #ff5e23}
+.swatch-aura-purple{background:linear-gradient(90deg,#24104f,#bf63ff);box-shadow:0 0 8px #bf63ff}
+.swatch-aura-emerald{background:linear-gradient(90deg,#06412e,#43ffad);box-shadow:0 0 8px #43ffad}
+.swatch-aura-gold{background:linear-gradient(90deg,#68400a,#ffd65b);box-shadow:0 0 8px #ffd65b}
+.swatch-aura-rainbow{background:linear-gradient(90deg,#ff4d9a,#ffe16a,#4deaff,#bf63ff);box-shadow:0 0 8px #4deaff}
+
+@media(max-width:700px){
+  .custom-options{grid-template-columns:repeat(4,minmax(0,1fr));gap:5px}
+  .custom-option{min-height:73px;padding:6px 3px}
+  .custom-option strong{font-size:10px}
+  .custom-option small{font-size:9px}
+  .custom-swatch{width:36px;height:17px}
+  .daily-custom-banner{padding:10px}
+}
+@media(max-width:480px){
+  .custom-options{grid-template-columns:repeat(3,minmax(0,1fr));gap:5px}
+  .custom-option{min-height:69px;border-radius:9px}
+  .custom-option strong{font-size:10px}
+  .daily-custom-banner strong{font-size:12px}
 }
