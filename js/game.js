@@ -79,7 +79,7 @@
     { id: "tailwind", name: "追い風スタート", description: "スタート速度が80 km/hにアップ！", startSpeed: 80, nitroBonus: 0, pointBonus: 0, finishBonus: 0 },
     { id: "nitro-day", name: "ニトロデー", description: "正解するとニトロがいつもより多くたまる！", startSpeed: 60, nitroBonus: 12, pointBonus: 0, finishBonus: 0 },
     { id: "bonus-points", name: "ポイントボーナス", description: "正解1問につきポイントが1pt追加！", startSpeed: 60, nitroBonus: 0, pointBonus: 1, finishBonus: 0 },
-    { id: "crew-support", name: "クルー応援デー", description: "完走するとピットクルーから6ptプレゼント！", startSpeed: 60, nitroBonus: 0, pointBonus: 0, finishBonus: 6 },
+    { id: "crew-support", name: "クルー応援デー", description: "5問以上正解すると、ピットクルーから6pt追加！", startSpeed: 60, nitroBonus: 0, pointBonus: 0, finishBonus: 6 },
     { id: "streak-festival", name: "連続正解フェス", description: "連続正解するとニトロがさらにたまる！", startSpeed: 60, nitroBonus: 0, streakBonus: 10, pointBonus: 0, finishBonus: 0 }
   ];
   const defaultCareer = { points: 0, races: 0, bestScore: 0, bestSpeed: 0, bestStreak: 0, totalCorrect: 0, wins: 0, totalNitro: 0, badges: [], selectedLivery: "stock", customParts: defaultCustomParts };
