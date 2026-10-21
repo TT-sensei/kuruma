@@ -27,6 +27,7 @@
   let subjectFilter = "both";
   let gradeFilter = "all";
   let currentCourse = null;
+  let courseReady = true;
   let currentQuestion = null;
   let raceQuestions = [], index = 0, score = 0, locked = false, timer = null;
 
@@ -81,7 +82,8 @@
   }
   function begin() {
     resetScene();
-    chooseCourse();
+    if (!courseReady) chooseCourse();
+    courseReady = false;
     score = 0;
     index = 0;
     scoreEl.textContent = "0";
