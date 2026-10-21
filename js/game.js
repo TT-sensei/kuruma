@@ -47,7 +47,7 @@
       { id: "purple", name: "パープル", points: 50 }, { id: "gold", name: "ゴールド", points: 65 },
       { id: "rainbow", name: "レインボー", points: 85 }
     ]},
-    roof: { label: "ルーフ飾り", options: [
+    roof: { label: "ルーフのかざり", options: [
       { id: "none", name: "なし", points: 0 }, { id: "stripe", name: "ストライプ", points: 0 },
       { id: "checker", name: "チェッカー", points: 20 }, { id: "stars", name: "スター", points: 30 },
       { id: "flag", name: "チェッカーフラッグ", points: 45 }, { id: "number", name: "ゼッケン", points: 55 },
@@ -73,14 +73,14 @@
     { id: "city", name: "シティコース" },
     { id: "forest", name: "もりのコース" },
     { id: "coast", name: "うみべのコース" },
-    { id: "night", name: "ナイトコース" }
+    { id: "night", name: "よるのコース" }
   ];
   const events = [
-    { id: "tailwind", name: "追い風スタート", description: "スタート速度が80 km/hにアップ！", startSpeed: 80, nitroBonus: 0, pointBonus: 0, finishBonus: 0 },
-    { id: "nitro-day", name: "ニトロデー", description: "正解するとニトロがいつもより多くたまる！", startSpeed: 60, nitroBonus: 12, pointBonus: 0, finishBonus: 0 },
-    { id: "bonus-points", name: "ポイントボーナス", description: "正解1問につきポイントが1pt追加！", startSpeed: 60, nitroBonus: 0, pointBonus: 1, finishBonus: 0 },
-    { id: "crew-support", name: "クルー応援デー", description: "5問以上正解すると、ピットクルーから6pt追加！", startSpeed: 60, nitroBonus: 0, pointBonus: 0, finishBonus: 6 },
-    { id: "streak-festival", name: "連続正解フェス", description: "連続正解するとニトロがさらにたまる！", startSpeed: 60, nitroBonus: 0, streakBonus: 10, pointBonus: 0, finishBonus: 0 }
+    { id: "tailwind", name: "おいかぜスタート", description: "スタートのはやさが80 km/hになるよ！", startSpeed: 80, nitroBonus: 0, pointBonus: 0, finishBonus: 0 },
+    { id: "nitro-day", name: "ニトロデー", description: "せいかいすると、ニトロがいつもよりたまるよ！", startSpeed: 60, nitroBonus: 12, pointBonus: 0, finishBonus: 0 },
+    { id: "bonus-points", name: "ポイントボーナス", description: "1もんせいかいするごとに、ポイントが1ptふえるよ！", startSpeed: 60, nitroBonus: 0, pointBonus: 1, finishBonus: 0 },
+    { id: "crew-support", name: "クルーおうえんデー", description: "5もんいじょうせいかいすると、6ptプラス！", startSpeed: 60, nitroBonus: 0, pointBonus: 0, finishBonus: 6 },
+    { id: "streak-festival", name: "れんぞくせいかいフェス", description: "れんぞくでせいかいすると、ニトロがもっとたまるよ！", startSpeed: 60, nitroBonus: 0, streakBonus: 10, pointBonus: 0, finishBonus: 0 }
   ];
   const defaultCareer = { points: 0, races: 0, bestScore: 0, bestSpeed: 0, bestStreak: 0, totalCorrect: 0, wins: 0, totalNitro: 0, badges: [], selectedLivery: "stock", customParts: defaultCustomParts };
   const storageKey = "kuruma-study-career-v1";
@@ -171,19 +171,19 @@
     if (confirm) {
       confirm.disabled = !changed || !enough || raceActive;
       confirm.textContent = !changed
-        ? "🪙 変更するパーツを選ぼう"
+        ? "🪙 かえたいパーツをえらぼう"
         : enough
-          ? "🪙 購入して装着（合計 " + cost + " pt）"
-          : "ポイント不足（あと " + (cost - balance) + " pt）";
+          ? "🪙 ポイントでかう（合計 " + cost + " pt）"
+          : "ポイントがたりないよ（あと " + (cost - balance) + " pt）";
     }
     if (discard) discard.disabled = !changed || raceActive;
     const status = el("customStatus");
     if (status && status.dataset.notice !== "result") {
       status.textContent = changed
         ? enough
-          ? "今回の変更費用は合計 " + cost + " pt。確定すると購入され、残高は " + (balance - cost) + " ptになります。"
-          : "今回の変更費用は合計 " + cost + " pt。あと " + (cost - balance) + " pt必要です。問題に正解してポイントをためよう。"
-        : "各パーツに価格が表示されます。変更は「購入して装着」で確定し、ポイントは問題を解いてためます。";
+          ? "こんかいのねだんは合計 " + cost + " pt。かうと、のこりは " + (balance - cost) + " ptになるよ。"
+          : "こんかいのねだんは合計 " + cost + " pt。あと " + (cost - balance) + " ptひつようだよ。もんだいをといてためよう。"
+        : "パーツのねだんを見てえらぼう。「ポイントでかう」をおすと、ポイントをつかうよ。もんだいをといてためよう。";
       status.dataset.notice = changed ? "preview" : "";
     }
   }
@@ -204,7 +204,7 @@
     vehiclePreviewEl.textContent = vehicle.name + "でスタート";
     const summary = Object.keys(customCatalog).map(slot => customCatalog[slot].label + "：" +
       customCatalog[slot].options.find(item => item.id === selectedCustomValue(slot)).name);
-    el("customPreview").textContent = "現在の仕様： " + summary.join(" ／ ");
+    el("customPreview").textContent = "いまのマシン： " + summary.join(" ／ ");
   }
   function setVehicle(id) {
     if (!vehicles[id]) return;
@@ -233,7 +233,7 @@
     pendingCustomParts[slot] = id;
     const status = el("customStatus");
     if (status) {
-      status.textContent = "変更をプレビュー中です。確定すると、選んだパーツの合計価格をポイントで支払います。";
+      status.textContent = "かえたあとのマシンをおためし中だよ。「ポイントでかう」をおすと、合計ぶんのポイントをつかうよ。";
       status.dataset.notice = "preview";
     }
     applyAppearance();
@@ -249,14 +249,14 @@
     const status = el("customStatus");
     if (!changedSlots.length) {
       if (status) {
-        status.textContent = "変更はありません。ポイントは減っていません。";
+        status.textContent = "へんこうはないよ。ポイントはへっていません。";
         status.dataset.notice = "result";
       }
       return;
     }
     if (cost > career.points) {
       if (status) {
-        status.textContent = "ポイントが " + (cost - career.points) + " pt足りません。パーツを選び直すか、レースの問題に正解してためよう。";
+        status.textContent = "あと " + (cost - career.points) + " ptたりないよ。パーツをえらびなおすか、もんだいをといてためよう。";
         status.dataset.notice = "result";
       }
       renderCustomOptions();
@@ -270,8 +270,8 @@
     applyAppearance();
     renderCareer();
     if (status) {
-      status.textContent = "カスタム購入成功！ " + changedSlots.length +
-        "カテゴリを変更し、合計 " + cost + " pt使いました。残り " + career.points + " ptです。";
+      status.textContent =  "パーツをかったよ！ " + changedSlots.length +
+         "かしょをかえて、合計 " + cost + " ptつかったよ。のこりは " + career.points + " ptです。";
       status.dataset.notice = "result";
     }
     renderCustomActions();
@@ -301,14 +301,14 @@
         const affordable = career.points >= price;
         const disabled = !affordable && !selected;
         const status = selected && saved
-          ? "装着中"
+          ? "つけているよ"
           : selected
-            ? "選択中・" + price + " pt"
+            ? "えらんでいるよ・" + price + " pt"
             : !affordable
               ? price + " pt・あと" + (price - career.points) + " pt"
               : saved
-                ? price + " ptで戻す"
-                : price + " ptで変更";
+                ? price + " ptでもどす"
+                : price + " ptでかえる";
         return '<button type="button" class="custom-option' + (selected ? ' is-selected' : '') +
           (saved && !selected ? ' is-saved' : '') + (disabled ? ' is-locked' : '') +
           '" data-custom-slot="' + slot + '" data-custom-value="' + option.id + '" aria-pressed="' + String(selected) + '"' +
@@ -324,7 +324,7 @@
     el("careerSpeed").textContent = String(career.bestSpeed) + " km/h";
     el("careerPoints").textContent = String(career.points);
     const labels = career.badges.length ? career.badges.map(id => badgeInfo[id] ? badgeInfo[id].name : "").filter(Boolean) : [];
-    el("careerBadges").textContent = labels.length ? "獲得した称号：" + labels.join(" ／ ") : "称号はレースを重ねると増えていきます。";
+    el("careerBadges").textContent = labels.length ? "あつめたバッジ：" + labels.join(" ／ ") : "レースをすると、バッジがふえていくよ。";
     renderCustomOptions();
   }
   function updateNitro() {
@@ -360,9 +360,9 @@
   function updateDuel() {
     el("playerMarker").style.left = Math.min(100, playerDistance * 100) + "%";
     el("rivalMarker").style.left = Math.min(100, rivalDistance * 100) + "%";
-    if (playerDistance > rivalDistance + 0.035) el("positionText").textContent = "1位";
-    else if (rivalDistance > playerDistance + 0.035) el("positionText").textContent = "2位";
-    else el("positionText").textContent = "接戦";
+    if (playerDistance > rivalDistance + 0.035) el("positionText").textContent = "1い！";
+    else if (rivalDistance > playerDistance + 0.035) el("positionText").textContent = "2い";
+    else el("positionText").textContent = "いいしょうぶ";
   }
   function updatePhase() {
     root.classList.remove("phase-start", "phase-battle", "phase-final");
@@ -371,14 +371,14 @@
       el("phaseTag").textContent = "スタート";
     } else if (index >= raceQuestions.length - 2) {
       root.classList.add("phase-final");
-      el("phaseTag").textContent = "ファイナル";
+      el("phaseTag").textContent = "ラスト";
     } else {
       root.classList.add("phase-battle");
-      el("phaseTag").textContent = "中盤戦";
+      el("phaseTag").textContent = "まんなか";
     }
   }
   function showEvent() {
-    el("eventName").textContent = "EVENT · " + currentEvent.name;
+    el("eventName").textContent = "イベント・" + currentEvent.name;
     el("eventBanner").title = currentEvent.description;
     el("eventBanner").classList.add("event-pop");
     clearTimeout(eventTimer);
@@ -413,7 +413,7 @@
       applyAppearance();
       const status = el("customStatus");
       if (status) {
-        status.textContent = "未確定のカスタムは保存せず、前の仕様でレースを開始します。";
+        status.textContent = "まだきめていないカスタムは保存せず、前のマシンでレースをはじめるよ。";
         status.dataset.notice = "result";
       }
     }
@@ -439,8 +439,8 @@
     );
     raceQuestions = shuffled(pool).slice(0, Math.min(data.game.questionsPerRace, pool.length));
     if (raceQuestions.length === 0) {
-      resultTitle.textContent = "問題がありません";
-      resultText.textContent = "選んだ条件に合う問題がありません。条件を変えて試してください。";
+      resultTitle.textContent = "もんだいがないよ";
+      resultText.textContent = "えらんだ条件にあうもんだいがないよ。べつの条件をえらんでみてね。";
       result.classList.add("show");
       return;
     }
@@ -467,7 +467,7 @@
     currentQuestion = q;
     prompt.textContent = q.prompt;
     progressEl.textContent = (index + 1) + " / " + raceQuestions.length;
-    el("questionHint").textContent = q.subject + "・" + ({1:"基礎",2:"標準",3:"チャレンジ"}[q.grade] || "標準") + "レベル";
+    el("questionHint").textContent = (q.subject === "国語" ? "こくご" : "さんすう") + "・" + ({1:"きほん",2:"ふつう",3:"ちょうせん"}[q.grade] || "ふつう");
     Object.values(buttons).forEach(button => { button.textContent = ""; button.dataset.value = ""; });
     q.choices.forEach(choice => {
       const button = buttons[choice.side];
@@ -484,7 +484,7 @@
         button.disabled = true;
         button.classList.add("thinking");
       });
-      el("questionHint").textContent = "問題を読んで考えよう。少し待ってから答えを選べます。";
+      el("questionHint").textContent = "もんだいをよんで、かんがえよう。すこしまつと、こたえをえらべるよ。";
       el("thinkMeter").classList.add("active");
       timer = setTimeout(() => {
         if (!raceActive || !currentQuestion) return;
@@ -492,7 +492,7 @@
           button.disabled = false;
           button.classList.remove("thinking");
         });
-        el("questionHint").textContent = q.subject + "・" + ({1:"基礎",2:"標準",3:"チャレンジ"}[q.grade] || "標準") + "レベル";
+        el("questionHint").textContent = (q.subject === "国語" ? "こくご" : "さんすう") + "・" + ({1:"きほん",2:"ふつう",3:"ちょうせん"}[q.grade] || "ふつう");
         el("thinkMeter").classList.remove("active");
       }, 1400);
     }, data.game.questionDelayMs);
@@ -515,7 +515,7 @@
       let charge = 28 + (streak >= 2 ? 7 : 0) + (currentEvent.nitroBonus || 0);
       if (currentEvent.streakBonus && streak >= 2) charge += currentEvent.streakBonus;
       nitro = Math.min(100, nitro + charge);
-      feedbackEl.textContent = "正解！ " + (gain > 0 ? "時速 +" + gain + " km/h。 " : "最高速度！ ") +
+      feedbackEl.textContent =  "せいかい！ " + (gain > 0 ? "はやさ +" + gain + " km/h。 " :  "さいこうのはやさ！ ") +
         (streak >= 2 ? "連続正解 " + streak + "！ " : "") + currentQuestion.explanation;
     } else {
       streak = 0;
@@ -523,8 +523,8 @@
       const correctChoice = currentQuestion.choices.find(choice => String(choice.value) === String(currentQuestion.correctValue));
       const correctLabel = correctChoice ? correctChoice.label : String(currentQuestion.correctValue);
       const loss = updateSpeed(-15);
-      feedbackEl.textContent = "今回は不正解。 " + (loss < 0 ? "時速 " + loss + " km/h。 " : "最低速度です。 ") +
-        "正解は「" + correctLabel + "」。" + currentQuestion.explanation;
+      feedbackEl.textContent =  "ざんねん！ " + (loss < 0 ? "時速 " + loss + " km/h。 " :  "これいじょうおそくならないよ。 ") +
+        "ただしいこたえは「" + correctLabel + "」。" + currentQuestion.explanation;
     }
     updateNitro();
     playerDistance += 0.105 + (correct ? 0.043 : 0.012) + (speed / 240) * 0.012;
@@ -544,7 +544,7 @@
     const gain = updateSpeed(45);
     root.classList.add("nitro-active");
     car.classList.add("nitro-flash");
-    feedbackEl.textContent = "⚡ ニトロ発動！ +" + gain + " km/h！";
+    feedbackEl.textContent = "⚡ ニトロ！ はやさ +" + gain + " km/h！";
     clearTimeout(nitroTimer);
     nitroTimer = setTimeout(() => {
       root.classList.remove("nitro-active");
@@ -552,12 +552,12 @@
     }, 1900);
   }
   const badgeInfo = {
-    first: { name: "初完走", description: "最初のレースを完走" },
-    streak: { name: "連続正解", description: "3問連続で正解" },
+    first: { name: "はじめてのゴール", description: "さいしょのレースをゴール" },
+    streak: { name: "れんぞくせいかい", description: "3もんつづけてせいかい" },
     perfect: { name: "パーフェクト", description: "1レースで全問正解" },
-    nitro: { name: "ニトロ初発動", description: "ニトロを使った" },
-    regular: { name: "サーキット常連", description: "5レース完走" },
-    winner: { name: "トップランナー", description: "1位を3回獲得" }
+    nitro: { name: "はじめてのニトロ", description: "ニトロをつかった" },
+    regular: { name: "サーキットのじょうれん", description: "5レースをゴール" },
+    winner: { name: "トップランナー", description: "1いを3かいとった" }
   };
   function updateBadges() {
     const earned = [];
@@ -599,21 +599,21 @@
     const newBadges = updateBadges();
     saveCareer();
     renderCareer();
-    resultTitle.textContent = won ? "1位でフィニッシュ！ 🏆" : "ゴール！ 次は巻き返そう 🏁";
+    resultTitle.textContent = won ? "1いでゴール！ 🏆" : "ゴール！ つぎはがんばろう 🏁";
     resultTitle.style.color = won ? "#3be89c" : "#ffd12a";
-    resultText.textContent = total + "問中 " + score + "問正解。 " +
-      (score === total ? "パーフェクト！ " : "解説を確認して次のレースに生かそう。 ") +
+    resultText.textContent = total + "もん中 " + score + "もんせいかい！ " +
+      (score === total ? "パーフェクト！ " : "かいせつをみて、つぎのレースにいかそう。 ") +
       (earnsReward
-        ? "今回の獲得ポイント：" + reward + " pt" + (eventPoints ? "（イベントボーナス +" + eventPoints + " ptを含む）" : "")
-        : "ポイント獲得には " + rewardThreshold + "問以上の正解が必要です。今回はポイントなし。解説を確認して、次のレースで再挑戦しよう。");
+        ? "もらったポイント：" + reward + " pt" + (eventPoints ? "（イベントボーナス +" + eventPoints + " ptを含む）" : "")
+        : "ポイントをもらうには " + rewardThreshold + "もんいじょうのせいかいがひつようだよ。こんかいはポイントなし。かいせつをみて、つぎもがんばろう！");
     el("resultRecords").textContent =
-      "イベント：" + currentEvent.name + " ／ 最高速度 " + raceBestSpeed + " km/h ／ 連続正解 " + raceBestStreak +
-      "問 ／ ニトロ " + nitroUses + "回" + (wasBest ? " ／ 🆕 自己ベスト更新！" : "");
+      "イベント：" + currentEvent.name + " ／ さいこうのはやさ " + raceBestSpeed + " km/h ／ れんぞくせいかい " + raceBestStreak +
+      "もん ／ ニトロ " + nitroUses + "かい" + (wasBest ? " ／ 🆕 自己ベスト更新！" : "");
     el("badgeNotice").textContent = newBadges.length
-      ? "新しい称号を獲得！ " + newBadges.map(id => badgeInfo[id].name).join("・")
-      : (career.badges.length ? "獲得した称号：" + career.badges.map(id => badgeInfo[id].name).join("・") : "レースを続けて称号を集めよう。");
+      ? "あたらしいバッジをゲット！ " + newBadges.map(id => badgeInfo[id].name).join("・")
+      : (career.badges.length ? "あつめたバッジ：" + career.badges.map(id => badgeInfo[id].name).join("・") : "レースを続けて称号を集めよう。");
     el("nextRaceNote").textContent = vehicles[selectedVehicle].name + "・" + liveryNames[selectedLivery] +
-      "仕様。次は別のコースとイベントが待っている！";
+      "のマシンだよ。つぎはべつのコースとイベントがまっているよ！";
     result.classList.add("show");
     updateNitro();
     el("retry").focus({ preventScroll: true });
