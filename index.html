@@ -16,28 +16,28 @@
     <div class="hud">
       <div class="pill">🏁 くるまスタディ</div>
       <div class="pill">コース <span id="courseName">グランプリ</span></div>
-      <div class="pill">問題 <span id="progress">0 / 8</span></div>
-      <div class="pill">得点 <span id="score">0</span></div>
-      <div class="pill">連続 <span id="streak">0</span></div>
-      <div id="speedPanel" class="pill speed-panel" aria-live="polite" aria-label="現在の時速 60 キロメートル">🚦 時速 <strong id="speed">60</strong><span> km/h</span></div>
+      <div class="pill">もんだい <span id="progress">0 / 8</span></div>
+      <div class="pill">とくてん <span id="score">0</span></div>
+      <div class="pill">れんぞく <span id="streak">0</span></div>
+      <div id="speedPanel" class="pill speed-panel" aria-live="polite" aria-label="いまのはやさ 60 キロメートル">🚦 時速 <strong id="speed">60</strong><span> km/h</span></div>
     </div>
 
-    <div class="race-utility" aria-label="レース情報">
+    <div class="race-utility" aria-label="レースのじょうほう">
       <div class="duel-panel">
         <div class="duel-labels"><span>YOU</span><span>RIVAL</span></div>
         <div class="duel-track" aria-label="ライバルとの位置"><span id="playerMarker" class="duel-marker you"></span><span id="rivalMarker" class="duel-marker rival"></span></div>
-        <strong id="positionText">並走中</strong>
+        <strong id="positionText">ならんでいるよ</strong>
       </div>
-      <div id="eventBanner" class="event-banner" aria-live="polite"><strong id="eventName">RACE EVENT</strong><span id="phaseTag">スタート</span></div>
+      <div id="eventBanner" class="event-banner" aria-live="polite"><strong id="eventName">レースイベント</strong><span id="phaseTag">スタート</span></div>
       <div class="nitro-panel">
         <div class="nitro-heading"><span>⚡ NITRO</span><strong id="nitroText">0%</strong></div>
         <div class="nitro-track"><span id="nitroFill"></span></div>
-        <button id="nitroBtn" type="button" disabled>⚡ ニトロ発動</button>
+        <button id="nitroBtn" type="button" disabled>⚡ ニトロをつかう</button>
       </div>
     </div>
 
     <section id="question" class="question" aria-live="polite">
-      <small id="questionHint">左右2つから、正しい答えを選ぼう</small>
+      <small id="questionHint">ひだりとみぎ、どちらがこたえかな？</small>
       <strong id="prompt"></strong>
       <div id="thinkMeter" class="think-meter" aria-hidden="true"><span id="thinkMeterFill"></span></div>
       <div id="feedback" class="feedback" aria-live="polite"></div>
@@ -51,72 +51,72 @@
 
     <div id="start" class="overlay">
       <div class="card start-card">
-        <p class="eyebrow">CHOOSE YOUR GT MACHINE</p>
+        <p class="eyebrow">すきなマシンを えらぼう</p>
         <h1>🏎️ くるまスタディ・サーキット</h1>
-        <p class="intro">好きなレーシングカーを選び、8問のレースに挑戦。<br>問題を読んで考えてから、左右2つの答えを選びます。</p>
+        <p class="intro">すきなレーシングカーをえらんで、8もんのレースにちょうせん！<br>もんだいをよんで、かんがえてから、ひだりかみぎのこたえをえらぼう。</p>
 
         <div class="start-layout">
           <div class="learning-panel">
 <section class="setup-section" aria-labelledby="vehicleHeading">
-          <h2 id="vehicleHeading">① レーシングカーを選択</h2>
+          <h2 id="vehicleHeading">① マシンを えらぼう</h2>
           <div class="vehicle-options" role="group" aria-label="レーシングカーを選ぶ">
             <button type="button" class="vehicle-option selected" data-vehicle="red" aria-pressed="true">
               <span class="vehicle-illustration paint-red" aria-hidden="true"><span class="mini-wing"></span><span class="mini-roof"></span><span class="mini-body"></span><span class="mini-lamp left"></span><span class="mini-lamp right"></span><span class="mini-tyre left"></span><span class="mini-tyre right"></span></span>
-              <span class="vehicle-name">GT レッド</span><span class="vehicle-detail">スタンダード</span>
+              <span class="vehicle-name">GT レッド</span><span class="vehicle-detail">ふつうのタイプ</span>
             </button>
             <button type="button" class="vehicle-option" data-vehicle="blue" aria-pressed="false">
               <span class="vehicle-illustration paint-blue" aria-hidden="true"><span class="mini-wing"></span><span class="mini-roof"></span><span class="mini-body"></span><span class="mini-lamp left"></span><span class="mini-lamp right"></span><span class="mini-tyre left"></span><span class="mini-tyre right"></span></span>
-              <span class="vehicle-name">GT ブルー</span><span class="vehicle-detail">ダブルウイング</span>
+              <span class="vehicle-name">GT ブルー</span><span class="vehicle-detail">ウイングが2まい</span>
             </button>
             <button type="button" class="vehicle-option" data-vehicle="yellow" aria-pressed="false">
               <span class="vehicle-illustration paint-yellow" aria-hidden="true"><span class="mini-wing"></span><span class="mini-roof"></span><span class="mini-body"></span><span class="mini-lamp left"></span><span class="mini-lamp right"></span><span class="mini-tyre left"></span><span class="mini-tyre right"></span></span>
-              <span class="vehicle-name">GT イエロー</span><span class="vehicle-detail">ハイウイング</span>
+              <span class="vehicle-name">GT イエロー</span><span class="vehicle-detail">たかいウイング</span>
             </button>
             <button type="button" class="vehicle-option" data-vehicle="black" aria-pressed="false">
               <span class="vehicle-illustration paint-black" aria-hidden="true"><span class="mini-wing"></span><span class="mini-roof"></span><span class="mini-body"></span><span class="mini-lamp left"></span><span class="mini-lamp right"></span><span class="mini-tyre left"></span><span class="mini-tyre right"></span></span>
-              <span class="vehicle-name">GT ブラック</span><span class="vehicle-detail">ロングウイング</span>
+              <span class="vehicle-name">GT ブラック</span><span class="vehicle-detail">ながいウイング</span>
             </button>
           </div>
           <p id="vehiclePreview" class="selection-note">GT レッドでスタート</p>
         </section>
 <section class="setup-section" aria-labelledby="subjectHeading">
-          <h2 id="subjectHeading">② 教科</h2>
+          <h2 id="subjectHeading">② べんきょうするもの</h2>
           <div class="pill-options" role="group" aria-label="学習する教科">
-            <button type="button" class="select-option selected" data-subject-filter="both" aria-pressed="true">国語＋算数</button>
-            <button type="button" class="select-option" data-subject-filter="国語" aria-pressed="false">国語</button>
-            <button type="button" class="select-option" data-subject-filter="算数" aria-pressed="false">算数</button>
+            <button type="button" class="select-option selected" data-subject-filter="both" aria-pressed="true">こくご＋さんすう</button>
+            <button type="button" class="select-option" data-subject-filter="国語" aria-pressed="false">こくご</button>
+            <button type="button" class="select-option" data-subject-filter="算数" aria-pressed="false">さんすう</button>
           </div>
         </section>
 <section class="setup-section" aria-labelledby="gradeHeading">
-          <h2 id="gradeHeading">③ 問題レベル</h2>
+          <h2 id="gradeHeading">③ もんだいのレベル</h2>
           <div class="pill-options" role="group" aria-label="問題レベル">
-            <button type="button" class="select-option selected" data-grade-filter="all" aria-pressed="true">全レベル</button>
-            <button type="button" class="select-option" data-grade-filter="1" aria-pressed="false">基礎</button>
-            <button type="button" class="select-option" data-grade-filter="2" aria-pressed="false">標準</button>
-            <button type="button" class="select-option" data-grade-filter="3" aria-pressed="false">チャレンジ</button>
+            <button type="button" class="select-option selected" data-grade-filter="all" aria-pressed="true">ぜんぶ</button>
+            <button type="button" class="select-option" data-grade-filter="1" aria-pressed="false">きほん</button>
+            <button type="button" class="select-option" data-grade-filter="2" aria-pressed="false">ふつう</button>
+            <button type="button" class="select-option" data-grade-filter="3" aria-pressed="false">ちょうせん</button>
           </div>
         </section>
-<div class="course-preview" aria-live="polite">次のコース：<strong id="coursePreview">グランプリ</strong><span>5種類のコースとイベントがランダムで変わります。レースでポイントを集めて、カスタムパーツを解放しよう。</span></div>
-        <button id="startBtn" type="button" class="mainbtn start-race-btn">🚦 すぐに学習スタート</button>
+<div class="course-preview" aria-live="polite">つぎのコース：<strong id="coursePreview">グランプリ</strong><span>5つのコースとイベントがランダムできまるよ。レースでポイントをためて、すきなパーツにかえよう。</span></div>
+        <button id="startBtn" type="button" class="mainbtn start-race-btn">🚦 すぐに はじめる</button>
           </div>
 <section class="garage-panel garage-section" aria-labelledby="garageHeading">
-          <h2 id="garageHeading">ガレージ：マシンをカスタム</h2>
-          <p class="garage-help">パーツを選ぶと価格が表示されます。「購入して装着」でポイントを支払います。ポイントはレースの問題に正解してためよう。</p>
-          <section class="garage-wallet" aria-label="ガレージポイントと今回の購入額" aria-live="polite">
-            <div class="wallet-heading"><span>🪙 使えるガレージポイント</span><strong><span id="garagePointBalance">0</span> pt</strong></div>
-            <p>パーツを変更するたびにポイントを消費します。ポイントを買う機能はありません。問題を解いてためよう。</p>
+          <h2 id="garageHeading">ガレージ：マシンを かっこよくしよう</h2>
+          <p class="garage-help">パーツをえらぶと、ねだんがでるよ。「ポイントでかう」をおすとマシンにつけられるよ。ポイントはもんだいをといてためよう。</p>
+          <section class="garage-wallet" aria-label="つかえるポイントと今回の買いもの" aria-live="polite">
+            <div class="wallet-heading"><span>🪙 つかえるポイント</span><strong><span id="garagePointBalance">0</span> pt</strong></div>
+            <p>パーツをかえるとポイントをつかうよ。ポイントは買えないので、もんだいをといてためよう。</p>
             <div class="wallet-metrics">
-              <span>今回の変更費用<strong><span id="customCostPreview">0</span> pt</strong></span>
-              <span>購入後の残高<strong><span id="customPointsAfter">0</span> pt</strong></span>
+              <span>こんかいのねだん<strong><span id="customCostPreview">0</span> pt</strong></span>
+              <span>かったあとのポイント<strong><span id="customPointsAfter">0</span> pt</strong></span>
             </div>
           </section>
-          <div class="garage-actions"><button id="confirmCustomBtn" type="button" class="mainbtn">🪙 購入して装着</button><button id="discardCustomBtn" type="button" class="secondarybtn">変更を取り消す</button></div>
+          <div class="garage-actions"><button id="confirmCustomBtn" type="button" class="mainbtn">🪙 ポイントでかう</button><button id="discardCustomBtn" type="button" class="secondarybtn">やめる</button></div>
           <div class="custom-category">
             <h3>🎨 ボディカラー</h3>
             <div id="customOptions-livery" class="custom-options" role="group" aria-label="ボディカラーを選ぶ"></div>
           </div>
           <div class="custom-category">
-            <h3>🏁 ステッカー・デカール</h3>
+            <h3>🏁 ステッカー</h3>
             <div id="customOptions-decal" class="custom-options" role="group" aria-label="ステッカーを選ぶ"></div>
           </div>
           <div class="custom-category">
@@ -132,19 +132,19 @@
             <div id="customOptions-lights" class="custom-options" role="group" aria-label="ライトを選ぶ"></div>
           </div>
           <div class="custom-category">
-            <h3>✨ ルーフ飾り</h3>
+            <h3>✨ ルーフのかざり</h3>
             <div id="customOptions-roof" class="custom-options" role="group" aria-label="ルーフ飾りを選ぶ"></div>
           </div>
           <div class="custom-category">
             <h3>⚡ エフェクト</h3>
             <div id="customOptions-aura" class="custom-options" role="group" aria-label="エフェクトを選ぶ"></div>
           </div>
-          <p id="customStatus" class="custom-status" aria-live="polite">パーツを選んで、最後にカスタムを確定してください。</p>
-          <div id="customPreview" class="custom-preview" aria-live="polite">現在のカスタムを読み込み中</div>
-          <div class="career-summary" aria-label="これまでの記録">
-            <span>🏁 完走 <strong id="careerRaces">0</strong></span>
+          <p id="customStatus" class="custom-status" aria-live="polite">パーツをえらんで、ポイントをかくにんしよう。</p>
+          <div id="customPreview" class="custom-preview" aria-live="polite">いまのマシンをよみこみ中</div>
+          <div class="career-summary" aria-label="これまでのきろく">
+            <span>🏁 ゴール <strong id="careerRaces">0</strong></span>
             <span>🏆 ベスト <strong id="careerBest">0 / 8</strong></span>
-            <span>⚡ 最速 <strong id="careerSpeed">0 km/h</strong></span>
+            <span>⚡ さいこうのはやさ <strong id="careerSpeed">0 km/h</strong></span>
             <span>🪙 ポイント <strong id="careerPoints">0</strong></span>
           </div>
           <div id="careerBadges" class="career-badges" aria-live="polite"></div>
@@ -155,14 +155,14 @@
 
     <div id="result" class="overlay result" aria-live="assertive">
       <div class="card">
-        <p class="eyebrow">FINISH!</p>
+        <p class="eyebrow">ゴール！</p>
         <h2 id="resultTitle"></h2>
         <p id="resultText"></p>
         <div id="resultRecords" class="result-records"></div>
         <p id="badgeNotice" class="badge-notice" aria-live="polite"></p>
-        <p id="nextRaceNote" class="selection-note">車はそのまま、次のレースへ！</p>
-        <button id="retry" type="button" class="mainbtn">もう一度レース</button>
-        <button id="garageBtn" type="button" class="secondarybtn">ガレージに戻る</button>
+        <p id="nextRaceNote" class="selection-note">くるまはそのまま、つぎのレースへ！</p>
+        <button id="retry" type="button" class="mainbtn">もういちど やってみる</button>
+        <button id="garageBtn" type="button" class="secondarybtn">ガレージにもどる</button>
       </div>
     </div>
   </main>
