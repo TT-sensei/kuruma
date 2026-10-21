@@ -119,6 +119,7 @@
     const resultNote = el("dailyCustomResult");
     if (resultNote) resultNote.textContent = "今日のカスタム変更残り：" + remaining + " / " + dailyCustomLimit + "回";
     renderCustomOptions();
+    renderCustomActions();
   }
   function loadCareer() {
     try {
@@ -144,6 +145,8 @@
   let selectedVehicle = "red";
   let selectedLivery = career.selectedLivery || "stock";
   if ((liveryUnlocks[selectedLivery] || 0) > career.points) selectedLivery = "stock";
+  let pendingCustomParts = Object.assign({}, career.customParts || defaultCustomParts);
+  pendingCustomParts.livery = selectedLivery;
   let subjectFilter = "both";
   let gradeFilter = "all";
   let currentCourse = null;
@@ -174,7 +177,29 @@
     coursePreviewEl.textContent = currentCourse.name;
   }
   function selectedCustomValue(slot) {
-    return slot === "livery" ? selectedLivery : career.customParts[slot];
+    return pendingCustomParts[slot] || defaultCustomParts[slot];
+  }
+  function hasPendingCustomChanges() {
+    return Object.keys(customCatalog).some(slot => pendingCustomParts[slot] !== career.customParts[slot]);
+  }
+  function renderCustomActions() {
+    const remaining = remainingCustomChanges();
+    const changed = hasPendingCustomChanges();
+    const confirm = el("confirmCustomBtn");
+    const discard = el("discardCustomBtn");
+    if (confirm) {
+      confirm.disabled = !changed || remaining <= 0;
+      confirm.textContent = remaining > 0
+        ? "このカスタムで確定（1回使用・残り" + remaining + "回）"
+        : "本日のカスタム変更は終了";
+    }
+    if (discard) discard.disabled = !changed;
+    const status = el("customStatus");
+    if (status && !status.dataset.notice) {
+      status.textContent = changed
+        ? "未確定の変更があります。確定するまでは回数を使いません。"
+        : "保存済みのカスタムです。パーツを選んで試してみよう。";
+    }
   }
   function slotClass(slot, value) {
     const prefix = { livery: "livery--", decal: "decal--", spoiler: "spoiler--", wheels: "wheels--", lights: "lights--", roof: "roof--", aura: "aura--" }[slot];
@@ -206,44 +231,97 @@
     applyAppearance();
   }
   function handleCustomSelection(slot, id) {
-    refreshCustomDaily();
     const config = customCatalog[slot];
     const option = config && config.options.find(item => item.id === id);
-    if (!option || option.points > career.points) return;
-    const current = selectedCustomValue(slot);
-    if (current === id) return;
-    if (remainingCustomChanges() <= 0) {
-      renderCustomDaily();
+    if (!option || option.points > career.points || raceActive) return;
+    if (selectedCustomValue(slot) === id) return;
+    pendingCustomParts[slot] = id;
+    const status = el("customStatus");
+    if (status) {
+      status.textContent = "変更候補をプレビュー中です。最後に「このカスタムで確定」を押すと1回分を使います。";
+      status.dataset.notice = "preview";
+    }
+    applyAppearance();
+    renderCustomOptions();
+    renderCustomActions();
+  }
+  function confirmCustomChanges() {
+    if (raceActive) return;
+    refreshCustomDaily();
+    const changedSlots = Object.keys(customCatalog).filter(slot =>
+      pendingCustomParts[slot] !== career.customParts[slot]
+    );
+    const status = el("customStatus");
+    if (!changedSlots.length) {
+      if (status) {
+        status.textContent = "変更はありません。カスタム回数は減っていません。";
+        status.dataset.notice = "result";
+      }
       return;
+    }
+    if (remainingCustomChanges() <= 0) {
+      if (status) {
+        status.textContent = "今日の変更回数を使い切りました。選んだ内容はまだ保存されていません。";
+        status.dataset.notice = "result";
+      }
+      renderCustomActions();
+      return;
+    }
+    for (const slot of changedSlots) {
+      const option = customCatalog[slot].options.find(item => item.id === pendingCustomParts[slot]);
+      if (!option || option.points > career.points) {
+        if (status) status.textContent = "ポイントが足りないパーツが含まれています。選び直してください。";
+        return;
+      }
     }
     dailyCustomState.used++;
     saveCustomDailyState();
-    if (slot === "livery") {
-      selectedLivery = id;
-      career.selectedLivery = id;
-    }
-    career.customParts[slot] = id;
+    career.customParts = Object.assign({}, pendingCustomParts);
+    selectedLivery = career.customParts.livery;
+    career.selectedLivery = selectedLivery;
     saveCareer();
     applyAppearance();
     renderCareer();
     renderCustomDaily();
+    if (status) {
+      status.textContent = "カスタム確定！ " + changedSlots.length +
+        "カテゴリを保存しました。今日の変更回数を1回使いました。";
+      status.dataset.notice = "result";
+    }
+    renderCustomActions();
+  }
+  function discardCustomChanges() {
+    pendingCustomParts = Object.assign({}, career.customParts);
+    selectedLivery = career.customParts.livery || "stock";
+    applyAppearance();
+    renderCareer();
+    const status = el("customStatus");
+    if (status) {
+      status.textContent = "未確定の変更を取り消しました。カスタム回数は減っていません。";
+      status.dataset.notice = "result";
+    }
+    renderCustomActions();
   }
   function renderCustomOptions() {
     for (const [slot, config] of Object.entries(customCatalog)) {
       const container = el("customOptions-" + slot);
       if (!container) continue;
       const current = selectedCustomValue(slot);
+      const committed = career.customParts[slot];
       container.innerHTML = config.options.map(option => {
         const selected = current === option.id;
+        const saved = committed === option.id;
         const unlocked = career.points >= option.points;
-        const disabled = !unlocked || (!selected && remainingCustomChanges() <= 0);
-        const status = !unlocked ? option.points + " ptで解放" : selected ? "装着中" : "変更する";
-        return '<button type="button" class="custom-option' + (selected ? ' is-selected' : '') + (disabled ? ' is-locked' : '') +
+        const disabled = !unlocked;
+        const status = !unlocked ? option.points + " ptで解放" : selected && !saved ? "仮選択中" : selected ? "装着中" : saved ? "保存済み" : "選ぶ";
+        return '<button type="button" class="custom-option' + (selected ? ' is-selected' : '') +
+          (saved && !selected ? ' is-saved' : '') + (disabled ? ' is-locked' : '') +
           '" data-custom-slot="' + slot + '" data-custom-value="' + option.id + '" aria-pressed="' + String(selected) + '"' +
           (disabled ? ' disabled' : '') + '><span class="custom-swatch swatch-' + slot + '-' + option.id + '" aria-hidden="true"></span>' +
           '<strong>' + option.name + '</strong><small>' + status + '</small></button>';
       }).join("");
     }
+    renderCustomActions();
   }
   function renderCareer() {
     el("careerRaces").textContent = String(career.races);
@@ -335,6 +413,17 @@
     refreshCustomDaily();
     if (!courseReady) chooseCourse();
     courseReady = false;
+    if (hasPendingCustomChanges()) {
+      pendingCustomParts = Object.assign({}, career.customParts);
+      selectedLivery = career.customParts.livery || "stock";
+      applyAppearance();
+      const status = el("customStatus");
+      if (status) {
+        status.textContent = "未確定のカスタムは保存せず、前の仕様でレースを開始します。";
+        status.dataset.notice = "result";
+      }
+    }
+    refreshCustomDaily();
     currentEvent = Object.assign({}, events[Math.floor(Math.random() * events.length)], { isSpecial: true });
     score = 0;
     index = 0;
@@ -562,6 +651,8 @@
   }
   el("startBtn").addEventListener("click", begin);
   el("retry").addEventListener("click", begin);
+  el("confirmCustomBtn").addEventListener("click", confirmCustomChanges);
+  el("discardCustomBtn").addEventListener("click", discardCustomChanges);
   el("garageBtn").addEventListener("click", () => {
     result.classList.remove("show");
     start.classList.remove("hide");
