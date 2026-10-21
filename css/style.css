@@ -742,3 +742,24 @@ p{line-height:1.75}
   .garage-panel .custom-option small{font-size:11px}
   .question{top:204px}
 }
+
+
+/* レース中、いつでも見つけられる「とちゅうでやめる」ボタン */
+.quit-btn{
+  display:inline-flex;align-items:center;justify-content:center;align-self:flex-start;
+  min-height:44px;padding:8px 13px;border:2px solid #ffc2c8;border-radius:999px;
+  background:linear-gradient(180deg,#a63848,#74202d);color:#fff;
+  font-size:clamp(12px,1vw,15px);font-weight:850;line-height:1.4;letter-spacing:.01em;
+  white-space:nowrap;cursor:pointer;touch-action:manipulation;
+  box-shadow:0 3px 0 #45131b,0 4px 12px #0004
+}
+.quit-btn:hover{background:linear-gradient(180deg,#c44759,#852536)}
+.quit-btn:active{transform:translateY(2px);box-shadow:0 1px 0 #45131b}
+.quit-btn:focus-visible{outline:4px solid #ffe16a;outline-offset:3px}
+.quit-btn[hidden]{display:none!important}
+@media(max-width:900px){
+  .quit-btn{min-height:40px;padding:7px 10px;font-size:13px}
+}
+@media(max-width:480px){
+  .quit-btn{min-height:36px;padding:6px 8px;font-size:11px}
+}
