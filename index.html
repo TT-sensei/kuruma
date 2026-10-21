@@ -101,12 +101,16 @@
           </div>
 <section class="garage-panel garage-section" aria-labelledby="garageHeading">
           <h2 id="garageHeading">ガレージ：マシンをカスタム</h2>
-          <p class="garage-help">レースでポイントを集めてパーツを解放。いくつでも試して、最後に確定するとカスタム変更を1回使います。</p>
-          <div class="daily-custom-banner">
-            <strong>🛠 今日のカスタム変更残り：<span id="dailyCustomCount">3</span> / 3回</strong>
-            <span id="dailyCustomMessage">いくつパーツを選んでも、確定ボタン1回で変更回数を1回使います。</span>
-          </div>
-          <div class="garage-actions"><button id="confirmCustomBtn" type="button" class="mainbtn">このカスタムで確定（1回使用）</button><button id="discardCustomBtn" type="button" class="secondarybtn">変更を取り消す</button></div>
+          <p class="garage-help">パーツを選ぶと価格が表示されます。「購入して装着」でポイントを支払います。ポイントはレースの問題に正解してためよう。</p>
+          <section class="garage-wallet" aria-label="ガレージポイントと今回の購入額" aria-live="polite">
+            <div class="wallet-heading"><span>🪙 使えるガレージポイント</span><strong><span id="garagePointBalance">0</span> pt</strong></div>
+            <p>パーツを変更するたびにポイントを消費します。ポイントを買う機能はありません。問題を解いてためよう。</p>
+            <div class="wallet-metrics">
+              <span>今回の変更費用<strong><span id="customCostPreview">0</span> pt</strong></span>
+              <span>購入後の残高<strong><span id="customPointsAfter">0</span> pt</strong></span>
+            </div>
+          </section>
+          <div class="garage-actions"><button id="confirmCustomBtn" type="button" class="mainbtn">🪙 購入して装着</button><button id="discardCustomBtn" type="button" class="secondarybtn">変更を取り消す</button></div>
           <div class="custom-category">
             <h3>🎨 ボディカラー</h3>
             <div id="customOptions-livery" class="custom-options" role="group" aria-label="ボディカラーを選ぶ"></div>
@@ -156,7 +160,6 @@
         <p id="resultText"></p>
         <div id="resultRecords" class="result-records"></div>
         <p id="badgeNotice" class="badge-notice" aria-live="polite"></p>
-        <p id="dailyCustomResult" class="daily-custom-result"></p>
         <p id="nextRaceNote" class="selection-note">車はそのまま、次のレースへ！</p>
         <button id="retry" type="button" class="mainbtn">もう一度レース</button>
         <button id="garageBtn" type="button" class="secondarybtn">ガレージに戻る</button>
