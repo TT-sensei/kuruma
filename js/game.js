@@ -270,7 +270,7 @@
     applyAppearance();
     renderCareer();
     if (status) {
-      status.textContent =  "パーツをかったよ！ " + changedSlots.length +
+      status.textContent = "パーツをかったよ！ " + changedSlots.length +
           "しゅるいのパーツをかえて、合計 " + cost + " ptつかったよ。のこりは " + career.points + " ptだよ！";
       status.dataset.notice = "result";
     }
@@ -341,7 +341,7 @@
     const previous = speed;
     speed = Math.max(20, Math.min(240, speed + delta));
     el("speed").textContent = String(speed);
-    el("speedPanel").setAttribute("aria-label", "現在の時速 " + speed + " キロメートル");
+    el("speedPanel").setAttribute("aria-label", "いまのはやさ " + speed + " キロメートル");
     el("speedPanel").classList.remove("speed-up", "speed-down");
     el("speedPanel").classList.add(speed >= previous ? "speed-up" : "speed-down");
     const duration = 0.56 - ((speed - 20) / 220) * 0.44;
@@ -354,7 +354,7 @@
     raceBestSpeed = speed;
     el("speed").textContent = String(speed);
     el("speedPanel").classList.remove("speed-up", "speed-down");
-    el("speedPanel").setAttribute("aria-label", "現在の時速 " + speed + " キロメートル");
+    el("speedPanel").setAttribute("aria-label", "いまのはやさ " + speed + " キロメートル");
     root.style.setProperty("--drive-duration", "0.48s");
   }
   function updateDuel() {
@@ -474,7 +474,7 @@
       button.textContent = choice.label;
       button.dataset.value = String(choice.value);
       button.disabled = false;
-      button.setAttribute("aria-label", "答え " + choice.label);
+      button.setAttribute("aria-label", "こたえ " + choice.label);
     });
     updatePhase();
     timer = setTimeout(() => {
@@ -515,7 +515,7 @@
       let charge = 28 + (streak >= 2 ? 7 : 0) + (currentEvent.nitroBonus || 0);
       if (currentEvent.streakBonus && streak >= 2) charge += currentEvent.streakBonus;
       nitro = Math.min(100, nitro + charge);
-      feedbackEl.textContent =  "せいかい！ " + (gain > 0 ? "はやさ +" + gain + " km/h。 " :  "さいこうのはやさ！ ") +
+      feedbackEl.textContent = "せいかい！ " + (gain > 0 ? "はやさ +" + gain + " km/h。 " : "さいこうのはやさ！ ") +
         (streak >= 2 ? streak + "もん れんぞくせいかい！ " : "") + currentQuestion.explanation;
     } else {
       streak = 0;
@@ -523,7 +523,7 @@
       const correctChoice = currentQuestion.choices.find(choice => String(choice.value) === String(currentQuestion.correctValue));
       const correctLabel = correctChoice ? correctChoice.label : String(currentQuestion.correctValue);
       const loss = updateSpeed(-15);
-      feedbackEl.textContent =  "ざんねん！ " + (loss < 0 ? "はやさ " + loss + " km/h。 " :  "これいじょうおそくならないよ。 ") +
+      feedbackEl.textContent = "ざんねん！ " + (loss < 0 ? "はやさ " + loss + " km/h。 " : "これいじょうおそくならないよ。 ") +
         "ただしいこたえは「" + correctLabel + "」。" + currentQuestion.explanation;
     }
     updateNitro();
