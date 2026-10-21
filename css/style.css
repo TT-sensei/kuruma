@@ -449,3 +449,103 @@ button{font:inherit}
   .custom-option strong{font-size:10px}
   .daily-custom-banner strong{font-size:12px}
 }
+
+
+/* 広い画面を活かし、学習とガレージを左右に分ける */
+body{width:100%;min-width:0}
+.game{width:100%;max-width:none;margin:0;min-height:100vh;min-height:100svh}
+.overlay{padding:12px}
+.start-card{
+  display:flex;flex-direction:column;
+  width:calc(100vw - 24px);max-width:1600px;
+  height:calc(100svh - 24px);max-height:calc(100svh - 24px);
+  padding:clamp(14px,1.8vw,26px);overflow:hidden
+}
+.start-card>.eyebrow,.start-card>h1,.start-card>.intro{flex:0 0 auto}
+.start-card>h1{font-size:clamp(23px,2.6vw,36px);margin-bottom:4px}
+.start-card>.intro{margin:4px 0 12px}
+.start-layout{
+  display:grid;grid-template-columns:minmax(330px,.82fr) minmax(0,1.18fr);
+  gap:clamp(12px,1.5vw,22px);flex:1;min-height:0;overflow:hidden;text-align:left
+}
+.learning-panel{display:flex;min-width:0;min-height:0;flex-direction:column;gap:7px;overflow-y:auto;overscroll-behavior:contain;padding:2px 7px 8px 1px}
+.learning-panel .setup-section{margin-top:4px;padding-top:8px}
+.learning-panel .setup-section h2{font-size:clamp(14px,1.5vw,18px);margin-bottom:7px}
+.learning-panel .vehicle-options{grid-template-columns:repeat(4,minmax(0,1fr));gap:5px}
+.learning-panel .vehicle-option{min-width:0;min-height:92px;padding:5px 2px;overflow:hidden}
+.learning-panel .vehicle-illustration{transform:scale(.76);transform-origin:center;margin:-3px 0}
+.learning-panel .vehicle-detail{font-size:clamp(8px,.9vw,10px);overflow-wrap:anywhere}
+.learning-panel .vehicle-option .vehicle-name{font-size:clamp(10px,1.05vw,13px)}
+.learning-panel .pill-options{gap:6px}
+.learning-panel .select-option{min-height:38px;padding:7px 10px;font-size:clamp(12px,1.1vw,14px)}
+.learning-panel .selection-note{font-size:12px}
+.learning-panel .course-preview{margin: auto 0 9px;display:block;text-align:left;padding:10px}
+.learning-panel .course-preview strong{font-size:16px}
+.learning-panel .course-preview span{display:block;margin-top:3px;font-size:11px}
+.start-race-btn{flex:0 0 auto;min-height:56px;margin-top:0;padding:14px;font-size:clamp(18px,1.8vw,23px);box-shadow:0 5px 0 #bc8c00}
+.garage-panel{
+  display:block;min-width:0;min-height:0;height:100%;max-height:none;
+  overflow-y:auto;overscroll-behavior:contain;padding:0 clamp(8px,1vw,14px) 12px;
+  border:1px solid #ffffff25;border-radius:17px;background:#06121c99;
+  scrollbar-gutter:stable
+}
+.garage-panel>h2{position:sticky;top:0;z-index:8;margin:0 -2px 8px;padding:14px 6px 10px;background:#081722f5;border-bottom:1px solid #ffffff20;font-size:clamp(17px,1.8vw,23px)}
+.garage-panel .garage-help{margin:7px 2px 9px;font-size:12px}
+.daily-custom-banner{margin:8px 0 10px;padding:9px 11px}
+.daily-custom-banner strong{font-size:12px}
+.daily-custom-banner>span{font-size:11px}
+.garage-actions{position:sticky;top:53px;z-index:7;display:grid;grid-template-columns:minmax(0,1.4fr) minmax(110px,.8fr);gap:8px;margin:0 -2px 8px;padding:8px 2px;background:#081722f5;border-bottom:1px solid #ffffff24}
+.garage-actions .mainbtn{min-height:43px;padding:9px 10px;font-size:clamp(13px,1.2vw,16px);line-height:1.25;box-shadow:0 3px 0 #bc8c00}
+.garage-actions .secondarybtn{min-height:43px;margin:0;padding:8px 10px;font-size:13px}
+.garage-actions button:disabled{opacity:.48;cursor:not-allowed;box-shadow:none}
+.custom-status{margin:5px 0 8px;padding:8px 10px;border-radius:9px;background:#122b38;color:#cbe7f3;font-size:12px;line-height:1.5}
+.garage-panel .custom-category{margin-top:7px;padding-top:7px}
+.garage-panel .custom-category h3{font-size:13px;margin-bottom:6px}
+.garage-panel .custom-options{grid-template-columns:repeat(auto-fit,minmax(82px,1fr));gap:5px}
+.garage-panel .custom-option{min-height:66px;padding:5px 3px}
+.garage-panel .custom-option strong{font-size:11px}
+.garage-panel .custom-option small{font-size:9px}
+.custom-option.is-saved:not(.is-selected){border-style:dashed;border-color:#9bb3c0}
+.garage-panel .custom-preview{margin-top:10px;font-size:11px}
+.garage-panel .career-summary{grid-template-columns:repeat(2,minmax(0,1fr))}
+.garage-panel .career-summary span{text-align:center}
+.garage-panel .career-badges{padding-bottom:8px}
+.start-card .daily-custom-result{font-size:12px}
+@media(max-width:900px){
+  .start-card{width:calc(100vw - 16px);height:calc(100svh - 16px);max-height:calc(100svh - 16px);padding:12px}
+  .start-layout{grid-template-columns:minmax(280px,.9fr) minmax(0,1.1fr);gap:10px}
+  .learning-panel .vehicle-options{gap:3px}
+  .learning-panel .vehicle-option{min-height:82px}
+  .learning-panel .vehicle-illustration{transform:scale(.63);margin:-7px 0}
+  .learning-panel .vehicle-option .vehicle-name{font-size:10px}
+  .garage-panel .custom-options{grid-template-columns:repeat(3,minmax(0,1fr))}
+}
+@media(max-width:740px){
+  .overlay{padding:6px}
+  .start-card{width:calc(100vw - 12px);height:calc(100svh - 12px);max-height:calc(100svh - 12px);padding:12px}
+  .start-card>.eyebrow{font-size:10px;letter-spacing:1.4px}
+  .start-card>h1{font-size:clamp(21px,5vw,28px)}
+  .start-card>.intro{font-size:13px;line-height:1.45;margin-bottom:7px}
+  .start-layout{display:flex;flex-direction:column;overflow-y:auto;overflow-x:hidden;gap:12px}
+  .learning-panel{overflow:visible;flex:0 0 auto;padding:0 2px 8px}
+  .learning-panel .vehicle-options{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .learning-panel .vehicle-option{min-height:82px}
+  .learning-panel .vehicle-illustration{transform:scale(.66);margin:-6px 0}
+  .learning-panel .setup-section{padding-top:6px;margin-top:4px}
+  .learning-panel .course-preview{margin:8px 0}
+  .start-race-btn{min-height:52px}
+  .garage-panel{flex:0 0 auto;height:auto;max-height:none;overflow:visible;padding:0 8px 10px}
+  .garage-panel>h2{position:static}
+  .garage-actions{top:0}
+  .garage-panel .custom-options{grid-template-columns:repeat(4,minmax(0,1fr))}
+}
+@media(max-width:440px){
+  .start-card{padding:9px}
+  .learning-panel .vehicle-option .vehicle-name{font-size:9px}
+  .learning-panel .vehicle-detail{display:none}
+  .learning-panel .vehicle-illustration{transform:scale(.58);margin:-8px 0}
+  .learning-panel .select-option{padding:7px 8px;font-size:11px}
+  .garage-panel .custom-options{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .garage-actions{grid-template-columns:1fr}
+  .garage-actions .secondarybtn{min-height:37px}
+}
