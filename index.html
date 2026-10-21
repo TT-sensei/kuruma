@@ -39,6 +39,7 @@
     <section id="question" class="question" aria-live="polite">
       <small id="questionHint">左右2つから、正しい答えを選ぼう</small>
       <strong id="prompt"></strong>
+      <div id="thinkMeter" class="think-meter" aria-hidden="true"><span id="thinkMeterFill"></span></div>
       <div id="feedback" class="feedback" aria-live="polite"></div>
     </section>
     <button id="left" type="button" class="choice left" aria-label="左の答え" disabled></button>
@@ -53,6 +54,7 @@
         <p class="eyebrow">CHOOSE YOUR GT MACHINE</p>
         <h1>🏎️ くるまスタディ・サーキット</h1>
         <p class="intro">好きなレーシングカーを選び、8問のレースに挑戦。<br>左右2つの選択肢から答えを選びます。</p>
+        <div class="daily-ticket-note"><strong>🎟️ 今日のスペシャルレース：<span id="dailySpecialCount">3</span> / 3回</strong><span id="dailyLimitMessage">スペシャルイベントとポイントボーナスは1日3回まで。通常レースは何度でもプレイできます。</span></div>
 
         <section class="setup-section" aria-labelledby="vehicleHeading">
           <h2 id="vehicleHeading">① レーシングカーを選択</h2>
@@ -127,8 +129,10 @@
         <p id="resultText"></p>
         <div id="resultRecords" class="result-records"></div>
         <p id="badgeNotice" class="badge-notice" aria-live="polite"></p>
+        <p id="dailySpecialResult" class="daily-special-result"></p>
         <p id="nextRaceNote" class="selection-note">車はそのまま、次のレースへ！</p>
-        <button id="retry" type="button" class="mainbtn">もう一度挑戦</button>
+        <button id="retry" type="button" class="mainbtn">もう一度レース</button>
+        <button id="garageBtn" type="button" class="secondarybtn">ガレージに戻る</button>
       </div>
     </div>
   </main>
