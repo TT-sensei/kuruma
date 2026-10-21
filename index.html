@@ -4,39 +4,81 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#07131d">
-  <meta name="description" content="左右2つの答えから正しいコースを選ぶ、小学生向けの算数レーシングゲーム。">
-  <title>サーキット算数レーシング</title>
+  <meta name="description" content="車を選んで、国語と算数の2択クイズに挑戦する小学生向けレーシングゲーム。">
+  <title>くるまスタディ・サーキット</title>
   <link rel="stylesheet" href="css/style.css">
   <script src="js/questions.js" defer></script>
   <script src="js/game.js" defer></script>
 </head>
 <body>
-  <main id="game" class="game" aria-label="サーキット算数レーシングゲーム">
+  <main id="game" class="game course-grand-prix" aria-label="くるまスタディ・サーキット">
     <div class="stands" aria-hidden="true"></div><div class="pit" aria-hidden="true"></div><div class="fence" aria-hidden="true"></div><div class="road" aria-hidden="true"><div class="line"></div></div>
     <div class="hud">
-      <div class="pill">🏁 CIRCUIT MATH</div>
-      <div class="pill">問題 <span id="progress">0 / 10</span></div>
+      <div class="pill">🏁 くるまスタディ</div>
+      <div class="pill">コース <span id="courseName">グランプリ</span></div>
+      <div class="pill">問題 <span id="progress">0 / 8</span></div>
       <div class="pill">得点 <span id="score">0</span></div>
     </div>
+
     <section id="question" class="question" aria-live="polite">
-      <small>左右2つから、正しいコースを選ぼう</small>
+      <small id="questionHint">左右2つから、正しい答えを選ぼう</small>
       <strong id="prompt"></strong>
       <div id="feedback" class="feedback" aria-live="polite"></div>
     </section>
     <button id="left" type="button" class="choice left" aria-label="左の答え" disabled></button>
     <button id="right" type="button" class="choice right" aria-label="右の答え" disabled></button>
-    <div id="car" class="car" aria-hidden="true"><div class="tire l"></div><div class="tire r"></div><div class="body"></div><div class="roof"></div><div class="wing"></div><div class="lamp l"></div><div class="lamp r"></div><div class="diffuser"></div><div class="number">GT 01</div></div>
+
+    <div id="car" class="car car--race" aria-hidden="true">
+      <div class="tire l"></div><div class="tire r"></div><div class="body"></div><div class="roof"></div><div class="wing"></div><div class="lamp l"></div><div class="lamp r"></div><div class="diffuser"></div><div class="vehicle-extra"></div><div id="vehicleNumber" class="number">GT 01</div>
+    </div>
+
     <div id="start" class="overlay">
-      <div class="card">
-        <h1>🏎️ サーキット算数</h1>
-        <p>正しい答えのコースを選んでゴールを目指そう！<br>1レース10問。問題は毎回ちがう順番で出題されます。</p>
-        <button id="startBtn" type="button" class="mainbtn">スタート</button>
+      <div class="card start-card">
+        <p class="eyebrow">CHOOSE YOUR VEHICLE</p>
+        <h1>🏎️ くるまスタディ・サーキット</h1>
+        <p class="intro">すきなくるまをえらんで、8もんのレースにしゅっぱつ！<br>こたえは、ひだりとみぎの2たくです。</p>
+
+        <section class="setup-section" aria-labelledby="vehicleHeading">
+          <h2 id="vehicleHeading">① のるくるま</h2>
+          <div class="vehicle-options" role="group" aria-label="車を選ぶ">
+            <button type="button" class="vehicle-option selected" data-vehicle="race" aria-pressed="true"><span class="vehicle-icon">🏎️</span><span class="vehicle-name">レーシングカー</span></button>
+            <button type="button" class="vehicle-option" data-vehicle="police" aria-pressed="false"><span class="vehicle-icon">🚓</span><span class="vehicle-name">パトカー</span></button>
+            <button type="button" class="vehicle-option" data-vehicle="fire" aria-pressed="false"><span class="vehicle-icon">🚒</span><span class="vehicle-name">しょうぼうしゃ</span></button>
+            <button type="button" class="vehicle-option" data-vehicle="truck" aria-pressed="false"><span class="vehicle-icon">🚚</span><span class="vehicle-name">トラック</span></button>
+          </div>
+          <p id="vehiclePreview" class="selection-note">レーシングカーでスタート</p>
+        </section>
+
+        <section class="setup-section" aria-labelledby="subjectHeading">
+          <h2 id="subjectHeading">② べんきょう</h2>
+          <div class="pill-options" role="group" aria-label="学習する教科">
+            <button type="button" class="select-option selected" data-subject-filter="both" aria-pressed="true">国語＋算数</button>
+            <button type="button" class="select-option" data-subject-filter="国語" aria-pressed="false">国語</button>
+            <button type="button" class="select-option" data-subject-filter="算数" aria-pressed="false">算数</button>
+          </div>
+        </section>
+
+        <section class="setup-section" aria-labelledby="gradeHeading">
+          <h2 id="gradeHeading">③ がくねんのめやす</h2>
+          <div class="pill-options" role="group" aria-label="学年の目安">
+            <button type="button" class="select-option selected" data-grade-filter="all" aria-pressed="true">1〜3年ミックス</button>
+            <button type="button" class="select-option" data-grade-filter="1" aria-pressed="false">1年</button>
+            <button type="button" class="select-option" data-grade-filter="2" aria-pressed="false">2年</button>
+            <button type="button" class="select-option" data-grade-filter="3" aria-pressed="false">3年</button>
+          </div>
+        </section>
+
+        <div class="course-preview" aria-live="polite">つぎのコース：<strong id="coursePreview">グランプリ</strong><span>コースは5しゅるいからレースごとにランダム！</span></div>
+        <button id="startBtn" type="button" class="mainbtn">レース スタート！</button>
       </div>
     </div>
+
     <div id="result" class="overlay result" aria-live="assertive">
       <div class="card">
+        <p class="eyebrow">FINISH!</p>
         <h2 id="resultTitle"></h2>
         <p id="resultText"></p>
+        <p id="nextRaceNote" class="selection-note">車はそのまま、次のレースへ！</p>
         <button id="retry" type="button" class="mainbtn">もう一度走る</button>
       </div>
     </div>
