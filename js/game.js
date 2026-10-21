@@ -195,10 +195,11 @@
     }
     if (discard) discard.disabled = !changed;
     const status = el("customStatus");
-    if (status && !status.dataset.notice) {
+    if (status && status.dataset.notice !== "result") {
       status.textContent = changed
         ? "未確定の変更があります。確定するまでは回数を使いません。"
         : "保存済みのカスタムです。パーツを選んで試してみよう。";
+      status.dataset.notice = changed ? "preview" : "";
     }
   }
   function slotClass(slot, value) {
