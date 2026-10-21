@@ -138,7 +138,7 @@
       }
       loaded.selectedLivery = loaded.customParts.livery;
       return loaded;
-    } catch (_) { return Object.assign({}, defaultCareer); }
+    } catch (_) { return Object.assign({}, defaultCareer, { customParts: Object.assign({}, defaultCustomParts), badges: [] }); }
   }
   let career = loadCareer();
   let selectedVehicle = "red";
@@ -173,14 +173,27 @@
     courseNameEl.textContent = currentCourse.name;
     coursePreviewEl.textContent = currentCourse.name;
   }
+  function selectedCustomValue(slot) {
+    return slot === "livery" ? selectedLivery : career.customParts[slot];
+  }
+  function slotClass(slot, value) {
+    const prefix = { livery: "livery--", decal: "decal--", spoiler: "spoiler--", wheels: "wheels--", lights: "lights--", roof: "roof--", aura: "aura--" }[slot];
+    return prefix + value;
+  }
   function applyAppearance() {
     const vehicle = vehicles[selectedVehicle];
-    car.classList.remove("car--red", "car--blue", "car--yellow", "car--black",
-      "livery--stock", "livery--neon", "livery--stripe", "livery--carbon", "left-turn", "right-turn");
-    car.classList.add("car--" + selectedVehicle, "livery--" + selectedLivery);
+    const removable = ["car--red", "car--blue", "car--yellow", "car--black", "left-turn", "right-turn", "nitro-flash"];
+    for (const [slot, config] of Object.entries(customCatalog)) {
+      for (const option of config.options) removable.push(slotClass(slot, option.id));
+    }
+    car.classList.remove(...removable);
+    car.classList.add("car--" + selectedVehicle);
+    for (const slot of Object.keys(customCatalog)) car.classList.add(slotClass(slot, selectedCustomValue(slot)));
     vehicleNumberEl.textContent = vehicle.number;
     vehiclePreviewEl.textContent = vehicle.name + "でスタート";
-    el("liveryPreview").textContent = liveryNames[selectedLivery] + "仕様を選択中";
+    const summary = Object.keys(customCatalog).map(slot => customCatalog[slot].label + "：" +
+      customCatalog[slot].options.find(item => item.id === selectedCustomValue(slot)).name);
+    el("customPreview").textContent = "現在の仕様： " + summary.join(" ／ ");
   }
   function setVehicle(id) {
     if (!vehicles[id]) return;
@@ -192,35 +205,54 @@
     });
     applyAppearance();
   }
-  function setLivery(id) {
-    if (!liveryNames[id] || career.points < liveryUnlocks[id]) return;
-    selectedLivery = id;
-    career.selectedLivery = id;
+  function handleCustomSelection(slot, id) {
+    refreshCustomDaily();
+    const config = customCatalog[slot];
+    const option = config && config.options.find(item => item.id === id);
+    if (!option || option.points > career.points) return;
+    const current = selectedCustomValue(slot);
+    if (current === id) return;
+    if (remainingCustomChanges() <= 0) {
+      renderCustomDaily();
+      return;
+    }
+    dailyCustomState.used++;
+    saveCustomDailyState();
+    if (slot === "livery") {
+      selectedLivery = id;
+      career.selectedLivery = id;
+    }
+    career.customParts[slot] = id;
     saveCareer();
-    document.querySelectorAll("[data-livery]").forEach(button => {
-      const active = button.dataset.livery === id;
-      button.classList.toggle("selected", active);
-      button.setAttribute("aria-pressed", String(active));
-    });
     applyAppearance();
+    renderCareer();
+    renderCustomDaily();
+  }
+  function renderCustomOptions() {
+    for (const [slot, config] of Object.entries(customCatalog)) {
+      const container = el("customOptions-" + slot);
+      if (!container) continue;
+      const current = selectedCustomValue(slot);
+      container.innerHTML = config.options.map(option => {
+        const selected = current === option.id;
+        const unlocked = career.points >= option.points;
+        const disabled = !unlocked || (!selected && remainingCustomChanges() <= 0);
+        const status = !unlocked ? option.points + " ptで解放" : selected ? "装着中" : "変更する";
+        return '<button type="button" class="custom-option' + (selected ? ' is-selected' : '') + (disabled ? ' is-locked' : '') +
+          '" data-custom-slot="' + slot + '" data-custom-value="' + option.id + '" aria-pressed="' + String(selected) + '"' +
+          (disabled ? ' disabled' : '') + '><span class="custom-swatch swatch-' + slot + '-' + option.id + '" aria-hidden="true"></span>' +
+          '<strong>' + option.name + '</strong><small>' + status + '</small></button>';
+      }).join("");
+    }
   }
   function renderCareer() {
     el("careerRaces").textContent = String(career.races);
     el("careerBest").textContent = String(career.bestScore) + " / " + data.game.questionsPerRace;
     el("careerSpeed").textContent = String(career.bestSpeed) + " km/h";
     el("careerPoints").textContent = String(career.points);
-    document.querySelectorAll("[data-livery]").forEach(button => {
-      const id = button.dataset.livery;
-      const unlocked = career.points >= liveryUnlocks[id];
-      button.disabled = !unlocked;
-      button.classList.toggle("locked", !unlocked);
-      button.classList.toggle("selected", selectedLivery === id);
-      button.setAttribute("aria-pressed", String(selectedLivery === id));
-      const small = button.querySelector("small");
-      if (small) small.textContent = unlocked ? (selectedLivery === id ? "選択中" : "選択できます") : liveryUnlocks[id] + " ptで解放";
-    });
     const labels = career.badges.length ? career.badges.map(id => badgeInfo[id] ? badgeInfo[id].name : "").filter(Boolean) : [];
     el("careerBadges").textContent = labels.length ? "獲得した称号：" + labels.join(" ／ ") : "称号はレースを重ねると増えていきます。";
+    renderCustomOptions();
   }
   function updateNitro() {
     el("nitroFill").style.width = nitro + "%";
