@@ -10,8 +10,59 @@
   const vehicleNumberEl = el("vehicleNumber"), vehiclePreviewEl = el("vehiclePreview");
   const buttons = { left: el("left"), right: el("right") };
   const resultTitle = el("resultTitle"), resultText = el("resultText");
-  const liveryNames = { stock: "ファクトリー", neon: "ネオン", stripe: "レーシング", carbon: "カーボン" };
-  const liveryUnlocks = { stock: 0, neon: 25, stripe: 60, carbon: 100 };
+  const customCatalog = {
+    livery: { label: "カラー", options: [
+      { id: "stock", name: "ファクトリー", points: 0 }, { id: "neon", name: "ネオン", points: 25 },
+      { id: "stripe", name: "レーシング", points: 45 }, { id: "carbon", name: "カーボン", points: 70 },
+      { id: "sunset", name: "サンセット", points: 90 }, { id: "ice", name: "アイスブルー", points: 110 },
+      { id: "lime", name: "ライム", points: 130 }, { id: "purple", name: "パープル", points: 150 },
+      { id: "sakura", name: "サクラ", points: 175 }, { id: "gold", name: "ゴールド", points: 200 },
+      { id: "ocean", name: "オーシャン", points: 225 }, { id: "flame", name: "フレイム", points: 250 },
+      { id: "desert", name: "デザート", points: 280 }, { id: "candy", name: "キャンディ", points: 310 },
+      { id: "stealth", name: "ステルス", points: 350 }
+    ]},
+    decal: { label: "ステッカー", options: [
+      { id: "none", name: "なし", points: 0 }, { id: "stripe", name: "スピードライン", points: 0 },
+      { id: "checker", name: "チェッカー", points: 15 }, { id: "flame", name: "ファイア", points: 25 },
+      { id: "lightning", name: "稲妻", points: 35 }, { id: "stars", name: "スター", points: 45 },
+      { id: "sponsor", name: "レーシングロゴ", points: 55 }, { id: "circuit", name: "サーキット", points: 70 },
+      { id: "camo", name: "カモフラージュ", points: 90 }, { id: "digital", name: "デジタル", points: 110 }
+    ]},
+    spoiler: { label: "ウイング", options: [
+      { id: "stock", name: "標準", points: 0 }, { id: "double", name: "ダブル", points: 0 },
+      { id: "high", name: "ハイウイング", points: 20 }, { id: "split", name: "スプリット", points: 35 },
+      { id: "carbon", name: "カーボン", points: 50 }, { id: "aero", name: "エアロGT", points: 70 },
+      { id: "wide", name: "ワイド", points: 90 }
+    ]},
+    wheels: { label: "ホイール", options: [
+      { id: "stock", name: "標準", points: 0 }, { id: "silver", name: "シルバー", points: 0 },
+      { id: "gold", name: "ゴールド", points: 15 }, { id: "ice", name: "アイス", points: 25 },
+      { id: "red", name: "レッド", points: 35 }, { id: "neon", name: "ネオン", points: 45 },
+      { id: "white", name: "ホワイト", points: 60 }, { id: "carbon", name: "カーボン", points: 75 },
+      { id: "rainbow", name: "レインボー", points: 100 }
+    ]},
+    lights: { label: "ライト", options: [
+      { id: "stock", name: "標準レッド", points: 0 }, { id: "ice", name: "アイスブルー", points: 0 },
+      { id: "amber", name: "アンバー", points: 20 }, { id: "green", name: "グリーン", points: 35 },
+      { id: "purple", name: "パープル", points: 50 }, { id: "gold", name: "ゴールド", points: 65 },
+      { id: "rainbow", name: "レインボー", points: 85 }
+    ]},
+    roof: { label: "ルーフ飾り", options: [
+      { id: "none", name: "なし", points: 0 }, { id: "stripe", name: "ストライプ", points: 0 },
+      { id: "checker", name: "チェッカー", points: 20 }, { id: "stars", name: "スター", points: 30 },
+      { id: "flag", name: "チェッカーフラッグ", points: 45 }, { id: "number", name: "ゼッケン", points: 55 },
+      { id: "japan", name: "日の丸", points: 70 }, { id: "digital", name: "デジタル", points: 90 }
+    ]},
+    aura: { label: "エフェクト", options: [
+      { id: "none", name: "なし", points: 0 }, { id: "blue", name: "ブーストブルー", points: 20 },
+      { id: "flame", name: "ファイア", points: 35 }, { id: "purple", name: "プラズマ", points: 50 },
+      { id: "emerald", name: "エメラルド", points: 70 }, { id: "gold", name: "ゴールド", points: 90 },
+      { id: "rainbow", name: "レインボー", points: 120 }
+    ]}
+  };
+  const liveryNames = Object.fromEntries(customCatalog.livery.options.map(item => [item.id, item.name]));
+  const liveryUnlocks = Object.fromEntries(customCatalog.livery.options.map(item => [item.id, item.points]));
+  const defaultCustomParts = Object.fromEntries(Object.entries(customCatalog).map(([slot, config]) => [slot, config.options[0].id]));
   const vehicles = {
     red: { name: "GT レッド", number: "GT 01", detail: "スタンダード" },
     blue: { name: "GT ブルー", number: "GT 03", detail: "ダブルウイング" },
@@ -32,51 +83,61 @@
     { id: "crew-support", name: "クルー応援デー", description: "完走するとピットクルーから6ptプレゼント！", startSpeed: 60, nitroBonus: 0, pointBonus: 0, finishBonus: 6 },
     { id: "streak-festival", name: "連続正解フェス", description: "連続正解するとニトロがさらにたまる！", startSpeed: 60, nitroBonus: 0, streakBonus: 10, pointBonus: 0, finishBonus: 0 }
   ];
-  const defaultCareer = { points: 0, races: 0, bestScore: 0, bestSpeed: 0, bestStreak: 0, totalCorrect: 0, wins: 0, totalNitro: 0, badges: [], selectedLivery: "stock" };
+  const defaultCareer = { points: 0, races: 0, bestScore: 0, bestSpeed: 0, bestStreak: 0, totalCorrect: 0, wins: 0, totalNitro: 0, badges: [], selectedLivery: "stock", customParts: defaultCustomParts };
   const storageKey = "kuruma-study-career-v1";
-  const dailyStorageKey = "kuruma-study-daily-v1";
-  const dailySpecialLimit = 3;
-  const normalEvent = { id: "standard", name: "通常レース", description: "スペシャルイベントの対象回数外です。通常レースは何度でも楽しめます。", startSpeed: 60, nitroBonus: 0, streakBonus: 0, pointBonus: 0, finishBonus: 0, isSpecial: false };
+  const customDailyStorageKey = "kuruma-study-custom-daily-v1";
+  const dailyCustomLimit = 3;
   function localDayKey() {
     const d = new Date();
     return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0");
   }
-  function readDailyState() {
+  function readCustomDailyState() {
     const today = localDayKey();
     try {
-      const saved = JSON.parse(localStorage.getItem(dailyStorageKey) || "null");
+      const saved = JSON.parse(localStorage.getItem(customDailyStorageKey) || "null");
       if (!saved || saved.date !== today) return { date: today, used: 0 };
-      return { date: today, used: Math.max(0, Math.min(dailySpecialLimit, Number(saved.used) || 0)) };
+      return { date: today, used: Math.max(0, Math.min(dailyCustomLimit, Number(saved.used) || 0)) };
     } catch (_) { return { date: today, used: 0 }; }
   }
-  let dailyState = readDailyState();
-  function saveDailyState() {
-    try { localStorage.setItem(dailyStorageKey, JSON.stringify(dailyState)); } catch (_) {}
+  let dailyCustomState = readCustomDailyState();
+  function saveCustomDailyState() {
+    try { localStorage.setItem(customDailyStorageKey, JSON.stringify(dailyCustomState)); } catch (_) {}
   }
-  function refreshDailyState() {
-    if (dailyState.date !== localDayKey()) dailyState = { date: localDayKey(), used: 0 };
-    renderDailyState();
+  function remainingCustomChanges() { return Math.max(0, dailyCustomLimit - dailyCustomState.used); }
+  function refreshCustomDaily() {
+    if (dailyCustomState.date !== localDayKey()) dailyCustomState = { date: localDayKey(), used: 0 };
+    renderCustomDaily();
   }
-  function remainingSpecialRaces() { return Math.max(0, dailySpecialLimit - dailyState.used); }
-  function renderDailyState() {
-    const remaining = remainingSpecialRaces();
-    const count = el("dailySpecialCount");
+  function renderCustomDaily() {
+    const remaining = remainingCustomChanges();
+    const count = el("dailyCustomCount");
     if (count) count.textContent = String(remaining);
-    const message = el("dailyLimitMessage");
+    const message = el("dailyCustomMessage");
     if (message) message.textContent = remaining > 0
-      ? "スペシャルイベントとポイントボーナスは1日3回まで。通常レースは何度でもプレイできます。"
-      : "今日のスペシャルレースは終了。通常レースと学習は引き続き何度でもプレイできます。";
-    const resultNote = el("dailySpecialResult");
-    if (resultNote) resultNote.textContent = "今日のスペシャルレース残り：" + remaining + " / " + dailySpecialLimit + "回";
+      ? "パーツを1つ変更すると1回分を使います。同じパーツを選び直しても回数は減りません。"
+      : "今日はカスタム変更の上限です。ポイント集め・レース・問題練習は何度でも続けられます。";
+    const resultNote = el("dailyCustomResult");
+    if (resultNote) resultNote.textContent = "今日のカスタム変更残り：" + remaining + " / " + dailyCustomLimit + "回";
+    renderCustomOptions();
   }
   function loadCareer() {
     try {
       const parsed = JSON.parse(localStorage.getItem(storageKey) || "{}");
       const saved = parsed && typeof parsed === "object" ? parsed : {};
-      return Object.assign({}, defaultCareer, saved, {
+      const loaded = Object.assign({}, defaultCareer, saved, {
         badges: Array.isArray(saved.badges) ? saved.badges : [],
-        selectedLivery: liveryNames[saved.selectedLivery] ? saved.selectedLivery : "stock"
+        selectedLivery: liveryNames[saved.selectedLivery] ? saved.selectedLivery : "stock",
+        customParts: Object.assign({}, defaultCustomParts, saved.customParts || {})
       });
+      if (!saved.customParts || !saved.customParts.livery) loaded.customParts.livery = loaded.selectedLivery;
+      for (const [slot, config] of Object.entries(customCatalog)) {
+        const selected = loaded.customParts[slot];
+        const option = config.options.find(item => item.id === selected);
+        loaded.customParts[slot] = option && option.points <= (Number(loaded.points) || 0)
+          ? selected : defaultCustomParts[slot];
+      }
+      loaded.selectedLivery = loaded.customParts.livery;
+      return loaded;
     } catch (_) { return Object.assign({}, defaultCareer); }
   }
   let career = loadCareer();
