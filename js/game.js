@@ -443,7 +443,7 @@
       ? "新しい称号を獲得！ " + newBadges.map(id => badgeInfo[id].name).join("・")
       : (career.badges.length ? "獲得した称号：" + career.badges.map(id => badgeInfo[id].name).join("・") : "レースを続けて称号を集めよう。");
     el("nextRaceNote").textContent = vehicles[selectedVehicle].name + "・" + liveryNames[selectedLivery] +
-      "仕様。次は別のコースとイベントが待っている！";
+      "仕様。" + (remainingSpecialRaces() > 0 ? "次は別のコースとスペシャルイベントが待っている！" : "スペシャルイベントは今日はここまで。通常レースはいつでも再挑戦できます。");
     renderDailyState();
     result.classList.add("show");
     updateNitro();
