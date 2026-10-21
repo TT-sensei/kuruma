@@ -61,7 +61,6 @@
     ]}
   };
   const liveryNames = Object.fromEntries(customCatalog.livery.options.map(item => [item.id, item.name]));
-  const liveryUnlocks = Object.fromEntries(customCatalog.livery.options.map(item => [item.id, item.points]));
   const defaultCustomParts = Object.fromEntries(Object.entries(customCatalog).map(([slot, config]) => [slot, config.options[0].id]));
   const vehicles = {
     red: { name: "GT レッド", number: "GT 01", detail: "スタンダード" },
@@ -85,43 +84,19 @@
   ];
   const defaultCareer = { points: 0, races: 0, bestScore: 0, bestSpeed: 0, bestStreak: 0, totalCorrect: 0, wins: 0, totalNitro: 0, badges: [], selectedLivery: "stock", customParts: defaultCustomParts };
   const storageKey = "kuruma-study-career-v1";
-  const customDailyStorageKey = "kuruma-study-custom-daily-v1";
-  const dailyCustomLimit = 3;
-  function localDayKey() {
-    const d = new Date();
-    return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0");
+  const minCustomChangeCost = 5;
+  function customOptionCost(option) {
+    return Math.max(minCustomChangeCost, Math.max(0, Number(option && option.points) || 0));
   }
-  function readCustomDailyState() {
-    const today = localDayKey();
-    try {
-      const saved = JSON.parse(localStorage.getItem(customDailyStorageKey) || "null");
-      if (!saved || saved.date !== today) return { date: today, used: 0 };
-      return { date: today, used: Math.max(0, Math.min(dailyCustomLimit, Number(saved.used) || 0)) };
-    } catch (_) { return { date: today, used: 0 }; }
-  }
-  let dailyCustomState = readCustomDailyState();
-  function saveCustomDailyState() {
-    try { localStorage.setItem(customDailyStorageKey, JSON.stringify(dailyCustomState)); } catch (_) {}
-  }
-  function remainingCustomChanges() { return Math.max(0, dailyCustomLimit - dailyCustomState.used); }
-  function refreshCustomDaily() {
-    if (dailyCustomState.date !== localDayKey()) dailyCustomState = { date: localDayKey(), used: 0 };
-    renderCustomDaily();
-  }
-  function renderCustomDaily() {
-    const remaining = remainingCustomChanges();
-    const count = el("dailyCustomCount");
-    if (count) count.textContent = String(remaining);
-    const message = el("dailyCustomMessage");
-    if (message) message.textContent = remaining > 0
-      ? "好きなだけパーツを選んで試せます。確定を1回押すと変更回数を1回使います。"
-      : "今日は確定の上限です。選ぶだけなら試せますが、保存は明日から。レースとポイント集めは続けられます。";
-    const resultNote = el("dailyCustomResult");
-    if (resultNote) resultNote.textContent = "今日のカスタム変更残り：" + remaining + " / " + dailyCustomLimit + "回";
-    renderCustomOptions();
-    renderCustomActions();
+  function pendingCustomCost() {
+    return Object.keys(customCatalog).reduce((total, slot) => {
+      if (pendingCustomParts[slot] === career.customParts[slot]) return total;
+      const option = customCatalog[slot].options.find(item => item.id === pendingCustomParts[slot]);
+      return total + customOptionCost(option);
+    }, 0);
   }
   function loadCareer() {
+
     try {
       const parsed = JSON.parse(localStorage.getItem(storageKey) || "{}");
       const saved = parsed && typeof parsed === "object" ? parsed : {};
@@ -134,8 +109,7 @@
       for (const [slot, config] of Object.entries(customCatalog)) {
         const selected = loaded.customParts[slot];
         const option = config.options.find(item => item.id === selected);
-        loaded.customParts[slot] = option && option.points <= (Number(loaded.points) || 0)
-          ? selected : defaultCustomParts[slot];
+        loaded.customParts[slot] = option ? selected : defaultCustomParts[slot];
       }
       loaded.selectedLivery = loaded.customParts.livery;
       return loaded;
@@ -144,7 +118,6 @@
   let career = loadCareer();
   let selectedVehicle = "red";
   let selectedLivery = career.selectedLivery || "stock";
-  if ((liveryUnlocks[selectedLivery] || 0) > career.points) selectedLivery = "stock";
   let pendingCustomParts = Object.assign({}, career.customParts || defaultCustomParts);
   pendingCustomParts.livery = selectedLivery;
   let subjectFilter = "both";
@@ -183,22 +156,34 @@
     return Object.keys(customCatalog).some(slot => pendingCustomParts[slot] !== career.customParts[slot]);
   }
   function renderCustomActions() {
-    const remaining = remainingCustomChanges();
     const changed = hasPendingCustomChanges();
+    const cost = pendingCustomCost();
+    const balance = Math.max(0, Number(career.points) || 0);
+    const enough = cost <= balance;
     const confirm = el("confirmCustomBtn");
     const discard = el("discardCustomBtn");
+    const balanceEl = el("garagePointBalance");
+    const costEl = el("customCostPreview");
+    const afterEl = el("customPointsAfter");
+    if (balanceEl) balanceEl.textContent = String(balance);
+    if (costEl) costEl.textContent = String(cost);
+    if (afterEl) afterEl.textContent = String(Math.max(0, balance - cost));
     if (confirm) {
-      confirm.disabled = !changed || remaining <= 0;
-      confirm.textContent = remaining > 0
-        ? "このカスタムで確定（1回使用・残り" + remaining + "回）"
-        : "本日のカスタム変更は終了";
+      confirm.disabled = !changed || !enough || raceActive;
+      confirm.textContent = !changed
+        ? "🪙 変更するパーツを選ぼう"
+        : enough
+          ? "🪙 購入して装着（合計 " + cost + " pt）"
+          : "ポイント不足（あと " + (cost - balance) + " pt）";
     }
-    if (discard) discard.disabled = !changed;
+    if (discard) discard.disabled = !changed || raceActive;
     const status = el("customStatus");
     if (status && status.dataset.notice !== "result") {
       status.textContent = changed
-        ? "未確定の変更があります。確定するまでは回数を使いません。"
-        : "保存済みのカスタムです。パーツを選んで試してみよう。";
+        ? enough
+          ? "今回の変更費用は合計 " + cost + " pt。確定すると購入され、残高は " + (balance - cost) + " ptになります。"
+          : "今回の変更費用は合計 " + cost + " pt。あと " + (cost - balance) + " pt必要です。問題に正解してポイントをためよう。"
+        : "各パーツに価格が表示されます。変更は「購入して装着」で確定し、ポイントは問題を解いてためます。";
       status.dataset.notice = changed ? "preview" : "";
     }
   }
@@ -234,12 +219,21 @@
   function handleCustomSelection(slot, id) {
     const config = customCatalog[slot];
     const option = config && config.options.find(item => item.id === id);
-    if (!option || option.points > career.points || raceActive) return;
+    if (!option || raceActive) return;
     if (selectedCustomValue(slot) === id) return;
+    const price = customOptionCost(option);
+    if (price > career.points) {
+      const status = el("customStatus");
+      if (status) {
+        status.textContent = "このパーツは " + price + " pt。今の残高は " + career.points + " ptです。問題に正解してポイントをためよう。";
+        status.dataset.notice = "result";
+      }
+      return;
+    }
     pendingCustomParts[slot] = id;
     const status = el("customStatus");
     if (status) {
-      status.textContent = "変更候補をプレビュー中です。最後に「このカスタムで確定」を押すと1回分を使います。";
+      status.textContent = "変更をプレビュー中です。確定すると、選んだパーツの合計価格をポイントで支払います。";
       status.dataset.notice = "preview";
     }
     applyAppearance();
@@ -248,45 +242,36 @@
   }
   function confirmCustomChanges() {
     if (raceActive) return;
-    refreshCustomDaily();
     const changedSlots = Object.keys(customCatalog).filter(slot =>
       pendingCustomParts[slot] !== career.customParts[slot]
     );
+    const cost = pendingCustomCost();
     const status = el("customStatus");
     if (!changedSlots.length) {
       if (status) {
-        status.textContent = "変更はありません。カスタム回数は減っていません。";
+        status.textContent = "変更はありません。ポイントは減っていません。";
         status.dataset.notice = "result";
       }
       return;
     }
-    if (remainingCustomChanges() <= 0) {
+    if (cost > career.points) {
       if (status) {
-        status.textContent = "今日の変更回数を使い切りました。選んだ内容はまだ保存されていません。";
+        status.textContent = "ポイントが " + (cost - career.points) + " pt足りません。パーツを選び直すか、レースの問題に正解してためよう。";
         status.dataset.notice = "result";
       }
-      renderCustomActions();
+      renderCustomOptions();
       return;
     }
-    for (const slot of changedSlots) {
-      const option = customCatalog[slot].options.find(item => item.id === pendingCustomParts[slot]);
-      if (!option || option.points > career.points) {
-        if (status) status.textContent = "ポイントが足りないパーツが含まれています。選び直してください。";
-        return;
-      }
-    }
-    dailyCustomState.used++;
-    saveCustomDailyState();
+    career.points -= cost;
     career.customParts = Object.assign({}, pendingCustomParts);
     selectedLivery = career.customParts.livery;
     career.selectedLivery = selectedLivery;
     saveCareer();
     applyAppearance();
     renderCareer();
-    renderCustomDaily();
     if (status) {
-      status.textContent = "カスタム確定！ " + changedSlots.length +
-        "カテゴリを保存しました。今日の変更回数を1回使いました。";
+      status.textContent = "カスタム購入成功！ " + changedSlots.length +
+        "カテゴリを変更し、合計 " + cost + " pt使いました。残り " + career.points + " ptです。";
       status.dataset.notice = "result";
     }
     renderCustomActions();
@@ -298,7 +283,7 @@
     renderCareer();
     const status = el("customStatus");
     if (status) {
-      status.textContent = "未確定の変更を取り消しました。カスタム回数は減っていません。";
+      status.textContent = "未確定の変更を取り消しました。ポイントは減っていません。";
       status.dataset.notice = "result";
     }
     renderCustomActions();
@@ -312,9 +297,18 @@
       container.innerHTML = config.options.map(option => {
         const selected = current === option.id;
         const saved = committed === option.id;
-        const unlocked = career.points >= option.points;
-        const disabled = !unlocked;
-        const status = !unlocked ? option.points + " ptで解放" : selected && !saved ? "仮選択中" : selected ? "装着中" : saved ? "保存済み" : "選ぶ";
+        const price = customOptionCost(option);
+        const affordable = career.points >= price;
+        const disabled = !affordable && !selected;
+        const status = selected && saved
+          ? "装着中"
+          : selected
+            ? "選択中・" + price + " pt"
+            : !affordable
+              ? price + " pt・あと" + (price - career.points) + " pt"
+              : saved
+                ? price + " ptで戻す"
+                : price + " ptで変更";
         return '<button type="button" class="custom-option' + (selected ? ' is-selected' : '') +
           (saved && !selected ? ' is-saved' : '') + (disabled ? ' is-locked' : '') +
           '" data-custom-slot="' + slot + '" data-custom-value="' + option.id + '" aria-pressed="' + String(selected) + '"' +
@@ -411,7 +405,6 @@
     resetScene();
     clearTimeout(nitroTimer);
     root.classList.remove("nitro-active");
-    refreshCustomDaily();
     if (!courseReady) chooseCourse();
     courseReady = false;
     if (hasPendingCustomChanges()) {
@@ -424,7 +417,6 @@
         status.dataset.notice = "result";
       }
     }
-    refreshCustomDaily();
     currentEvent = Object.assign({}, events[Math.floor(Math.random() * events.length)], { isSpecial: true });
     score = 0;
     index = 0;
@@ -622,7 +614,6 @@
       : (career.badges.length ? "獲得した称号：" + career.badges.map(id => badgeInfo[id].name).join("・") : "レースを続けて称号を集めよう。");
     el("nextRaceNote").textContent = vehicles[selectedVehicle].name + "・" + liveryNames[selectedLivery] +
       "仕様。次は別のコースとイベントが待っている！";
-    renderCustomDaily();
     result.classList.add("show");
     updateNitro();
     el("retry").focus({ preventScroll: true });
@@ -659,7 +650,6 @@
     start.classList.remove("hide");
     resetScene();
     courseReady = false;
-    refreshCustomDaily();
     renderCareer();
     el("startBtn").focus({ preventScroll: true });
   });
@@ -679,7 +669,6 @@
   setVehicle(selectedVehicle);
   applyAppearance();
   renderCareer();
-  refreshCustomDaily();
   chooseCourse();
   updateNitro();
 })();
