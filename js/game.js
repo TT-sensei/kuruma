@@ -29,7 +29,7 @@
   let currentCourse = null;
   let courseReady = true;
   let currentQuestion = null;
-  let raceQuestions = [], index = 0, score = 0, locked = false, timer = null;
+  let raceQuestions = [], index = 0, score = 0, speed = 60, locked = false, timer = null;
 
   function shuffled(items) {
     const copy = [...items];
@@ -67,6 +67,24 @@
       button.setAttribute("aria-pressed", String(active));
     });
   }
+  function updateSpeed(delta) {
+    const previous = speed;
+    speed = Math.max(20, Math.min(240, speed + delta));
+    el("speed").textContent = String(speed);
+    el("speedPanel").setAttribute("aria-label", "現在の時速 " + speed + " キロメートル");
+    el("speedPanel").classList.remove("speed-up", "speed-down");
+    el("speedPanel").classList.add(speed >= previous ? "speed-up" : "speed-down");
+    const duration = 1.3 - ((speed - 20) / 220) * 1.05;
+    root.style.setProperty("--drive-duration", duration.toFixed(2) + "s");
+    return speed - previous;
+  }
+  function resetSpeed() {
+    speed = 60;
+    el("speed").textContent = "60";
+    el("speedPanel").classList.remove("speed-up", "speed-down");
+    el("speedPanel").setAttribute("aria-label", "現在の時速 60 キロメートル");
+    root.style.setProperty("--drive-duration", "1.11s");
+  }
   function resetScene() {
     clearTimeout(timer);
     locked = false;
@@ -86,6 +104,7 @@
     courseReady = false;
     score = 0;
     index = 0;
+    resetSpeed();
     scoreEl.textContent = "0";
     start.classList.add("hide");
     const pool = data.questions.filter(q =>
@@ -141,11 +160,13 @@
     if (correct) {
       score++;
       scoreEl.textContent = String(score);
-      feedbackEl.textContent = "せいかい！ " + currentQuestion.explanation;
+      const gain = updateSpeed(20);
+      feedbackEl.textContent = "せいかい！ " + (gain > 0 ? "時速 +" + gain + " km/h！ " : "最高速度！ ") + "いま " + speed + " km/h。 " + currentQuestion.explanation;
     } else {
       const correctChoice = currentQuestion.choices.find(choice => String(choice.value) === String(currentQuestion.correctValue));
       const correctLabel = correctChoice ? correctChoice.label : String(currentQuestion.correctValue);
-      feedbackEl.textContent = "おしい！ 正解は「" + correctLabel + "」。" + currentQuestion.explanation;
+      const loss = updateSpeed(-15);
+      feedbackEl.textContent = "おしい！ " + (loss < 0 ? "時速 " + loss + " km/h。 " : "これ以上はおそくならないよ！ ") + "いま " + speed + " km/h。正解は「" + correctLabel + "」。" + currentQuestion.explanation;
     }
     timer = setTimeout(() => {
       index++;
