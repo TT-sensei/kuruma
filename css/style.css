@@ -198,6 +198,7 @@ button{font:inherit}
 .career-badges{margin-top:8px;color:#a9d8ed;font-size:11px;line-height:1.5}
 .result-records{padding:10px 12px;border-radius:12px;background:#ffffff0b;color:#c6d8e2;font-size:13px;line-height:1.6}
 .badge-notice{color:#ffe16a;font-weight:900;font-size:14px}
+.question{top:151px}
 @media(max-width:700px){
   .race-utility{top:102px;left:8px;right:8px;gap:6px}
   .duel-panel{min-width:112px;grid-template-columns:minmax(70px,1fr) auto;gap:3px 5px;padding:5px 7px}
