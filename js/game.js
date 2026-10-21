@@ -135,7 +135,7 @@
     currentQuestion = q;
     prompt.textContent = q.prompt;
     progressEl.textContent = (index + 1) + " / " + raceQuestions.length;
-    el("questionHint").textContent = q.subject + "・" + q.grade + "年生の問題";
+    el("questionHint").textContent = q.subject + "・" + ({1:"基礎",2:"標準",3:"チャレンジ"}[q.grade] || "標準") + "レベル";
     Object.values(buttons).forEach(button => { button.textContent = ""; button.dataset.value = ""; });
     q.choices.forEach(choice => {
       const button = buttons[choice.side];
@@ -161,12 +161,12 @@
       score++;
       scoreEl.textContent = String(score);
       const gain = updateSpeed(20);
-      feedbackEl.textContent = "せいかい！ " + (gain > 0 ? "時速 +" + gain + " km/h！ " : "最高速度！ ") + "いま " + speed + " km/h。 " + currentQuestion.explanation;
+      feedbackEl.textContent = "正解です。 " + (gain > 0 ? "時速 +" + gain + " km/h。 " : "最高速度です。 ") + "現在 " + speed + " km/h。 " + currentQuestion.explanation;
     } else {
       const correctChoice = currentQuestion.choices.find(choice => String(choice.value) === String(currentQuestion.correctValue));
       const correctLabel = correctChoice ? correctChoice.label : String(currentQuestion.correctValue);
       const loss = updateSpeed(-15);
-      feedbackEl.textContent = "おしい！ " + (loss < 0 ? "時速 " + loss + " km/h。 " : "これ以上はおそくならないよ！ ") + "いま " + speed + " km/h。正解は「" + correctLabel + "」。" + currentQuestion.explanation;
+      feedbackEl.textContent = "不正解です。 " + (loss < 0 ? "時速 " + loss + " km/h。 " : "最低速度を維持しています。 ") + "現在 " + speed + " km/h。正解は「" + correctLabel + "」。" + currentQuestion.explanation;
     }
     timer = setTimeout(() => {
       index++;
@@ -180,7 +180,7 @@
     resultTitle.textContent = score === total ? "パーフェクト！ 🏆" : "ゴール！ 🏁";
     resultTitle.style.color = score === total ? "#3be89c" : "#ffd12a";
     resultText.textContent = total + "問中 " + score + "問正解！" +
-      (score === total ? " 全問正解、すばらしい！" : " まちがえた問題も、解説を見ながら少しずつ覚えよう。");
+      (score === total ? " 全問正解です。見事な走りでした！" : " 解説を確認して、次のレースに生かしましょう。");
     el("nextRaceNote").textContent = vehicles[selectedVehicle].name + "（" + vehicles[selectedVehicle].detail + "）で、次は別のコースに挑戦しよう！";
     result.classList.add("show");
     el("retry").focus({ preventScroll: true });
