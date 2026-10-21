@@ -332,17 +332,10 @@
     resetScene();
     clearTimeout(nitroTimer);
     root.classList.remove("nitro-active");
-    refreshDailyState();
+    refreshCustomDaily();
     if (!courseReady) chooseCourse();
     courseReady = false;
-    if (remainingSpecialRaces() > 0) {
-      dailyState.used++;
-      saveDailyState();
-      currentEvent = Object.assign({}, events[Math.floor(Math.random() * events.length)], { isSpecial: true });
-    } else {
-      currentEvent = normalEvent;
-    }
-    renderDailyState();
+    currentEvent = Object.assign({}, events[Math.floor(Math.random() * events.length)], { isSpecial: true });
     score = 0;
     index = 0;
     streak = 0;
@@ -509,7 +502,7 @@
     const total = raceQuestions.length;
     const won = playerDistance >= rivalDistance;
     const rewardThreshold = Math.ceil(total * 0.625);
-    const earnsReward = currentEvent.isSpecial && score >= rewardThreshold;
+    const earnsReward = score >= rewardThreshold;
     const eventPoints = earnsReward ? score * (currentEvent.pointBonus || 0) + (currentEvent.finishBonus || 0) : 0;
     const reward = earnsReward ? 5 + score * 2 + eventPoints + (won ? 3 : 0) : 0;
     const wasBest = score > career.bestScore;
@@ -528,11 +521,9 @@
     resultTitle.style.color = won ? "#3be89c" : "#ffd12a";
     resultText.textContent = total + "問中 " + score + "問正解。 " +
       (score === total ? "パーフェクト！ " : "解説を確認して次のレースに生かそう。 ") +
-      (currentEvent.isSpecial
-        ? (earnsReward
-          ? "今回の獲得ポイント：" + reward + " pt" + (eventPoints ? "（イベントボーナス +" + eventPoints + " ptを含む）" : "")
-          : "ポイント獲得には " + rewardThreshold + "問以上の正解が必要です。今回はポイントなし。解説を確認して、次のレースで再挑戦しよう。")
-        : "今日はスペシャルレースの上限に達しています。通常レースと学習は引き続き楽しめます。ポイントは明日また獲得できます。");
+      (earnsReward
+        ? "今回の獲得ポイント：" + reward + " pt" + (eventPoints ? "（イベントボーナス +" + eventPoints + " ptを含む）" : "")
+        : "ポイント獲得には " + rewardThreshold + "問以上の正解が必要です。今回はポイントなし。解説を確認して、次のレースで再挑戦しよう。");
     el("resultRecords").textContent =
       "イベント：" + currentEvent.name + " ／ 最高速度 " + raceBestSpeed + " km/h ／ 連続正解 " + raceBestStreak +
       "問 ／ ニトロ " + nitroUses + "回" + (wasBest ? " ／ 🆕 自己ベスト更新！" : "");
@@ -540,8 +531,8 @@
       ? "新しい称号を獲得！ " + newBadges.map(id => badgeInfo[id].name).join("・")
       : (career.badges.length ? "獲得した称号：" + career.badges.map(id => badgeInfo[id].name).join("・") : "レースを続けて称号を集めよう。");
     el("nextRaceNote").textContent = vehicles[selectedVehicle].name + "・" + liveryNames[selectedLivery] +
-      "仕様。" + (remainingSpecialRaces() > 0 ? "次は別のコースとスペシャルイベントが待っている！" : "スペシャルイベントは今日はここまで。通常レースはいつでも再挑戦できます。");
-    renderDailyState();
+      "仕様。次は別のコースとイベントが待っている！";
+    renderCustomDaily();
     result.classList.add("show");
     updateNitro();
     el("retry").focus({ preventScroll: true });
@@ -550,9 +541,10 @@
   document.querySelectorAll("[data-vehicle]").forEach(button =>
     button.addEventListener("click", () => setVehicle(button.dataset.vehicle))
   );
-  document.querySelectorAll("[data-livery]").forEach(button =>
-    button.addEventListener("click", () => setLivery(button.dataset.livery))
-  );
+  document.addEventListener("click", event => {
+    const button = event.target.closest("[data-custom-slot][data-custom-value]");
+    if (button && !button.disabled && !raceActive) handleCustomSelection(button.dataset.customSlot, button.dataset.customValue);
+  });
   document.querySelectorAll("[data-subject-filter]").forEach(button => button.addEventListener("click", () => {
     subjectFilter = button.dataset.subjectFilter;
     setSelectedOption("[data-subject-filter]", subjectFilter, "data-subject-filter");
@@ -575,7 +567,7 @@
     start.classList.remove("hide");
     resetScene();
     courseReady = false;
-    refreshDailyState();
+    refreshCustomDaily();
     renderCareer();
     el("startBtn").focus({ preventScroll: true });
   });
@@ -593,9 +585,9 @@
   });
 
   setVehicle(selectedVehicle);
-  setLivery(selectedLivery);
+  applyAppearance();
   renderCareer();
-  refreshDailyState();
+  refreshCustomDaily();
   chooseCourse();
   updateNitro();
 })();
