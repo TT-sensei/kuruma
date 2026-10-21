@@ -74,7 +74,7 @@
     el("speedPanel").setAttribute("aria-label", "現在の時速 " + speed + " キロメートル");
     el("speedPanel").classList.remove("speed-up", "speed-down");
     el("speedPanel").classList.add(speed >= previous ? "speed-up" : "speed-down");
-    const duration = 1.3 - ((speed - 20) / 220) * 1.05;
+    const duration = 0.56 - ((speed - 20) / 220) * 0.44;
     root.style.setProperty("--drive-duration", duration.toFixed(2) + "s");
     return speed - previous;
   }
@@ -83,7 +83,7 @@
     el("speed").textContent = "60";
     el("speedPanel").classList.remove("speed-up", "speed-down");
     el("speedPanel").setAttribute("aria-label", "現在の時速 60 キロメートル");
-    root.style.setProperty("--drive-duration", "1.11s");
+    root.style.setProperty("--drive-duration", "0.48s");
   }
   function resetScene() {
     clearTimeout(timer);
