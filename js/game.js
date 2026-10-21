@@ -114,8 +114,8 @@
     if (count) count.textContent = String(remaining);
     const message = el("dailyCustomMessage");
     if (message) message.textContent = remaining > 0
-      ? "パーツを1つ変更すると1回分を使います。同じパーツを選び直しても回数は減りません。"
-      : "今日はカスタム変更の上限です。ポイント集め・レース・問題練習は何度でも続けられます。";
+      ? "好きなだけパーツを選んで試せます。確定を1回押すと変更回数を1回使います。"
+      : "今日は確定の上限です。選ぶだけなら試せますが、保存は明日から。レースとポイント集めは続けられます。";
     const resultNote = el("dailyCustomResult");
     if (resultNote) resultNote.textContent = "今日のカスタム変更残り：" + remaining + " / " + dailyCustomLimit + "回";
     renderCustomOptions();
