@@ -517,7 +517,6 @@
     });
     updatePhase();
     maybeTrafficPass();
-    maybeTrafficPass();
     timer = setTimeout(() => {
       questionPanel.classList.add("show");
       Object.values(buttons).forEach(button => {
