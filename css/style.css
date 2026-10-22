@@ -792,3 +792,23 @@ p{line-height:1.75}
  .learning-panel .vehicle-option .vehicle-name{font-size:12px}
  .learning-panel .vehicle-detail{font-size:10px}
 }
+
+/* 対向車が遠くから近づき、プレイヤーの車をよけて追いこす演出 */
+.duel-panel{display:none!important}
+.traffic-car{position:absolute;z-index:9;top:25%;left:50%;width:clamp(44px,8vw,86px);height:clamp(28px,5vw,54px);opacity:0;pointer-events:none;transform:translate(-50%,-50%) scale(.18);filter:drop-shadow(0 4px 3px #0007)}
+.traffic-car .body{position:absolute;left:7%;right:7%;top:35%;height:48%;border-radius:48% 48% 24% 24%;background:linear-gradient(#5bbcff,#1762b5 60%,#0b2b58);border:2px solid #d9f1ff}
+.traffic-car .roof{position:absolute;left:28%;top:13%;width:44%;height:36%;border-radius:45% 45% 10% 10%;background:linear-gradient(#c9f0ff,#377eb9);border:2px solid #e8f9ff}
+.traffic-car .wing{position:absolute;left:0;right:0;top:28%;height:5px;border-radius:3px;background:#142a42;box-shadow:0 -3px 0 #a8dfff}
+.traffic-car .tire{position:absolute;top:45%;width:13%;height:36%;border-radius:3px;background:#101419;border:1px solid #82919a;z-index:2}
+.traffic-car .tire.l{left:3%}.traffic-car .tire.r{right:3%}
+.traffic-car .lamp{position:absolute;top:68%;width:17%;height:7%;background:#fff6b4;box-shadow:0 0 9px #fff7a0}
+.traffic-car .lamp.l{left:15%}.traffic-car .lamp.r{right:15%}
+.traffic-car.pass{animation:trafficPass 1.35s cubic-bezier(.2,.7,.25,1) both}
+@keyframes trafficPass{
+  0%{opacity:0;top:28%;left:50%;transform:translate(-50%,-50%) scale(.18)}
+  10%{opacity:1}
+  55%{opacity:1;top:53%;left:51%;transform:translate(-50%,-50%) scale(.62)}
+  76%{opacity:1;top:70%;left:65%;transform:translate(-50%,-50%) scale(.9)}
+  100%{opacity:0;top:86%;left:75%;transform:translate(-50%,-50%) scale(1.05)}
+}
+@media(prefers-reduced-motion:reduce){.traffic-car.pass{animation-duration:.01ms}}
