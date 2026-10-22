@@ -809,3 +809,25 @@ p{line-height:1.75}
 @keyframes trafficPass{0%{opacity:0;top:27%;left:50%;transform:translate(-50%,-50%) scale(.12)}9%{opacity:1}43%{opacity:1;top:43%;left:50%;transform:translate(-50%,-50%) scale(.4)}68%{opacity:1;top:61%;left:62%;transform:translate(-50%,-50%) scale(.76) rotate(-4deg)}100%{opacity:0;top:88%;left:82%;transform:translate(-50%,-50%) scale(1.12) rotate(-8deg)}}
 @media(max-width:600px){.traffic-car{width:180px;height:120px}.traffic-car .body{inset:23px 13px 14px}.traffic-car .roof{top:4px;left:45px;width:90px;height:54px;border-width:4px}.traffic-car .wing{left:-1px;top:9px;width:182px;height:12px}.traffic-car .tire{bottom:14px;width:27px;height:51px}.traffic-car .diffuser{left:34px;bottom:12px;width:112px;height:22px}.traffic-car .lamp{bottom:36px;width:41px;height:10px}.traffic-car .lamp.l{left:30px}.traffic-car .lamp.r{right:30px}.traffic-car .number{bottom:37px;font-size:9px}}
 @media(prefers-reduced-motion:reduce){.traffic-car.pass{animation-duration:.01ms}}
+
+/* トップ画面のマシン選択：レイアウト変更後も車体を大きく中央に表示 */
+.start-card .learning-panel .vehicle-option{
+  justify-content:center;
+  gap:5px;
+}
+.start-card .learning-panel .vehicle-illustration{
+  width:120px;
+  height:52px;
+  margin:2px 0 3px;
+  transform:scale(1.16);
+  transform-origin:center center;
+}
+@media(max-width:900px){
+  .start-card .learning-panel .vehicle-illustration{transform:scale(1.05);margin:1px 0 2px}
+}
+@media(max-width:740px){
+  .start-card .learning-panel .vehicle-illustration{transform:scale(1.02);margin:1px 0 2px}
+}
+@media(max-width:440px){
+  .start-card .learning-panel .vehicle-illustration{transform:scale(.9);margin:0}
+}
