@@ -506,7 +506,7 @@
     currentQuestion = q;
     prompt.textContent = q.prompt;
     progressEl.textContent = (index + 1) + " / " + raceQuestions.length;
-    el("questionHint").textContent = (q.subject === "国語" ? "こくご" : "さんすう") + "・" + ({1:"きほん",2:"ふつう",3:"ちょうせん"}[q.grade] || "ふつう");
+    el("questionHint").textContent = ({ "国語": "こくご", "算数": "さんすう", "理科": "りか", "社会": "しゃかい" }[q.subject] || q.subject) + "・" + ({1:"きほん",2:"ふつう",3:"ちょうせん"}[q.grade] || "ふつう");
     Object.values(buttons).forEach(button => { button.textContent = ""; button.dataset.value = ""; });
     q.choices.forEach(choice => {
       const button = buttons[choice.side];
@@ -532,7 +532,7 @@
           button.disabled = false;
           button.classList.remove("thinking");
         });
-        el("questionHint").textContent = (q.subject === "国語" ? "こくご" : "さんすう") + "・" + ({1:"きほん",2:"ふつう",3:"ちょうせん"}[q.grade] || "ふつう");
+        el("questionHint").textContent = ({ "国語": "こくご", "算数": "さんすう", "理科": "りか", "社会": "しゃかい" }[q.subject] || q.subject) + "・" + ({1:"きほん",2:"ふつう",3:"ちょうせん"}[q.grade] || "ふつう");
         el("thinkMeter").classList.remove("active");
       }, 1400);
     }, data.game.questionDelayMs);
