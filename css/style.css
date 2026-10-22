@@ -763,3 +763,32 @@ p{line-height:1.75}
 @media(max-width:480px){
   .quit-btn{min-height:36px;padding:6px 8px;font-size:11px}
 }
+
+/* スタート画面：説明を短くし、マシン選択を広く見やすく */
+.start-card>.intro{margin:2px 0 8px;font-size:clamp(15px,1.15vw,18px);line-height:1.5}
+.start-layout{grid-template-columns:minmax(420px,1.12fr) minmax(0,.88fr);gap:clamp(14px,1.7vw,26px)}
+.learning-panel .vehicle-options{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.learning-panel .vehicle-option{min-height:118px;padding:10px 8px;gap:6px;border-radius:16px}
+.learning-panel .vehicle-illustration{transform:scale(1);margin:0;width:120px;height:48px}
+.learning-panel .vehicle-option .vehicle-name{font-size:clamp(14px,1.15vw,17px)}
+.learning-panel .vehicle-detail{font-size:clamp(11px,.9vw,13px)}
+@media(max-width:900px){
+ .start-layout{grid-template-columns:minmax(320px,1fr) minmax(0,1fr)}
+ .learning-panel .vehicle-options{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+ .learning-panel .vehicle-option{min-height:105px}
+ .learning-panel .vehicle-illustration{transform:scale(.9);margin:0}
+}
+@media(max-width:740px){
+ .start-card>.intro{font-size:15px;line-height:1.5;margin:2px 0 6px}
+ .learning-panel .vehicle-options{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+ .learning-panel .vehicle-option{min-height:112px;padding:8px 5px}
+ .learning-panel .vehicle-illustration{transform:scale(.95);margin:0}
+ .learning-panel .vehicle-option .vehicle-name{font-size:14px}
+ .learning-panel .vehicle-detail{display:block;font-size:11px}
+}
+@media(max-width:440px){
+ .learning-panel .vehicle-option{min-height:100px}
+ .learning-panel .vehicle-illustration{transform:scale(.82);margin:-2px 0}
+ .learning-panel .vehicle-option .vehicle-name{font-size:12px}
+ .learning-panel .vehicle-detail{font-size:10px}
+}
