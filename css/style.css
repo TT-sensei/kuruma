@@ -793,22 +793,19 @@ p{line-height:1.75}
  .learning-panel .vehicle-detail{font-size:10px}
 }
 
-/* 対向車が遠くから近づき、プレイヤーの車をよけて追いこす演出 */
-.duel-panel{display:none!important}
-.traffic-car{position:absolute;z-index:9;top:25%;left:50%;width:clamp(44px,8vw,86px);height:clamp(28px,5vw,54px);opacity:0;pointer-events:none;transform:translate(-50%,-50%) scale(.18);filter:drop-shadow(0 4px 3px #0007)}
-.traffic-car .body{position:absolute;left:7%;right:7%;top:35%;height:48%;border-radius:48% 48% 24% 24%;background:linear-gradient(#5bbcff,#1762b5 60%,#0b2b58);border:2px solid #d9f1ff}
-.traffic-car .roof{position:absolute;left:28%;top:13%;width:44%;height:36%;border-radius:45% 45% 10% 10%;background:linear-gradient(#c9f0ff,#377eb9);border:2px solid #e8f9ff}
-.traffic-car .wing{position:absolute;left:0;right:0;top:28%;height:5px;border-radius:3px;background:#142a42;box-shadow:0 -3px 0 #a8dfff}
-.traffic-car .tire{position:absolute;top:45%;width:13%;height:36%;border-radius:3px;background:#101419;border:1px solid #82919a;z-index:2}
-.traffic-car .tire.l{left:3%}.traffic-car .tire.r{right:3%}
-.traffic-car .lamp{position:absolute;top:68%;width:17%;height:7%;background:#fff6b4;box-shadow:0 0 9px #fff7a0}
-.traffic-car .lamp.l{left:15%}.traffic-car .lamp.r{right:15%}
-.traffic-car.pass{animation:trafficPass 1.35s cubic-bezier(.2,.7,.25,1) both}
-@keyframes trafficPass{
-  0%{opacity:0;top:28%;left:50%;transform:translate(-50%,-50%) scale(.18)}
-  10%{opacity:1}
-  55%{opacity:1;top:53%;left:51%;transform:translate(-50%,-50%) scale(.62)}
-  76%{opacity:1;top:70%;left:65%;transform:translate(-50%,-50%) scale(.9)}
-  100%{opacity:0;top:86%;left:75%;transform:translate(-50%,-50%) scale(1.05)}
-}
+/* 対向車：プレイヤー車と共通の立体的な車体パーツを使用 */
+.traffic-car{position:absolute;z-index:16;left:50%;top:25%;bottom:auto;width:240px;height:160px;opacity:0;pointer-events:none;transform:translate(-50%,-50%) scale(.12);transform-origin:center;filter:drop-shadow(0 7px 5px #0009);--paint-dark:#062d69;--paint-mid:#006bce;--paint-light:#34d6ff;transition:none!important}
+.traffic-car:after{content:"";position:absolute;left:25px;right:25px;bottom:-5px;height:32px;border-radius:50%;background:#0009;filter:blur(9px);z-index:-1}
+.traffic-car .body{position:absolute;inset:31px 18px 18px;background:linear-gradient(90deg,#062d69 0 12%,#f1fbff 13% 22%,#006bce 23% 65%,#e5fbff 66% 72%,#004b9e 73% 100%);clip-path:polygon(20% 0,80% 0,97% 38%,100% 80%,88% 100%,12% 100%,0 80%,3% 38%);border:1px solid #d7f5ff;box-shadow:inset 0 12px 18px #c2f4ff88,inset 0 -25px 24px #001842}
+.traffic-car .roof{position:absolute;z-index:2;top:5px;left:60px;width:120px;height:72px;background:linear-gradient(145deg,#e3fcff,#3186b8 32%,#06172e 76%);clip-path:polygon(25% 0,75% 0,100% 100%,0 100%);border:6px solid #2fc8ff;border-radius:45% 45% 8% 8%}
+.traffic-car .wing{position:absolute;z-index:6;left:-1px;top:12px;width:242px;height:16px;border-radius:3px;background:linear-gradient(#d5f7ff,#0075c9 55%,#031735);box-shadow:0 8px 0 -5px #000}
+.traffic-car .tire{position:absolute;bottom:18px;width:36px;height:68px;border-radius:12px;background:linear-gradient(90deg,#030405,#383e43,#030405)}
+.traffic-car .tire.l{left:3px}.traffic-car .tire.r{right:3px}
+.traffic-car .diffuser{position:absolute;z-index:7;left:45px;bottom:16px;width:150px;height:29px;background:repeating-linear-gradient(100deg,#020304 0 13px,#424a50 14px 17px);clip-path:polygon(0 0,100% 0,88% 100%,12% 100%)}
+.traffic-car .lamp{position:absolute;z-index:8;bottom:48px;width:54px;height:13px;border-radius:9px;background:linear-gradient(#fff,#bdeeff);box-shadow:0 0 18px #9ceaff}
+.traffic-car .lamp.l{left:40px}.traffic-car .lamp.r{right:40px}
+.traffic-car .number{position:absolute;z-index:9;left:50%;bottom:49px;transform:translateX(-50%);background:#07131d;padding:4px 8px;border-radius:4px;color:white;font-size:11px;font-weight:1000;white-space:nowrap}
+.traffic-car.pass{animation:trafficPass 1.5s cubic-bezier(.2,.7,.25,1) both}
+@keyframes trafficPass{0%{opacity:0;top:27%;left:50%;transform:translate(-50%,-50%) scale(.12)}9%{opacity:1}43%{opacity:1;top:43%;left:50%;transform:translate(-50%,-50%) scale(.4)}68%{opacity:1;top:61%;left:62%;transform:translate(-50%,-50%) scale(.76) rotate(-4deg)}100%{opacity:0;top:88%;left:82%;transform:translate(-50%,-50%) scale(1.12) rotate(-8deg)}}
+@media(max-width:600px){.traffic-car{width:180px;height:120px}.traffic-car .body{inset:23px 13px 14px}.traffic-car .roof{top:4px;left:45px;width:90px;height:54px;border-width:4px}.traffic-car .wing{left:-1px;top:9px;width:182px;height:12px}.traffic-car .tire{bottom:14px;width:27px;height:51px}.traffic-car .diffuser{left:34px;bottom:12px;width:112px;height:22px}.traffic-car .lamp{bottom:36px;width:41px;height:10px}.traffic-car .lamp.l{left:30px}.traffic-car .lamp.r{right:30px}.traffic-car .number{bottom:37px;font-size:9px}}
 @media(prefers-reduced-motion:reduce){.traffic-car.pass{animation-duration:.01ms}}
