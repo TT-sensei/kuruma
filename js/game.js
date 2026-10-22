@@ -5,6 +5,8 @@
   const root = el("game");
   const start = el("start"), result = el("result"), questionPanel = el("question");
   const prompt = el("prompt"), car = el("car"), scoreEl = el("score");
+  const trafficCar = el("trafficCar");
+  let trafficTimer = null;
   const progressEl = el("progress"), feedbackEl = el("feedback");
   const courseNameEl = el("courseName"), coursePreviewEl = el("coursePreview");
   const vehicleNumberEl = el("vehicleNumber"), vehiclePreviewEl = el("vehiclePreview");
@@ -387,11 +389,15 @@
     root.style.setProperty("--drive-duration", "0.48s");
   }
   function updateDuel() {
-    el("playerMarker").style.left = Math.min(100, playerDistance * 100) + "%";
-    el("rivalMarker").style.left = Math.min(100, rivalDistance * 100) + "%";
-    if (playerDistance > rivalDistance + 0.035) el("positionText").textContent = "1い！";
-    else if (rivalDistance > playerDistance + 0.035) el("positionText").textContent = "2い";
-    else el("positionText").textContent = "いいしょうぶ";
+    // 順位表示は使わず、距離データだけをレース結果の判定に利用する。
+  }
+  function maybeTrafficPass() {
+    if (!raceActive || !trafficCar || Math.random() > 0.34) return;
+    trafficCar.classList.remove("pass");
+    void trafficCar.offsetWidth;
+    trafficCar.classList.add("pass");
+    clearTimeout(trafficTimer);
+    trafficTimer = setTimeout(() => trafficCar.classList.remove("pass"), 1450);
   }
   function updatePhase() {
     root.classList.remove("phase-start", "phase-battle", "phase-final");
@@ -424,6 +430,8 @@
   }
   function resetScene() {
     clearTimeout(timer);
+    clearTimeout(trafficTimer);
+    if (trafficCar) trafficCar.classList.remove("pass");
     locked = false;
     currentQuestion = null;
     car.classList.remove("left-turn", "right-turn");
@@ -508,6 +516,7 @@
       button.setAttribute("aria-label", "こたえ " + choice.label);
     });
     updatePhase();
+    maybeTrafficPass();
     timer = setTimeout(() => {
       questionPanel.classList.add("show");
       Object.values(buttons).forEach(button => {
