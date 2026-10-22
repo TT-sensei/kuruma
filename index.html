@@ -24,11 +24,6 @@
     </div>
 
     <div class="race-utility" aria-label="レースのじょうほう">
-      <div class="duel-panel">
-        <div class="duel-labels"><span>じぶん</span><span>ライバル</span></div>
-        <div class="duel-track" aria-label="じぶんとライバルのいち"><span id="playerMarker" class="duel-marker you"></span><span id="rivalMarker" class="duel-marker rival"></span></div>
-        <strong id="positionText">ならんでいるよ</strong>
-      </div>
       <div id="eventBanner" class="event-banner" aria-live="polite"><strong id="eventName">レースイベント</strong><span id="phaseTag">スタート</span></div>
       <div class="nitro-panel">
         <div class="nitro-heading"><span>⚡ NITRO</span><strong id="nitroText">0%</strong></div>
@@ -45,6 +40,8 @@
     </section>
     <button id="left" type="button" class="choice left" aria-label="ひだりのこたえ" disabled></button>
     <button id="right" type="button" class="choice right" aria-label="みぎのこたえ" disabled></button>
+
+    <div id="trafficCar" class="traffic-car car--blue" aria-hidden="true"><div class="tire l"></div><div class="tire r"></div><div class="body"></div><div class="roof"></div><div class="wing"></div><div class="lamp l"></div><div class="lamp r"></div></div>
 
     <div id="car" class="car car--red" aria-hidden="true">
       <div class="tire l"></div><div class="tire r"></div><div class="body"></div><div class="roof"></div><div class="wing"></div><div class="lamp l"></div><div class="lamp r"></div><div class="diffuser"></div><div class="vehicle-extra"></div><div id="vehicleNumber" class="number">GT 01</div>
