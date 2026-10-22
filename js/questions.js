@@ -6081,6 +6081,25 @@ window.GAME_DATA = {
     ],
     "correctValue": "政府が行う開発途上国への援助",
     "explanation": "ODAは政府開発援助のことで、開発途上国の発展などを支援する活動です。"
+  },
+  {
+    "id": "sci-051",
+    "subject": "理科",
+    "grade": 1,
+    "topic": "植物と環境",
+    "prompt": "光合成によって植物が空気中に出す気体は？",
+    "choices": [
+      {
+        "value": "酸素",
+        "label": "酸素"
+      },
+      {
+        "value": "二酸化炭素",
+        "label": "二酸化炭素"
+      }
+    ],
+    "correctValue": "酸素",
+    "explanation": "植物は光合成で二酸化炭素を取り入れ、酸素を放出します。"
   }
 ]
 };
