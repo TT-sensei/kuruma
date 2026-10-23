@@ -1,4 +1,5 @@
 import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js";
+import { GLTFLoader } from "https://cdn.jsdelivr.net/npm/three@0.180.0/examples/jsm/loaders/GLTFLoader.js";
 
 (() => {
   "use strict";
@@ -64,8 +65,9 @@ import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.m
 
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(34, 300/160, 0.1, 100);
-    camera.position.set(4.6, 4.1, 6.7);
-    camera.lookAt(0, 0.3, 0);
+    // Rear chase camera: the car points toward +Z, so the camera sits behind it at -Z.
+    camera.position.set(0.55, 2.65, -5.8);
+    camera.lookAt(0, 0.48, 0);
     scene.add(new THREE.HemisphereLight(0xe8f6ff, 0x253040, 2.0));
     const key = new THREE.DirectionalLight(0xffffff, 3.2);
     key.position.set(3, 7, 5);
@@ -78,6 +80,10 @@ import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.m
     scene.add(rig);
     const model = new THREE.Group();
     rig.add(model);
+    const assetModel = new THREE.Group();
+    assetModel.visible = false;
+    rig.add(assetModel);
+    let loadedAsset = false;
     const bodyMat = mat("#d70d25", 0.58, 0.22);
     const highlightMat = mat("#ff5363", 0.48, 0.2);
     const darkMat = mat("#151c24", 0.45, 0.32);
@@ -88,8 +94,8 @@ import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.m
     const lightMat = new THREE.MeshStandardMaterial({ color:"#ff3449", emissive:"#ff3449", emissiveIntensity:2.3, metalness:0.2, roughness:0.18 });
     const paintGroup = new THREE.Group(); model.add(paintGroup);
     const wheels = [];
-    const decals = new THREE.Group(); model.add(decals);
-    const extras = new THREE.Group(); model.add(extras);
+    const decals = new THREE.Group(); assetModel.add(decals);
+    const extras = new THREE.Group(); assetModel.add(extras);
 
     // A low, wide GT silhouette assembled from actual 3D meshes.
     box(model, [2.08,0.34,3.75], [0,0.48,0], bodyMat);
@@ -128,16 +134,16 @@ import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.m
       box(model,[0.28,0.13,0.28],[x,0.86,0.48],darkMat);
       box(model,[0.16,0.06,0.2],[x,0.91,0.49],highlightMat);
     }
-    const wing = new THREE.Group(); model.add(wing);
+    const wing = new THREE.Group(); assetModel.add(wing);
     box(wing,[2.2,0.1,0.34],[0,1.05,-1.78],darkMat);
     box(wing,[2.38,0.1,0.36],[0,1.2,-1.83],highlightMat);
     for (const x of [-0.72,0.72]) box(wing,[0.09,0.35,0.1],[x,0.88,-1.72],trimMat);
-    const roofDecoration = new THREE.Group(); model.add(roofDecoration);
+    const roofDecoration = new THREE.Group(); assetModel.add(roofDecoration);
     box(roofDecoration,[1.42,0.045,0.1],[0,1.35,-0.1],highlightMat);
     const aura = new THREE.Mesh(new THREE.SphereGeometry(1,20,12), new THREE.MeshBasicMaterial({color:"#1cc9ff",transparent:true,opacity:0.12}));
-    aura.scale.set(1.4,0.35,2.25); aura.position.y=0.2; model.add(aura);
+    aura.scale.set(1.4,0.35,2.25); aura.position.y=0.2; assetModel.add(aura);
     const shadow = new THREE.Mesh(new THREE.CircleGeometry(1.7,32), new THREE.MeshBasicMaterial({color:"#07131d",transparent:true,opacity:0.22,depthWrite:false}));
-    shadow.rotation.x=-Math.PI/2; shadow.position.y=0.03; shadow.scale.set(1.0,1.35,1); model.add(shadow);
+    shadow.rotation.x=-Math.PI/2; shadow.position.y=0.03; shadow.scale.set(1.0,1.35,1); assetModel.add(shadow);
 
     function getClass(prefix, fallback) {
       const name = Array.from(element.classList).find(c => c.startsWith(prefix));
@@ -151,6 +157,20 @@ import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.m
       const paint = custom || base[0];
       bodyMat.color.set(paint); highlightMat.color.set(custom ? new THREE.Color(custom).lerp(new THREE.Color("#ffffff"),0.35) : base[1]);
       bodyMat.needsUpdate = true; highlightMat.needsUpdate = true;
+      if (loadedAsset) {
+        const excluded = /wheel|tyre|tire|rubber|glass|window|light|lamp|chrome|rim/i;
+        assetModel.traverse(node => {
+          if (!node.isMesh || !node.material) return;
+          const materials = Array.isArray(node.material) ? node.material : [node.material];
+          for (const material of materials) {
+            const label = `${node.name || ""} ${material.name || ""}`;
+            if (/body|paint|chassis|car[_ -]?main/i.test(label) && !excluded.test(label)) {
+              material.color.set(paint);
+              material.needsUpdate = true;
+            }
+          }
+        });
+      }
       if (livery === "carbon") { bodyMat.roughness=0.52; bodyMat.metalness=0.72; }
       else { bodyMat.roughness=0.22; bodyMat.metalness=0.58; }
       const wheelStyle = getClass("wheels--","stock");
@@ -203,6 +223,42 @@ import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.m
       element.classList.toggle("car3d-has-aura", aura.visible);
       element.classList.toggle("car3d-nitro", element.classList.contains("nitro-flash"));
     }
+    // Kenney Car Kit race model (CC0-1.0). Keep the procedural model as a fallback if loading fails.
+    const assetLoader = new GLTFLoader();
+    assetLoader.load(
+      "https://raw.githubusercontent.com/Hidencod/tge-assets/main/packs/car-kit/race.glb",
+      gltf => {
+        const root = gltf.scene;
+        root.updateMatrixWorld(true);
+        const bounds = new THREE.Box3().setFromObject(root);
+        const size = bounds.getSize(new THREE.Vector3());
+        const scale = 3.55 / Math.max(size.z, 0.001);
+        root.scale.setScalar(scale);
+        root.updateMatrixWorld(true);
+        const scaledBounds = new THREE.Box3().setFromObject(root);
+        root.position.x -= (scaledBounds.min.x + scaledBounds.max.x) / 2;
+        root.position.z -= (scaledBounds.min.z + scaledBounds.max.z) / 2;
+        root.position.y -= scaledBounds.min.y - 0.03;
+        root.traverse(node => {
+          if (!node.isMesh) return;
+          node.castShadow = true;
+          node.receiveShadow = true;
+          if (Array.isArray(node.material)) node.material = node.material.map(material => material.clone());
+          else if (node.material) node.material = node.material.clone();
+        });
+        assetModel.add(root);
+        assetModel.visible = true;
+        loadedAsset = true;
+        model.visible = false;
+        applyClasses();
+      },
+      undefined,
+      error => {
+        assetModel.visible = false;
+        console.warn("車の3Dアセットを読み込めないため、簡易モデルを使います。", error);
+      }
+    );
+
     const observer = new MutationObserver(applyClasses);
     observer.observe(element,{attributes:true,attributeFilter:["class"]});
     applyClasses();
