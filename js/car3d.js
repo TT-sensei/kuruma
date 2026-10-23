@@ -81,6 +81,7 @@ import { GLTFLoader } from "https://cdn.jsdelivr.net/npm/three@0.180.0/examples/
     const model = new THREE.Group();
     rig.add(model);
     const assetModel = new THREE.Group();
+    assetModel.visible = false;
     rig.add(assetModel);
     let loadedAsset = false;
     const bodyMat = mat("#d70d25", 0.58, 0.22);
@@ -246,12 +247,16 @@ import { GLTFLoader } from "https://cdn.jsdelivr.net/npm/three@0.180.0/examples/
           else if (node.material) node.material = node.material.clone();
         });
         assetModel.add(root);
+        assetModel.visible = true;
         loadedAsset = true;
         model.visible = false;
         applyClasses();
       },
       undefined,
-      error => console.warn("車の3Dアセットを読み込めないため、簡易モデルを使います。", error)
+      error => {
+        assetModel.visible = false;
+        console.warn("車の3Dアセットを読み込めないため、簡易モデルを使います。", error);
+      }
     );
 
     const observer = new MutationObserver(applyClasses);
