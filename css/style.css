@@ -831,3 +831,71 @@ p{line-height:1.75}
 @media(max-width:440px){
   .start-card .learning-panel .vehicle-illustration{transform:scale(.9);margin:0}
 }
+
+
+/* 車体ディテール強化：既存の7カテゴリのカスタムクラス・購入処理はそのまま */
+.car .tire{
+  border:2px solid #070a0d;
+  box-shadow:inset 0 0 0 2px #242b31, inset 0 0 0 4px #050607, 0 2px 4px #0008;
+}
+.car .tire:before{
+  content:"";
+  position:absolute;
+  left:50%;
+  top:50%;
+  width:24px;
+  height:52px;
+  transform:translate(-50%,-50%);
+  border:1px solid #59656f;
+  border-radius:8px;
+  background:repeating-linear-gradient(0deg,#12171c 0 5px,#303941 6px 8px);
+  opacity:.9;
+  pointer-events:none;
+}
+.car .body:before{
+  content:"";
+  position:absolute;
+  z-index:1;
+  top:7%;
+  left:36%;
+  width:28%;
+  height:36%;
+  background:
+    repeating-linear-gradient(0deg,#101820 0 3px,#65727d 4px 5px,#17212a 6px 8px);
+  border:1px solid #ffffff30;
+  clip-path:polygon(16% 0,84% 0,100% 76%,82% 100%,18% 100%,0 76%);
+  opacity:.88;
+  pointer-events:none;
+}
+.car .body:after{
+  content:"";
+  position:absolute;
+  z-index:2;
+  left:32%;
+  bottom:4%;
+  width:36%;
+  height:12%;
+  border:1px solid #ffffff55;
+  background:linear-gradient(180deg,#8796a0,#18212a 48%,#05080b);
+  clip-path:polygon(8% 0,92% 0,100% 65%,80% 100%,20% 100%,0 65%);
+  box-shadow:0 0 8px #0009;
+  pointer-events:none;
+}
+.car .roof:before{
+  content:"";
+  position:absolute;
+  z-index:2;
+  top:8%;
+  left:16%;
+  width:24%;
+  height:48%;
+  background:linear-gradient(120deg,#ffffffb8,#ffffff38 48%,transparent 80%);
+  clip-path:polygon(25% 0,100% 0,72% 100%,0 100%);
+  pointer-events:none;
+}
+.car.nitro-flash .body:after{
+  box-shadow:0 0 10px #39dfff, inset 0 0 6px #39dfff;
+}
+@media(prefers-reduced-motion:reduce){
+  .car .tire:before,.car .body:before,.car .body:after,.car .roof:before{transition:none}
+}
