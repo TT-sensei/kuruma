@@ -831,14 +831,3 @@ p{line-height:1.75}
 @media(max-width:440px){
   .start-card .learning-panel .vehicle-illustration{transform:scale(.9);margin:0}
 }
-
-
-/* Three.js 3Dマシン：既存のゲーム要素・クラスをそのまま利用 */
-.car .car3d-canvas{position:absolute;inset:0;width:100%!important;height:100%!important;display:block;pointer-events:none;z-index:2}
-.car .car3d-hidden-part{visibility:hidden!important}
-.car.car3d-has-aura .car3d-canvas{filter:drop-shadow(0 0 8px #24d9ff)}
-.car.car3d-nitro .car3d-canvas{filter:drop-shadow(0 0 14px #26d8ff) brightness(1.2)}
-.garage3d-preview.car{position:relative!important;left:auto!important;right:auto!important;top:auto!important;bottom:auto!important;width:100%!important;height:180px!important;transform:none!important;transform-origin:center!important;margin:12px 0 8px;z-index:2;overflow:hidden;border:1px solid #496d80;border-radius:16px;background:radial-gradient(ellipse at 50% 45%,#23465a 0,#102532 56%,#09151e 100%);box-shadow:inset 0 0 28px #2dc5ff18}
-.garage3d-preview.car .car3d-canvas{z-index:1}
-.garage3d-preview.car:after{content:"3D GARAGE";position:absolute;z-index:3;left:10px;top:8px;font-size:10px;letter-spacing:2px;font-weight:1000;color:#b6eaff;background:#07131dbb;padding:4px 7px;border-radius:6px;pointer-events:none}
-@media(max-width:580px){.garage3d-preview.car{height:145px!important;transform:none!important}}
