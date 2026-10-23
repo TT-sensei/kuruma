@@ -45,11 +45,17 @@ import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.m
     canvas.className = "car3d-canvas";
     canvas.setAttribute("aria-hidden", "true");
     element.prepend(canvas);
+    let renderer;
+    try {
+      renderer = new THREE.WebGLRenderer({ canvas, alpha:true, antialias:true, powerPreference:"low-power" });
+    } catch (error) {
+      canvas.remove();
+      console.warn("3D表示を開始できないため、従来の車表示を使います。", error);
+      return;
+    }
     Array.from(element.children).forEach(child => {
       if (child !== canvas) child.classList.add("car3d-hidden-part");
     });
-
-    const renderer = new THREE.WebGLRenderer({ canvas, alpha:true, antialias:true, powerPreference:"low-power" });
     renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.6));
     renderer.setSize(300, 160, false);
     renderer.outputColorSpace = THREE.SRGBColorSpace;
@@ -157,7 +163,13 @@ import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.m
       wing.scale.x = spoiler === "wide" ? 1.2 : spoiler === "split" ? 0.86 : 1;
       wing.position.y = spoiler === "high" ? 0.32 : spoiler === "double" ? 0.16 : 0;
       const decal = getClass("decal--","none");
-      decals.clear();
+      while (decals.children.length) {
+        const child = decals.children[0];
+        decals.remove(child);
+        child.geometry?.dispose();
+        if (Array.isArray(child.material)) child.material.forEach(m => m.dispose());
+        else child.material?.dispose();
+      }
       if (decal === "stripe" || livery === "stripe") {
         for (const x of [-0.37,0.37]) box(decals,[0.13,0.018,2.95],[x,0.85,0.12],mat("#f4f7f9",0.3,0.28));
       } else if (decal === "checker" || decal === "digital") {
@@ -170,7 +182,13 @@ import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.m
       } else if (decal !== "none") {
         for (const x of [-0.66,0.66]) box(decals,[0.15,0.03,0.85],[x,0.85,0.2],mat(decal==="lightning"?"#ffe75b":decal==="stars"?"#ffffff":"#30d7ff",0.3,0.28));
       }
-      roofDecoration.clear();
+      while (roofDecoration.children.length) {
+        const child = roofDecoration.children[0];
+        roofDecoration.remove(child);
+        child.geometry?.dispose();
+        if (Array.isArray(child.material)) child.material.forEach(m => m.dispose());
+        else child.material?.dispose();
+      }
       const roof = getClass("roof--","none");
       if (roof !== "none") {
         const c = roof === "japan" ? "#ed4050" : roof === "number" ? "#ffd12a" : roof === "digital" ? "#38e6f5" : "#f5f7fa";
@@ -197,7 +215,6 @@ import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.m
       camera.aspect=width/height; camera.updateProjectionMatrix();
     }
     const ro = new ResizeObserver(resize); ro.observe(element); resize();
-    let last=0;
     function render(time) {
       if (!document.hidden && element.isConnected) {
         const active = element.id === "car";
@@ -206,7 +223,6 @@ import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.m
         wheels.forEach(w => { /* wheel details stay stable in the preview */ });
         renderer.render(scene,camera);
       }
-      last=time;
       requestAnimationFrame(render);
     }
     requestAnimationFrame(render);
