@@ -215,6 +215,20 @@ import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.m
 
   function init() {
     carIds.forEach(id => createCar(document.getElementById(id)));
+    const garage = document.getElementById("garage3dPreview");
+    const mainCar = document.getElementById("car");
+    if (garage && mainCar) {
+      createCar(garage);
+      const syncGarage = () => {
+        const keep = ["car", "garage3d-preview"];
+        const dynamic = Array.from(mainCar.classList).filter(name =>
+          name !== "car" && !["left-turn", "right-turn", "nitro-flash"].includes(name)
+        );
+        garage.className = [...keep, ...dynamic].join(" ");
+      };
+      syncGarage();
+      new MutationObserver(syncGarage).observe(mainCar, { attributes:true, attributeFilter:["class"] });
+    }
     document.documentElement.classList.add("has-3d-cars");
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded",init,{once:true});
