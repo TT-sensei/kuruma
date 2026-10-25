@@ -26,7 +26,7 @@
     "清少納言":"せいしょうなごん", "雪舟":"せっしゅう", "ペリー":"ぺりー"
   };
   const readingNames = Object.keys(readings).sort((a,b) => b.length-a.length);
-  const readingPattern = new RegExp("(" + readingNames.map(name => name.replace(/[.*+?^${}()|[\]\\]/g, "\\  const el = id => document.getElementById(id);
+  const readingPattern = new RegExp("(" + readingNames.join("|") + ")", "g");
 ")).join("|") + ")", "g");
   function setReadableText(node, value) {
     node.replaceChildren();
