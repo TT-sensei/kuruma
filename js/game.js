@@ -27,7 +27,6 @@
   };
   const readingNames = Object.keys(readings).sort((a,b) => b.length-a.length);
   const readingPattern = new RegExp("(" + readingNames.join("|") + ")", "g");
-")).join("|") + ")", "g");
   function setReadableText(node, value) {
     node.replaceChildren();
     const parts = String(value).split(readingPattern);
