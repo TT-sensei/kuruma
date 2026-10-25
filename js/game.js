@@ -2,6 +2,48 @@
   "use strict";
   const data = window.GAME_DATA;
   const el = id => document.getElementById(id);
+  // 歴史人物の名前には、問題文・選択肢のどちらにもふりがなを表示する。
+  const readings = {
+    "フランシスコ・ザビエル":"ふらんしすこ・ざびえる",
+    "中大兄皇子":"なかのおおえのおうじ", "中臣鎌足":"なかとみのかまたり",
+    "聖徳太子":"しょうとくたいし", "小野妹子":"おののいもこ",
+    "聖武天皇":"しょうむてんのう", "北条政子":"ほうじょうまさこ",
+    "北条時宗":"ほうじょうときむね", "北条氏":"ほうじょうし",
+    "源頼朝":"みなもとのよりとも", "源義経":"みなもとのよしつね",
+    "平清盛":"たいらのきよもり", "足利尊氏":"あしかがたかうじ",
+    "足利義満":"あしかがよしみつ", "織田信長":"おだのぶなが",
+    "豊臣秀吉":"とよとみひでよし", "徳川家康":"とくがわいえやす",
+    "徳川家光":"とくがわいえみつ", "徳川吉宗":"とくがわよしむね",
+    "伊藤博文":"いとうひろぶみ", "板垣退助":"いたがきたいすけ",
+    "福沢諭吉":"ふくざわゆきち", "野口英世":"のぐちひでよ",
+    "津田梅子":"つだうめこ", "樋口一葉":"ひぐちいちよう",
+    "平塚らいてう":"ひらつからいてう", "夏目漱石":"なつめそうせき",
+    "手塚治虫":"てづかおさむ", "松尾芭蕉":"まつおばしょう",
+    "近松門左衛門":"ちかまつもんざえもん", "伊能忠敬":"いのうただたか",
+    "杉田玄白":"すぎたげんぱく", "西郷隆盛":"さいごうたかもり",
+    "大久保利通":"おおくぼとしみち", "卑弥呼":"ひみこ",
+    "鑑真":"がんじん", "行基":"ぎょうき", "紫式部":"むらさきしきぶ",
+    "清少納言":"せいしょうなごん", "雪舟":"せっしゅう", "ペリー":"ぺりー"
+  };
+  const readingNames = Object.keys(readings).sort((a,b) => b.length-a.length);
+  const readingPattern = new RegExp("(" + readingNames.map(name => name.replace(/[.*+?^${}()|[\]\\]/g, "\\  const el = id => document.getElementById(id);
+")).join("|") + ")", "g");
+  function setReadableText(node, value) {
+    node.replaceChildren();
+    const parts = String(value).split(readingPattern);
+    parts.forEach(part => {
+      if (readings[part]) {
+        const ruby = document.createElement("ruby");
+        ruby.append(document.createTextNode(part));
+        const rt = document.createElement("rt");
+        rt.textContent = readings[part];
+        ruby.append(rt);
+        node.append(ruby);
+      } else if (part) {
+        node.append(document.createTextNode(part));
+      }
+    });
+  }
   const root = el("game");
   const start = el("start"), result = el("result"), questionPanel = el("question");
   const prompt = el("prompt"), car = el("car"), scoreEl = el("score");
@@ -506,13 +548,13 @@
     }
     const q = prepareQuestion(raceQuestions[index]);
     currentQuestion = q;
-    prompt.textContent = q.prompt;
+    setReadableText(prompt, q.prompt);
     progressEl.textContent = (index + 1) + " / " + raceQuestions.length;
     el("questionHint").textContent = ({ "国語": "こくご", "算数": "さんすう", "理科": "りか", "社会": "しゃかい" }[q.subject] || q.subject) + "・" + ({1:"きほん",2:"ふつう",3:"ちょうせん"}[q.grade] || "ふつう");
     Object.values(buttons).forEach(button => { button.textContent = ""; button.dataset.value = ""; });
     q.choices.forEach(choice => {
       const button = buttons[choice.side];
-      button.textContent = choice.label;
+      setReadableText(button, choice.label);
       button.dataset.value = String(choice.value);
       button.disabled = false;
       button.setAttribute("aria-label", "こたえ " + choice.label);
