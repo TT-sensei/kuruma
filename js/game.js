@@ -471,9 +471,11 @@
     updateDuel();
     start.classList.add("hide");
     showEvent();
-    const pool = data.questions.filter(q =>
+    // 算数・理科・社会はやさしい専用問題を使い、国語は既存問題を残す。
+    const sourceQuestions = (window.EASY_QUESTIONS || []).concat(data.questions.filter(q => q.subject === "国語"));
+    const pool = sourceQuestions.filter(q =>
       (subjectFilter === "both" || q.subject === subjectFilter) &&
-      (gradeFilter === "all" || String(q.grade) === gradeFilter)
+      (q.subject !== "国語" || gradeFilter === "all" || String(q.grade) === gradeFilter)
     );
     raceQuestions = shuffled(pool).slice(0, Math.min(data.game.questionsPerRace, pool.length));
     if (raceQuestions.length === 0) {
